@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 540" role="img" aria-label="GC4653 分频33约36MHz五分钟每5秒实际采集帧率图">
+<rect width="1180" height="540" rx="20" fill="#101827"/>
+<text x="48" y="48" fill="#f0f5fa" font-size="27" font-weight="bold" font-family="Arial,Noto Sans CJK SC">GC4653 · ~36 MHz / 720P · 5-minute live acquisition</text>
+<text x="48" y="81" fill="#aabbd0" font-size="16" font-family="Arial,Noto Sans CJK SC">1280×720 · CAM1 divider 33 · VI frames and PTS timestamp rate (not browser refresh)</text>
+<rect x="50" y="99" width="14" height="14" fill="#43c2a7"/><text x="73" y="112" font-size="16" fill="#d5e2f0" font-family="Arial">VI host FPS</text>
+<rect x="235" y="99" width="14" height="14" fill="#f5b45d"/><text x="258" y="112" font-size="16" fill="#d5e2f0" font-family="Arial">PTS FPS</text>
+<line x1="105" y1="427.0" x2="1130" y2="427.0" stroke="#34455e" stroke-dasharray="4 7"/>
+<text x="91" y="432.0" fill="#b8c6d6" font-family="Arial" font-size="15" text-anchor="end">79.0</text>
+<line x1="105" y1="355.2" x2="1130" y2="355.2" stroke="#34455e" stroke-dasharray="4 7"/>
+<text x="91" y="360.2" fill="#b8c6d6" font-family="Arial" font-size="15" text-anchor="end">79.5</text>
+<line x1="105" y1="283.5" x2="1130" y2="283.5" stroke="#34455e" stroke-dasharray="4 7"/>
+<text x="91" y="288.5" fill="#b8c6d6" font-family="Arial" font-size="15" text-anchor="end">80.0</text>
+<line x1="105" y1="211.8" x2="1130" y2="211.8" stroke="#34455e" stroke-dasharray="4 7"/>
+<text x="91" y="216.8" fill="#b8c6d6" font-family="Arial" font-size="15" text-anchor="end">80.5</text>
+<line x1="105" y1="140.0" x2="1130" y2="140.0" stroke="#34455e" stroke-dasharray="4 7"/>
+<text x="91" y="145.0" fill="#b8c6d6" font-family="Arial" font-size="15" text-anchor="end">81.0</text>
+<text x="105.0" y="454" text-anchor="middle" fill="#b8c6d6" font-family="Arial" font-size="15">0s</text>
+<text x="303.4" y="454" text-anchor="middle" fill="#b8c6d6" font-family="Arial" font-size="15">60s</text>
+<text x="501.8" y="454" text-anchor="middle" fill="#b8c6d6" font-family="Arial" font-size="15">120s</text>
+<text x="700.2" y="454" text-anchor="middle" fill="#b8c6d6" font-family="Arial" font-size="15">180s</text>
+<text x="898.5" y="454" text-anchor="middle" fill="#b8c6d6" font-family="Arial" font-size="15">240s</text>
+<text x="1096.9" y="454" text-anchor="middle" fill="#b8c6d6" font-family="Arial" font-size="15">300s</text>
+<polyline points="154.7,340.6 171.3,283.5 187.9,283.5 204.4,286.2 221.0,280.7 237.5,283.5 254.1,283.5 270.6,286.1 287.2,338.1 303.8,283.5 320.3,283.6 336.8,286.1 353.4,280.8 370.0,283.5 386.5,283.5 403.1,283.5 419.6,286.3 436.2,282.2 452.8,282.0 469.3,283.6 485.9,286.1 502.4,280.9 519.0,283.5 535.5,283.5 552.1,286.3 568.7,280.7 585.2,283.6 601.8,283.3 618.3,289.8 634.9,277.3 651.4,285.6 668.0,281.4 684.5,286.7 701.1,280.3 717.6,284.9 734.2,283.0 750.7,286.6 767.3,279.8 783.8,283.7 800.4,283.9 816.9,285.9 833.5,282.2 850.1,282.6 866.6,285.8 883.1,284.6 899.7,280.3 916.3,282.3 932.8,284.6 949.4,286.9 965.9,281.0 982.5,284.9 999.0,281.6 1015.6,286.1 1032.1,279.4 1048.7,286.2 1065.2,284.0 1081.8,286.7 1098.4,282.4 1114.9,279.3" fill="none" stroke="#43c2a7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="154.7,340.5 171.3,283.5 187.9,283.5 204.4,283.5 221.0,283.4 237.5,283.5 254.1,283.5 270.6,283.5 287.2,340.7 303.8,283.6 320.3,283.6 336.8,283.4 353.4,283.4 370.0,283.4 386.5,283.5 403.1,283.5 419.6,283.5 436.2,283.5 452.8,283.5 469.3,283.5 485.9,283.5 502.4,283.5 519.0,283.5 535.5,283.5 552.1,283.7 568.7,283.4 585.2,283.6 601.8,283.3 618.3,284.2 634.9,282.8 651.4,283.6 668.0,283.5 684.5,283.5 701.1,283.4 717.6,283.5 734.2,283.7 750.7,283.3 767.3,283.7 783.8,283.3 800.4,283.9 816.9,283.6 833.5,283.2 850.1,283.5 866.6,283.4 883.1,283.6 899.7,283.7 916.3,283.3 932.8,283.5 949.4,283.5 965.9,283.5 982.5,283.5 999.0,283.6 1015.6,283.5 1032.1,283.4 1048.7,283.7 1065.2,283.3 1081.8,283.6 1098.4,283.5 1114.9,283.6" fill="none" stroke="#f5b45d" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 5"/>
+<text x="47" y="501" fill="#d4e5ef" font-size="15" font-family="Arial,Noto Sans CJK SC">5-minute timer stopped normally; MIPI error counters stayed 0; temperature ended near 72.4C.</text>
+<text x="47" y="524" fill="#91a9c1" font-size="12" font-family="Arial,Noto Sans CJK SC">The clock divider was restored automatically. MCLK pin waveform and 10-minute optical quality remain unverified.</text>
+</svg>

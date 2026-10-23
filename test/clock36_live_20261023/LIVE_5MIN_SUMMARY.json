@@ -1,0 +1,96 @@
+{
+  "title": "GC4653 CAM1 divider-33 5-minute supervised live test",
+  "hardware": "LicheeRV Nano SG2002 with GC4653",
+  "nominal_mode": "1280x720, camera 80 FPS initialization",
+  "mclk_frequency_source": "Parent CAM0PLL 1187999988 Hz divided by 33; calculated ~36 MHz; no pin measurement; debugfs remains 37125000 Hz",
+  "divider_mmio_test": "0x00210001",
+  "divider_mmio_restored": "0x00200001",
+  "live_duration_s": 300,
+  "last_window_elapsed_since_capture_s": 305.44,
+  "captured_frames_final": 24222,
+  "encoded_final": 24203,
+  "encoder_errors_final": 0,
+  "last_reported_aggregate_host_fps": 80.0098,
+  "last_reported_aggregate_pts_fps": 80.0099,
+  "last_reported_duplicate_pts": 0,
+  "last_reported_timeouts": 0,
+  "last_reported_encode_errors": 0,
+  "last_5s_window": {
+    "elapsed_s": 305.44,
+    "frames": 401,
+    "host_fps": 80.0292,
+    "pts_fps": 79.9995
+  },
+  "stable_5s_windows_count": 59,
+  "stable_window_host_fps_mean": 79.98636,
+  "stable_window_host_fps_min": 79.6022,
+  "stable_window_host_fps_max": 80.0435,
+  "stable_window_pts_fps_mean": 79.98649,
+  "mipi_monitored_sample_count": 97,
+  "mipi_all_monitored_counters_zero": true,
+  "soc_max_observed_mC": 72414,
+  "soc_last_observed_mC": 72414,
+  "normal_stop_and_clock_restore_confirmed": true,
+  "raw12_samples": {
+    "before": {
+      "file": "sensor-bayer-before.bin",
+      "bytes": 1382400,
+      "reference_mean_y20_to_79": 452.367,
+      "top_rows_relative": [
+        -1.533,
+        -5.623,
+        78.602,
+        53.358,
+        -1.827,
+        -12.436,
+        -2.167,
+        -12.005,
+        -1.305,
+        -10.817
+      ],
+      "max_abs_first_6_deviation": 78.602
+    },
+    "after": {
+      "file": "sensor-bayer-after.bin",
+      "bytes": 1382400,
+      "reference_mean_y20_to_79": 453.023,
+      "top_rows_relative": [
+        -1.742,
+        -10.786,
+        -2.155,
+        -13.008,
+        -1.861,
+        -12.38,
+        -2.12,
+        -11.627,
+        -0.761,
+        -10.927
+      ],
+      "max_abs_first_6_deviation": 13.008
+    },
+    "late": {
+      "file": "sensor-bayer-late.bin",
+      "bytes": 1382400,
+      "reference_mean_y20_to_79": 450.062,
+      "top_rows_relative": [
+        -2.297,
+        -11.916,
+        -3.928,
+        -12.731,
+        -2.778,
+        -12.144,
+        -2.288,
+        -11.85,
+        -1.116,
+        -11.688
+      ],
+      "max_abs_first_6_deviation": 12.731
+    }
+  },
+  "limitations": [
+    "Not a scope-measured 36 MHz sensor MCLK pin; Linux CCF still reports 37.125 MHz.",
+    "A/B capture had environmental/exposure changes; only sampled Bayer RAW snapshots, not every frame.",
+    "Browser rendered FPS not measured; distinct from VI capture FPS.",
+    "Manual MMIO clock register changes are experimental; not a production driver."
+  ]
+}

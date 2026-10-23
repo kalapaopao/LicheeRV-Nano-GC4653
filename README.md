@@ -8,7 +8,11 @@
 
 ![不同实验的实际帧率对照](docs/images/fps-results.svg)
 
-**2026-10-23 新进展：约36 MHz短时实机 A/B，获得真实约80 FPS和未压缩 Bayer RAW 顶部行改善证据。**
+**2026-10-23 新成绩：CAM1 分频33（推算约36 MHz）的720P高速方案已完成**真实5分钟实时运行**：最终累计采集**80.0098 FPS**，共24,222帧，MIPI 97次巡检均零错误，自动恢复时钟。物理MCLK引脚未测，因此是研发验证而不是正式驱动。
+
+![5分钟实时采集FPS](docs/images/36mhz-live-5min-fps.svg)
+
+[五分钟完整实测报告与源码](test/clock36_live_20261023/LIVE_5MIN_RESULTS.md) · [结构化指标](test/clock36_live_20261023/LIVE_5MIN_SUMMARY.json) · [每5秒窗口CSV](test/clock36_live_20261023/LIVE_5MIN_WINDOWS.csv)
 
 ![CAM1分频32与33的RAW顶部异常对比](docs/images/36mhz-raw-row-comparison.svg)
 
@@ -23,7 +27,7 @@
 | 2026-10-22 实机恢复 | 1920×1080 / JPEG | **约 70.7–71.5 FPS** | 27 MHz | 预览和抓拍成功；检查时无新增 MIPI 错误；随温度升高帧率略降 |
 | 72 FPS RAW 实验 | 1920×1080 RAW12 | **72.1007 FPS** | 27 MHz | **后期出现 22 次 CRC 错误，已停止**；仅用于实验参考 |
 | 历史 80 档 | 1280×720 | **约 82.37 FPS** | 37.125 MHz | **顶部彩色条纹可在 Bayer RAW 中复现**，画质不合格；且高于某版 GC4653 数据手册 36 MHz 上限 |
-| 36 MHz 分频短测（2026-10-23） | 1280×720 Bayer RAW12/JPEG | **约 80.0 FPS**（稳定短窗） | CAM1 分频33，推算约36MHz；CCF仍报37.125 | 1张RAW顶部异常亮行消失、切换后无新增MIPI错误；**尚非长期无花屏验收** |
+| 36 MHz 分频5分钟实测（2026-10-23） | 1280×720 Bayer RAW12/JPEG | **80.0098 FPS** 最终累计 | CAM1 分频33，推算约36MHz；CCF仍报37.125 | **24,222帧；MIPI巡检97次零错误；无超时或编码错误；最高72.4°C；RAW抽样顶部明显改善；仍需全帧与引脚实测** |
 | 原生36 MHz驱动路线 | 待验证 | **尚无正式实测** | 目标36MHz | 匹配内核的36MHz驱动与厂家配套高速初始化表尚未完成 |
 
 以上分别是 **VI 采集 / PTS 统计**，不等于浏览器屏幕刷新率。历史高清 MJPEG 预览在 USB NCM 下 60 秒接收约 82.43 FPS；**该历史 80 档仍有彩条**。数据来源于仓库内的原始实验报告（链接见下）。
@@ -98,7 +102,7 @@ flowchart LR
 | [test/stable_72p18_raw1080/](test/stable_72p18_raw1080/) | RAW12 72 FPS 研究快照（**CRC 错误，不是稳定版本**） |
 | [test/clock36_safe_20261019/](test/clock36_safe_20261019/) | 36 MHz 内核模块路径研究和补丁记录（未完成实板验证） |
 | [test/fps36_max/](test/fps36_max/) | 36 MHz 理论方案、前置检查 |
-| [test/clock36_live_20261023/](test/clock36_live_20261023/) | 分频33≈36MHz实机 A/B、80FPS短测、完整 Bayer RAW12 顶部画质分析（短测，非量产） |
+| [test/clock36_live_20261023/](test/clock36_live_20261023/) | 分频33≈36MHz的实机 A/B、5分钟连续80FPS、RISC-V实时运行源码、自动回退、Bayer RAW量化（研发验证，非量产） |
 | [test/view70_20261022/](test/view70_20261022/) | 70 FPS 方案再次调出、实机帧率、JPEG 画面记录 |
 | [licheervnano-gc4653-80fps-20261018/](licheervnano-gc4653-80fps-20261018/) | 较早的交接文档、校验和（SDK 和压缩包不上传） |
 | [docs/](docs/) | [实验时间线](docs/EXPERIMENT_TIMELINE.md) · [复现与停止](docs/REPRODUCE.md) · [公开文件说明](docs/PUBLICATION_SCOPE.md) |
@@ -119,7 +123,7 @@ flowchart LR
 
 1. **80 档彩条来自采集上游：** 在 Bayer RAW 上复现；禁用 TNR、DPC 与压缩不能解决，不能靠裁切、模糊、缩放掩盖。报告：[stripe-diagnostic/REPORT.md](speed-fry/stripe-diagnostic/REPORT.md)。
 2. **72 FPS 并非稳定版本：** 历史 RAW12 试验中出现 CRC 增长，测试自动中止，不能在宣传材料中当作可靠吞吐。
-3. **正式36MHz驱动仍未完成：** 2026-10-23 已通过 CAM1 硬件分频器做短时36MHz推定试验，得到约80FPS和RAW顶部画质改善，但 Linux debugfs 仍报37.125MHz，未物理测MCLK引脚。现用 MIPI 时钟枚举没有原生36MHz入口；不可把用户态寄存器直写当作安全量产驱动。
+3. **正式36MHz驱动仍未完成：** 2026-10-23 CAM1 分频器方案完成5分钟约80FPS实时运行且RAW抽样改善，但 Linux debugfs 仍报37.125MHz，未物理测MCLK引脚，未对所有帧做画质验收。现用 MIPI 时钟枚举没有原生36MHz入口；不可把用户态寄存器直写当作安全量产驱动。
 4. **温升可能相关，未证因果：** 70 档测试末期帧率下降，不能单凭板端 SoC 温度断言传感器热故障。
 5. **报告是独立试验条件下的观测：** 采集 FPS、编码 FPS、网络接收 FPS、浏览器绘制 FPS 分别记录。
 

@@ -143,6 +143,5 @@ credentials*
 # RISC-V experiment binaries and unverified long-run work-in-progress
 /test/clock36_live_20261023/camera_36probe
 /test/clock36_live_20261023/camera_36long
-/test/clock36_live_20261023/camera_36long.cpp
-/test/clock36_live_20261023/build_long.sh
-/test/clock36_live_20261023/run_board_long.sh
+# Source, build scripts, rollback supervisor are intentionally public;
+# large raw frames and compiled binaries remain untracked.

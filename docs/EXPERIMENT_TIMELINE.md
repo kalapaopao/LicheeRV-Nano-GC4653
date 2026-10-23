@@ -12,8 +12,8 @@
 | 2026-10-19，72 FPS RAW | 27 MHz、1920×1080 RAW12、HTS=1165、VTS=1140、取帧 72.1007 FPS | [试验JSON](../test/stable_72p18_raw1080/snapshot/results/raw1080-20261019-204558/summary.json) | 在第 21 秒附近观察到 CRC 22，自动中止；**不可视作稳定** |
 | 2026-10-19，36 MHz 研发 | 内核/时钟枚举、驱动补丁和候选参数 | [状态](../test/clock36_safe_20261019/STATUS_20261019.md) | **未验证36MHz物理输出** |
 | 2026-10-22，复现 70 FPS | 27 MHz、1920×1080 JPEG、约 71.5 初期 → 70.7 持续运行、MIPI 0 错误 | [最新复现](../test/view70_20261022/RUN_STATUS.md) | 成功拉流与单帧抓拍；SoC 长运行温度约 74.5°C |
-
-| 2026-10-23，CAM1 分频33实机 A/B | 1280×720 packed RAW12，寄存器÷33≈36MHz，约80.0 FPS；顶行异常改善 | [36MHz分频实验](../test/clock36_live_20261023/RESULTS_36MHZ_20261023.md)、[RAW量化图](images/36mhz-raw-row-comparison.svg) | **仅短时试验成功**：Linux CCF仍读37.125MHz、物理MCLK未测、无10分钟质量验收 |
+| 2026-10-23，CAM1 分频33实机 A/B | 1280×720 packed RAW12，寄存器÷33≈36MHz，约80.0 FPS；顶行异常改善 | [36MHz分频实验](../test/clock36_live_20261023/RESULTS_36MHZ_20261023.md)、[RAW量化图](images/36mhz-raw-row-comparison.svg) | 短时对照验证通过，Linux CCF仍读37.125MHz |
+| **2026-10-23，5分钟实时采集** | 1280×720；24,222帧；最终累计**80.0098FPS**、PTS80.0099；97次MIPI零错；最高72.414°C | [5分钟报告与代码](../test/clock36_live_20261023/LIVE_5MIN_RESULTS.md)、[曲线](images/36mhz-live-5min-fps.svg) | **连续300秒取帧通过**，RAW抽样正常；原时钟已恢复；引脚物理MCLK与全部帧画质仍待验证 |
 
 ## 性能数字的含义
 
@@ -33,4 +33,4 @@
 2. 找厂家合法高速模式寄存器表、PLL 与 MIPI lane 匹配参数。
 3. 逐项只修改 MCLK、HTS、VTS 或曝光，保留完整测量数据和每步回退方案。
 4. 对 Bayer RAW 每帧全图做错行/彩条/CRC 分析，另测亮场、暗场、运动场景与温升。
-5. 需要稳定的正式成果再出厂端独立二进制，不替换已封存基线。`n
+5. 需要稳定的正式成果再出厂端独立二进制，不替换已封存基线。
