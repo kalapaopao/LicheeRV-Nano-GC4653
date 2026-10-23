@@ -82,7 +82,7 @@ sh /tmp/clock36_live_20261023/live_36_supervisor.sh
 
 ## 📚 每次失败和进步都有资料
 
-**本次清理不是忘记过去，而是只保留一个有效启动入口。** 已经从主分支退役 **87个旧启动/停止/构建/实验调用脚本**。删除之前逐一归档了名称、SHA-256、用途、Git旧版链接，完整源码可从 Git 历史固定提交恢复，避免交接人重复踩坑。**历史C++研究源码、技术说明、指标JSON等仍保留在仓库**，但不是当前可用入口。
+**本次清理不是忘记过去，而是只保留一个有效启动入口。** 已经从主分支退役 **109个旧启动/停止/构建/实验调用及板端辅助脚本**。删除之前逐一归档了名称、SHA-256、用途、Git旧版链接，完整源码可从 Git 历史固定提交恢复，避免交接人重复踩坑。**历史C++研究源码、技术说明、指标JSON等仍保留在仓库**，但不是当前可用入口。
 
 | 历史阶段 | 实测帧率 / 结果 | 状态 |
 |---|---|---|
@@ -98,7 +98,7 @@ sh /tmp/clock36_live_20261023/live_36_supervisor.sh
 <summary>展开全部研究、源码历史与交接资料</summary>
 
 - **[逐次方案对比、尝试顺序、失败原因与决策过程](docs/history/EXPERIMENT_DECISIONS.md)**：包含从30FPS到80FPS的17项阶段试验
-- **[87个旧调用脚本逐个记录、SHA-256和删除前Git源码链接](docs/history/RETIRED_LAUNCHERS.md)**
+- **[109个旧调用脚本逐个记录、SHA-256和删除前Git源码链接](docs/history/RETIRED_LAUNCHERS.md)**
 - [长周期测试原始时间线](docs/EXPERIMENT_TIMELINE.md)
 - [当前环境、部署及停止说明](docs/REPRODUCE.md)
 - [公开范围与本地完整档案](docs/PUBLICATION_SCOPE.md)

@@ -2,7 +2,7 @@
 
 > **此文档创建于清理之前。** 仅旧的启动、停止、构建和实验运行脚本从主分支移除；历史 C/C++ 源码、测试报告、JSON 指标仍在对应目录。所有被移除脚本的完整原文仍可从 Git 只读提交 [8fe1a520](https://github.com/kalapaopao/LicheeRV-Nano-GC4653/tree/8fe1a520aeb29387d9e4bc30cf44bf8c35057ac1) 恢复。
 
-**清理范围：** 87 个历史调用/构建脚本，当前唯一推荐运行方案为 `test/clock36_live_20261023/live_36_supervisor.sh`，构建入口 `build_long.sh`。
+**清理范围：** 109 个历史调用/构建/板端辅助脚本，当前唯一推荐运行方案为 `test/clock36_live_20261023/live_36_supervisor.sh`，构建入口 `build_long.sh`。
 
 ## 文档和恢复规则
 
@@ -162,6 +162,35 @@
 | [`test/clock36_live_20261023/build.sh`](https://github.com/kalapaopao/LicheeRV-Nano-GC4653/blob/8fe1a520aeb29387d9e4bc30cf44bf8c35057ac1/test/clock36_live_20261023/build.sh) | 交叉编译/重新编译 | `fe8e1b5daf6a57bd7c8473e0e5cde386a4d790e111e5123fb7977ba7d8d09f6e` |
 | [`test/clock36_live_20261023/run_board_long.sh`](https://github.com/kalapaopao/LicheeRV-Nano-GC4653/blob/8fe1a520aeb29387d9e4bc30cf44bf8c35057ac1/test/clock36_live_20261023/run_board_long.sh) | 实验执行/扫描/对照 | `1b53282b9221502d6a659785ade23cf321001d2dabb5477a208edc339a2c2c65` |
 | [`test/clock36_live_20261023/run_board_test.sh`](https://github.com/kalapaopao/LicheeRV-Nano-GC4653/blob/8fe1a520aeb29387d9e4bc30cf44bf8c35057ac1/test/clock36_live_20261023/run_board_test.sh) | 实验执行/扫描/对照 | `c722397d67feeb22507985150967e72d4571619f9f9c84f070d401b937f06b8e` |
+
+### 10 名称未以 start/run 开头的其他旧板端调用工具（22个）
+
+这些脚本虽没有传统 start/run 名称，但经实际源码检查，它们仍会部署/请求旧版摄像头、执行旧的板端基准、修改旧工程文件、处理旧内核构建或访问板端。为了只保留一个推荐的板端调用方案，也一起从主分支退役；原版均保留在同一个固定Git提交中。
+
+| 删除前完整路径（打开旧版源码） | 旧用途 | SHA-256 |
+|---|---|---|
+| [`speed-fry/saved-80/benchmark.sh`](https://github.com/kalapaopao/LicheeRV-Nano-GC4653/blob/8fe1a520aeb29387d9e4bc30cf44bf8c35057ac1/speed-fry/saved-80/benchmark.sh) | 旧板端摄像头启动/管理/状态检测 | `907ced1e5ea8955da316313f2a395f6147e796095126dc9825cfbaba116d11c0` |
+| [`speed-fry/board-hd.py`](https://github.com/kalapaopao/LicheeRV-Nano-GC4653/blob/8fe1a520aeb29387d9e4bc30cf44bf8c35057ac1/speed-fry/board-hd.py) | 旧板端摄像头启动/管理/状态检测 | `3f770a2bd845f0d07c47740f929ac4f253d9c4c128b832daf308fb2f7453fe51` |
+| [`speed-fry/board-preview80.py`](https://github.com/kalapaopao/LicheeRV-Nano-GC4653/blob/8fe1a520aeb29387d9e4bc30cf44bf8c35057ac1/speed-fry/board-preview80.py) | 旧板端摄像头启动/管理/状态检测 | `429da31c94fd8241c7a0fc8fd77d7e469cf562626160f5ab11f76022dff47dd3` |
+| [`speed-fry/check-preview-hd.py`](https://github.com/kalapaopao/LicheeRV-Nano-GC4653/blob/8fe1a520aeb29387d9e4bc30cf44bf8c35057ac1/speed-fry/check-preview-hd.py) | 旧板端摄像头启动/管理/状态检测 | `cb724a5a6e8fcd797f597fc10ab199190fbd8ec253a59014cbde478c065da7f6` |
+| [`speed-fry/check-preview80.py`](https://github.com/kalapaopao/LicheeRV-Nano-GC4653/blob/8fe1a520aeb29387d9e4bc30cf44bf8c35057ac1/speed-fry/check-preview80.py) | 旧板端摄像头启动/管理/状态检测 | `84fe48c44ffa54314159040af62955a61905e36610b5a3c6d5d1059e29f77b50` |
+| [`speed-fry/official-tests/board_factory_preview.py`](https://github.com/kalapaopao/LicheeRV-Nano-GC4653/blob/8fe1a520aeb29387d9e4bc30cf44bf8c35057ac1/speed-fry/official-tests/board_factory_preview.py) | 旧板端摄像头启动/管理/状态检测 | `699a9791211b3302eb3afc3fabbd219053003789bdf92a98b8cc12596b5c5324` |
+| [`speed-fry/official-tests/receive.py`](https://github.com/kalapaopao/LicheeRV-Nano-GC4653/blob/8fe1a520aeb29387d9e4bc30cf44bf8c35057ac1/speed-fry/official-tests/receive.py) | 旧HTTP视频接收/诊断 | `952ad111610c4e21bce9c71a9905b1681d1ec88cbaa225b0007c4b0ba8289802` |
+| [`speed-fry/patch_build.py`](https://github.com/kalapaopao/LicheeRV-Nano-GC4653/blob/8fe1a520aeb29387d9e4bc30cf44bf8c35057ac1/speed-fry/patch_build.py) | 旧时钟/源码构建或补丁辅助 | `5b472bccbed597248939e3c0a6faa9e746861055c2fc48aebd57ce16e1553254` |
+| [`speed-fry/patch_stream.py`](https://github.com/kalapaopao/LicheeRV-Nano-GC4653/blob/8fe1a520aeb29387d9e4bc30cf44bf8c35057ac1/speed-fry/patch_stream.py) | 旧时钟/源码构建或补丁辅助 | `d782453ddd682a1231dc24c5caf937721d11477b9e89623e284c078c75bb027c` |
+| [`speed-fry/stripe-diagnostic/verify_restore.py`](https://github.com/kalapaopao/LicheeRV-Nano-GC4653/blob/8fe1a520aeb29387d9e4bc30cf44bf8c35057ac1/speed-fry/stripe-diagnostic/verify_restore.py) | 旧实验部署、清理或验证 | `9a1dc09bf3db0e53862dc96ce55f25d1059ea5f79f967a5d03a39ae05552ed9d` |
+| [`test/board_lock_status.py`](https://github.com/kalapaopao/LicheeRV-Nano-GC4653/blob/8fe1a520aeb29387d9e4bc30cf44bf8c35057ac1/test/board_lock_status.py) | 旧板端摄像头启动/管理/状态检测 | `8313ca4fc5d0f172e483f1f0539e2335fa32eefa5a45dc23e83337087c96beaf` |
+| [`test/board_probe.py`](https://github.com/kalapaopao/LicheeRV-Nano-GC4653/blob/8fe1a520aeb29387d9e4bc30cf44bf8c35057ac1/test/board_probe.py) | 旧板端摄像头启动/管理/状态检测 | `14a778f1beab8084f3f68bf02a1fad45d38080929333b6c8e164d65f25e1c88e` |
+| [`test/cleanup_own_tmp.py`](https://github.com/kalapaopao/LicheeRV-Nano-GC4653/blob/8fe1a520aeb29387d9e4bc30cf44bf8c35057ac1/test/cleanup_own_tmp.py) | 旧实验部署、清理或验证 | `a41b5aadbc218bd4b44ddaf2875c4df1a823be84331d2b271cc0a37db6370d9a` |
+| [`test/fetch_factory_snapshot.py`](https://github.com/kalapaopao/LicheeRV-Nano-GC4653/blob/8fe1a520aeb29387d9e4bc30cf44bf8c35057ac1/test/fetch_factory_snapshot.py) | 旧HTTP视频接收/诊断 | `670e0dc54ccddf743580ab032dd800b6ba74e0e93d192c859a0e239343d15ea7` |
+| [`test/probe_mjpeg.py`](https://github.com/kalapaopao/LicheeRV-Nano-GC4653/blob/8fe1a520aeb29387d9e4bc30cf44bf8c35057ac1/test/probe_mjpeg.py) | 旧HTTP视频接收/诊断 | `442058836bc112323cb0481106bc71ff978524f47e57f144624f6a3a0183f908` |
+| [`test/setup_ssh_key.py`](https://github.com/kalapaopao/LicheeRV-Nano-GC4653/blob/8fe1a520aeb29387d9e4bc30cf44bf8c35057ac1/test/setup_ssh_key.py) | 旧SSH部署辅助 | `258d350f393c6f74d742fec7dabeecc63654f6793777f049f1b209fcae33d6de` |
+| [`test/clock36_safe_20261019/stage_kernel_source.py`](https://github.com/kalapaopao/LicheeRV-Nano-GC4653/blob/8fe1a520aeb29387d9e4bc30cf44bf8c35057ac1/test/clock36_safe_20261019/stage_kernel_source.py) | 旧时钟/源码构建或补丁辅助 | `9b56e08378a6191a9439b1634fedc67a6def670afa10072fea88edf2b4ad3747` |
+| [`test/kernel36/make_sipeed_patch.py`](https://github.com/kalapaopao/LicheeRV-Nano-GC4653/blob/8fe1a520aeb29387d9e4bc30cf44bf8c35057ac1/test/kernel36/make_sipeed_patch.py) | 旧时钟/源码构建或补丁辅助 | `55d1a5a543e7e3cbcf24d228c1e8797f53beecaa571b84e9155b63b21496da08` |
+| [`test/clock36_live_20261023/probe_clock_only.sh`](https://github.com/kalapaopao/LicheeRV-Nano-GC4653/blob/8fe1a520aeb29387d9e4bc30cf44bf8c35057ac1/test/clock36_live_20261023/probe_clock_only.sh) | 旧板端摄像头启动/管理/状态检测 | `f758b70cf5224e2f1ba91ba932041497ba9e4729fd171ce3fed9b2e2c42f0aae` |
+| [`test/clock36_safe_20261019/hostcc.sh`](https://github.com/kalapaopao/LicheeRV-Nano-GC4653/blob/8fe1a520aeb29387d9e4bc30cf44bf8c35057ac1/test/clock36_safe_20261019/hostcc.sh) | 旧时钟/源码构建或补丁辅助 | `f31be33c3e02455a343f0271cbf656b39abba9e8ec0a41801d48d4e26f7edaec` |
+| [`test/kernel36/extract_sipeed_sources.sh`](https://github.com/kalapaopao/LicheeRV-Nano-GC4653/blob/8fe1a520aeb29387d9e4bc30cf44bf8c35057ac1/test/kernel36/extract_sipeed_sources.sh) | 旧时钟/源码构建或补丁辅助 | `deccdb271c5b92a5ebf57d48dea3c55ea1be869c4f815cc682c2e75c369444ea` |
+| [`test/kernel36/prepare_host_tools.sh`](https://github.com/kalapaopao/LicheeRV-Nano-GC4653/blob/8fe1a520aeb29387d9e4bc30cf44bf8c35057ac1/test/kernel36/prepare_host_tools.sh) | 旧时钟/源码构建或补丁辅助 | `9f4afdab7065df90c08e00d49436b094759e7640969b54ffc52eab89eebc03c4` |
 
 ## 清理后保留的唯一可用链路
 
