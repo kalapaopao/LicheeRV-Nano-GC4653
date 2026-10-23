@@ -1,0 +1,128 @@
+{
+  "binary_sha256": "a61c793ecc37128f5548bc09abf2bea56a915637ab1a5f5144392173ae223278",
+  "plan": "27MHz only; HTS (1600,); 8s each",
+  "cases": [
+    {
+      "hts": 1600,
+      "mclk_mhz": 27,
+      "exit_code": 0,
+      "duration_wall_s": 14.875,
+      "temp_c": 62.625,
+      "mipi_counters_during": [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "sensor_requested_hts": 1600,
+      "readback_hts": 1600,
+      "readback_vts": 1800,
+      "vi": {
+        "clock": "27",
+        "frames": 481,
+        "fps": 60.0,
+        "pts_fps": 59.9998,
+        "duplicate_pts": 0,
+        "timeouts": 0,
+        "dump_rc": 0
+      },
+      "bayer": [
+        {
+          "file": "bayer-0.bin",
+          "valid": true,
+          "size": 1382400,
+          "sha256": "8f88a37d552c130359247da3b5ca85249ac6048adce46cfec63dfa9dfb273731",
+          "row_max_first8": [
+            1872,
+            1872,
+            1924,
+            1816,
+            2036,
+            1984,
+            2108,
+            2008
+          ],
+          "row_gt2500_first8": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "suspicious_x_row2": [],
+          "suspicious_x_row3": [],
+          "isolated_top_burst_count": 0,
+          "isolated_top_burst_positions": []
+        },
+        {
+          "file": "bayer-1.bin",
+          "valid": true,
+          "size": 1382400,
+          "sha256": "60cbaddbc8be7616105f224b3bc8a6f44659b2dbf336132eecabadeca99e08eb",
+          "row_max_first8": [
+            1832,
+            1820,
+            1976,
+            1896,
+            2024,
+            1936,
+            2016,
+            2000
+          ],
+          "row_gt2500_first8": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "suspicious_x_row2": [],
+          "suspicious_x_row3": [],
+          "isolated_top_burst_count": 0,
+          "isolated_top_burst_positions": []
+        },
+        {
+          "file": "bayer-2.bin",
+          "valid": true,
+          "size": 1382400,
+          "sha256": "a51807ce3552cbbec1dab21125fad56327a038e7cfaefe3c209c5f75ad61c24a",
+          "row_max_first8": [
+            1852,
+            1876,
+            1916,
+            1880,
+            1932,
+            2004,
+            2028,
+            2040
+          ],
+          "row_gt2500_first8": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "suspicious_x_row2": [],
+          "suspicious_x_row3": [],
+          "isolated_top_burst_count": 0,
+          "isolated_top_burst_positions": []
+        }
+      ]
+    }
+  ],
+  "output": "D:\\study\\LicheeRV\\test\\results\\spec27-hts-20261019-171906",
+  "pre_temp_c": 60.177,
+  "pre_df": "tmpfs                    65432       344     65088   1% /tmp",
+  "cleanup": "Released own camera lock; initial preview was off"
+}

@@ -1,0 +1,2 @@
+RESTORED=True
+  787 root     /code/camera/bin/camera_preview_factory 10.133.124.1 /code/camera/reports/preview-factory-15226-784 60

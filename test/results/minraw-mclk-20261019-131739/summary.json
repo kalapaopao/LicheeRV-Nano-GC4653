@@ -1,0 +1,49 @@
+{
+  "directory": "D:\\study\\LicheeRV\\test\\results\\minraw-mclk-20261019-131739",
+  "binary_sha256": "cae4aa34cd7945017c96e1f90cece7728256110bb7c4fdc2ad27ac6b03c0ee36",
+  "cases": [
+    {
+      "label": "a-27",
+      "clock": "27",
+      "exit_code": 8,
+      "elapsed_wall_s": 16.828,
+      "raw_samples": [
+        {
+          "file": "bayer-0.bin",
+          "bad_size": 0
+        },
+        {
+          "file": "bayer-1.bin",
+          "bad_size": 0
+        },
+        {
+          "file": "bayer-2.bin",
+          "bad_size": 0
+        }
+      ],
+      "capture": {
+        "clock": "27",
+        "frames": 601,
+        "fps": 59.9998,
+        "pts_fps": 59.9999,
+        "duplicate_pts": 0,
+        "timeouts": 0,
+        "dump_rc": 1
+      },
+      "mipi_pre": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "mipi_post": null,
+      "temperature_c": 61.925
+    }
+  ],
+  "initial_camera_processes": [],
+  "initial_temperature_c": 58.08,
+  "stopped_reason": "first abnormal trial: error/CRC/RAW/temperature",
+  "cleanup": "camera lock released",
+  "final_camera_processes": []
+}

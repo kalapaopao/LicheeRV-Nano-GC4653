@@ -1,0 +1,121 @@
+{
+  "binary_sha256": "4272c79862414077a1d123589711b8e9c1f83ffc979cd8868b690c4e18b0b887",
+  "goal": "1920x1080, 27MHz, >70 VI and PTS, zero MIPI CRC/Hdr/Wc/FIFO, no damaged raw sample",
+  "plan": [
+    1200
+  ],
+  "cases": [
+    {
+      "hts": 1200,
+      "vts": "1180",
+      "pid": 3516,
+      "mipi_pre_reset": [
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "counters": [
+        {
+          "time_elapsed_s": 4,
+          "mipi": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "soc_temp_c": 61.576
+        },
+        {
+          "time_elapsed_s": 8,
+          "mipi": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "soc_temp_c": 63.324
+        },
+        {
+          "time_elapsed_s": 12,
+          "mipi": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "soc_temp_c": 64.023
+        },
+        {
+          "time_elapsed_s": 16,
+          "mipi": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "soc_temp_c": 64.722
+        }
+      ],
+      "metrics": [
+        "772",
+        "69.9434",
+        "69.9434",
+        "0",
+        "0",
+        "0"
+      ],
+      "raw_images": [
+        {
+          "valid": true,
+          "size_bytes": 3110400,
+          "sha256": "4af672fa58391d1246f76175767adc323d0715db81469500b1f3efd65cfc1475",
+          "top_anomaly_ratio": 0.983,
+          "max_row_brightness_jump": 0.2693
+        },
+        {
+          "valid": true,
+          "size_bytes": 3110400,
+          "sha256": "2d0d657006e0be3279593dfca5a4882b202b7ddaa4d39e651a14d7a5e03d285c",
+          "top_anomaly_ratio": 0.993,
+          "max_row_brightness_jump": 0.2677
+        },
+        {
+          "valid": true,
+          "size_bytes": 3110400,
+          "sha256": "f5a10dab592ddc93e2f6eb32a43191b4bda2e746e22875dc00cda353d72f4fb8",
+          "top_anomaly_ratio": 1.057,
+          "max_row_brightness_jump": 0.2859
+        }
+      ],
+      "samples": 3,
+      "sample_saves": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "1"
+        ],
+        [
+          "2",
+          "1"
+        ]
+      ],
+      "sensor_mode_logged": true,
+      "experiment_process_alive": false,
+      "board_temp_final_c": 60.527,
+      "actual_fps": 69.9434,
+      "pts_fps": 69.9434
+    }
+  ],
+  "start_soc_temp_c": 58.08,
+  "cleanup": "Released own lock, existing camera preview untouched",
+  "stop": "MIPI error present before counter reset at VTS 1180"
+}

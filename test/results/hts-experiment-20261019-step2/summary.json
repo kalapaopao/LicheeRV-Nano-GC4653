@@ -1,0 +1,19 @@
+{
+  "tests": [
+    {
+      "hts": 1150,
+      "pid": 1744,
+      "temp_c": 69.267,
+      "last_metrics": null,
+      "had_sensor_timing_log": true,
+      "top_anomaly_ratio": 999.0
+    }
+  ],
+  "binary_sha256": "eea53508742f80d28b8df28c8a843495734133253144f311888bf40735e2abc5",
+  "initial_process": " 1667 root     /code/camera/bin/camera_preview_factory 10.133.124.1 /code/camera/reports/preview-factory-18412-1664 60\n",
+  "temperature_before_c": 76.609,
+  "stopped_reason": "top-band anomaly after hts-1150",
+  "restore": "factory start command sent",
+  "restored_processes": " 1793 root     /code/camera/bin/camera_preview_factory 10.133.124.1 /code/camera/reports/preview-factory-18573-1790 60\n",
+  "restored_temperature_c": 71.714
+}

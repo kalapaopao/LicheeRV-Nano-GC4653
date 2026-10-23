@@ -1,0 +1,136 @@
+{
+  "hts": 1575,
+  "mclk_mhz": 27,
+  "exit_code": 0,
+  "duration_wall_s": 14.813,
+  "temp_c": 62.974,
+  "mipi_counters_during": [
+    1,
+    0,
+    0,
+    0,
+    0
+  ],
+  "sensor_requested_hts": 1575,
+  "readback_hts": 1575,
+  "readback_vts": 1800,
+  "vi": {
+    "clock": "27",
+    "frames": 488,
+    "fps": 60.9523,
+    "pts_fps": 60.9522,
+    "duplicate_pts": 0,
+    "timeouts": 0,
+    "dump_rc": 0
+  },
+  "bayer": [
+    {
+      "file": "bayer-0.bin",
+      "valid": true,
+      "size": 1382400,
+      "sha256": "5aa6fd04ae8ae336a2eb0217ec89db21b97747815bd20551a6febbf913d99e42",
+      "row_max_first8": [
+        3304,
+        3460,
+        3688,
+        3344,
+        3460,
+        3416,
+        3388,
+        3368
+      ],
+      "row_gt2500_first8": [
+        2,
+        1,
+        2,
+        2,
+        2,
+        3,
+        2,
+        3
+      ],
+      "suspicious_x_row2": [
+        1172,
+        1174
+      ],
+      "suspicious_x_row3": [
+        1171,
+        1173
+      ],
+      "isolated_top_burst_count": 0,
+      "isolated_top_burst_positions": []
+    },
+    {
+      "file": "bayer-1.bin",
+      "valid": true,
+      "size": 1382400,
+      "sha256": "dfdd95bd825d7d96ccc7c681068fc88209d9b08ce8d6d6d0f930e2ec079cd809",
+      "row_max_first8": [
+        3320,
+        3448,
+        3448,
+        3244,
+        3572,
+        3184,
+        3396,
+        3384
+      ],
+      "row_gt2500_first8": [
+        2,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "suspicious_x_row2": [
+        1172,
+        1174
+      ],
+      "suspicious_x_row3": [
+        1171,
+        1173
+      ],
+      "isolated_top_burst_count": 0,
+      "isolated_top_burst_positions": []
+    },
+    {
+      "file": "bayer-2.bin",
+      "valid": true,
+      "size": 1382400,
+      "sha256": "3b0e4c2c5dcea849585e127163441958187bc3e197b46b89fd7015c9a2dcfdff",
+      "row_max_first8": [
+        3212,
+        3528,
+        3292,
+        3324,
+        3496,
+        3224,
+        3344,
+        3276
+      ],
+      "row_gt2500_first8": [
+        2,
+        1,
+        2,
+        2,
+        2,
+        3,
+        2,
+        2
+      ],
+      "suspicious_x_row2": [
+        1172,
+        1174
+      ],
+      "suspicious_x_row3": [
+        1171,
+        1173
+      ],
+      "isolated_top_burst_count": 0,
+      "isolated_top_burst_positions": []
+    }
+  ]
+}

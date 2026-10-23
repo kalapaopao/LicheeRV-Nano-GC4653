@@ -1,0 +1,18 @@
+﻿[
+    {
+        "file":  "analysis.json",
+        "sha256":  "9DE5A3F3FEF0228110218AFA7D1183C799B4854B1482C3687CA92C010B8906A4"
+    },
+    {
+        "file":  "audit_thermal.json",
+        "sha256":  "80E298A2D57B8F17BB552506665494DC9717F04DE218424C464AA0A156445663"
+    },
+    {
+        "file":  "run.log",
+        "sha256":  "FB10E5A7D6B5A5B9B8E00764500F25B1341A15577E7AC55309DE7D33AAA0C104"
+    },
+    {
+        "file":  "summary.json",
+        "sha256":  "CB92A15D849CAE159356FEC09D1215A0D1AA79CC6BE00DAA06729BB8D5F32B62"
+    }
+]

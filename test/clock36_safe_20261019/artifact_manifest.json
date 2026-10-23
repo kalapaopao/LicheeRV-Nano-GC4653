@@ -1,0 +1,72 @@
+﻿[
+    {
+        "relative":  "STATUS_20261019.md",
+        "size":  6103,
+        "sha256":  "936738EF74ADD957DE440890B0A5F15AA911CE4B05B5DC392F0C6F4492B947E2"
+    },
+    {
+        "relative":  "board.config",
+        "size":  133753,
+        "sha256":  "3DF6ECF5BCAD1D66C858B76ADC863B42176A1D6874D5F0D84E889A830BBE9AD3"
+    },
+    {
+        "relative":  "original_soph_mipi_rx.ko",
+        "size":  119480,
+        "sha256":  "27AEC4B153561E51446D178BA7788D32301B0A55FB91032EE07DBF2E23B05A00"
+    },
+    {
+        "relative":  "sipeed_soph_mipi_rx_36mhz.patch",
+        "size":  2049,
+        "sha256":  "F6867FDA0486251550A3A979B58ED1C42A0A392052F567C75E2A82CEE84A8B31"
+    },
+    {
+        "relative":  "driver_src\\cif.c",
+        "size":  87324,
+        "sha256":  "E84CD4A62ABAFDB85532944AF9961F4E5BC445342DCDCC9BA6F59FD56117827D"
+    },
+    {
+        "relative":  "driver_src\\cif_uapi.h",
+        "size":  9122,
+        "sha256":  "7675C7532A831A253BAAEA199BCAEF2F5F18CD24D30E9EBDD5F9D6644BD0764B"
+    },
+    {
+        "relative":  "userland\\main.cpp",
+        "size":  7425,
+        "sha256":  "7C87AF1E01DA9B67704554023108432CD6790A0661BDA54D60F006C6682D74CE"
+    },
+    {
+        "relative":  "userland\\sensor\\gc4653_cmos.c",
+        "size":  34824,
+        "sha256":  "CE8872EFADE0B698905B70327225F4E915E79C4983F660EAE0A3449FC31E6E59"
+    },
+    {
+        "relative":  "userland\\minraw1080_27or36",
+        "size":  98504,
+        "sha256":  "AE378D24CD5E110B8E2E1BA3A93A558A4BB5FB45C0E685E3CC10BCE9F397F0F5"
+    },
+    {
+        "relative":  "userland\\results\\raw1080-20261019-214804\\summary.json",
+        "size":  3388,
+        "sha256":  "6AC63CCB632821B35D9C2A26614E3E764E6A9301984F7064E087CF4E7F79CE26"
+    },
+    {
+        "relative":  "userland\\results\\raw1080-20261019-214804\\run.log",
+        "size":  2615,
+        "sha256":  "C3D5AA19C8223C9D16121E89F56FFCD7144DA3E1341EB9AEDF04D20A3444878E"
+    },
+    {
+        "relative":  "userland\\results\\raw1080-20261019-214804\\bayer-0.bin",
+        "size":  3110400,
+        "sha256":  "774D39951C0A67AA6C2F276926A0F8D025F6DC9DB73F8A46AED1255FC7AEBD67"
+    },
+    {
+        "relative":  "userland\\results\\raw1080-20261019-214804\\bayer-1.bin",
+        "size":  3110400,
+        "sha256":  "320100ECA4FA87FD518FA5B9AE72DCAE2CA41958A97C0428BD5208AF8CA9F4FF"
+    },
+    {
+        "relative":  "userland\\results\\raw1080-20261019-214804\\bayer-2.bin",
+        "size":  3110400,
+        "sha256":  "1E7C76740F7BC82619F904DA09F16C5CB01A5F2507B3264A708748BB76ADD22F"
+    }
+]

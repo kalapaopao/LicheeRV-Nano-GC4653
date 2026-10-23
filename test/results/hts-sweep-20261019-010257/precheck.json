@@ -1,0 +1,5 @@
+{
+  "before_temp_mC": 76259,
+  "original_processes": " 3682 root     /code/camera/bin/camera_preview_factory 10.133.124.1 /code/camera/reports/preview-factory-11019-3679 60\n",
+  "binary_sha256": "9423465e0d2c4c07d3048e3356d38dcd89cbb1658c3e0996c3fc6ced9efee171"
+}

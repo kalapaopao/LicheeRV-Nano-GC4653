@@ -1,0 +1,34 @@
+{
+  "name": "fps60_clock27",
+  "requested": 60,
+  "mclk_mhz": 27,
+  "exit_code": 0,
+  "elapsed_s": 14.06,
+  "temperature_after_c": 58.779,
+  "vi": {
+    "requested_fps": 60,
+    "width": 1280,
+    "height": 720,
+    "frames": 421,
+    "host_fps": 60.0,
+    "pts_fps": 59.9999,
+    "duplicate_pts": 0,
+    "timeouts": 0,
+    "large_intervals": 0
+  },
+  "bayer": [
+    {
+      "status": "invalid_raw_length",
+      "length": 0
+    },
+    {
+      "status": "invalid_raw_length",
+      "length": 0
+    },
+    {
+      "status": "invalid_raw_length",
+      "length": 0
+    }
+  ],
+  "sensor_clock_logged": true
+}

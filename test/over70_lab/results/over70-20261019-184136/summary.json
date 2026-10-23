@@ -1,0 +1,37 @@
+{
+  "binary_sha256": "4272c79862414077a1d123589711b8e9c1f83ffc979cd8868b690c4e18b0b887",
+  "goal": "1920x1080, 27MHz, >70 VI and PTS, zero MIPI CRC/Hdr/Wc/FIFO, no damaged raw sample",
+  "plan": [
+    1200
+  ],
+  "cases": [
+    {
+      "hts": 1200,
+      "vts": "1180",
+      "pid": 3298,
+      "counters": [
+        {
+          "time_elapsed_s": 4,
+          "mipi": [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "soc_temp_c": 61.576
+        }
+      ],
+      "metrics": null,
+      "raw_images": [],
+      "samples": 0,
+      "sample_saves": [],
+      "sensor_mode_logged": true,
+      "experiment_process_alive": false,
+      "board_temp_final_c": 59.128
+    }
+  ],
+  "start_soc_temp_c": 58.08,
+  "stop": "Invalid video/raw/statistics at HTS 1200",
+  "cleanup": "Released own lock, existing camera preview untouched"
+}

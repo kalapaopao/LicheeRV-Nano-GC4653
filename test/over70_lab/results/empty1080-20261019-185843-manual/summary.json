@@ -1,0 +1,141 @@
+{
+  "mode": "manual",
+  "resolution": "1920x1080",
+  "fps_request": 80,
+  "HTS": 1200,
+  "VTS": 1200,
+  "MCLK_target_MHz": 27,
+  "duration_seconds": 20,
+  "binary_sha256": "44c1163f7ce6571fe9c0ea57034b3b8eafe0afbe1339a9bbaf85e79551b0c798",
+  "MCLK_route": "current test sensor driver forces 27MHz for MAIX_SENSOR_FPS>=80",
+  "mipi_samples": [
+    {
+      "t_s": 4,
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "t_s": 8,
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "t_s": 12,
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "t_s": 16,
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "t_s": 20,
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "t_s": 24,
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "temperature_samples_c": [
+    {
+      "t_s": 4,
+      "soc_c": 59.478
+    },
+    {
+      "t_s": 8,
+      "soc_c": 60.177
+    },
+    {
+      "t_s": 12,
+      "soc_c": 60.876
+    },
+    {
+      "t_s": 16,
+      "soc_c": 60.876
+    },
+    {
+      "t_s": 20,
+      "soc_c": 61.576
+    },
+    {
+      "t_s": 24,
+      "soc_c": 61.925
+    }
+  ],
+  "soc_temp_start_c": 57.38,
+  "mipi_pre_reset": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "pre_reset_nonzero_unattributed": false,
+  "mipi_counter_reset": "reset 0 via documented /proc/mipi-rx debug command",
+  "vi_result": {
+    "requested_fps": 80,
+    "width": 1920,
+    "height": 1080,
+    "frames": 701,
+    "host_fps": 35.0343,
+    "pts_fps": 35.0358,
+    "duplicate_pts": 0,
+    "timeouts": 0,
+    "large_intervals": 700
+  },
+  "sensor_registers_after": {
+    "VTS": 2400,
+    "exposure_lines": 360
+  },
+  "ae_after": {
+    "exposure_us": 5000,
+    "again": 4096,
+    "dgain": 1024,
+    "isp_gain": 1024,
+    "luma": 6,
+    "fps_field": 3000
+  },
+  "frame_quality": {
+    "valid": true,
+    "size_bytes": 3110400,
+    "sha256": "ab2a11e26d00fd37069711f87745ff0e34290de7c0ede63df9bec20a9505ca7e",
+    "top_anomaly_ratio": 0.935,
+    "max_row_brightness_jump": 0.3453
+  },
+  "run_log_sha256": "c21294c07a66eb0970e00341db7e2a5fad559a9782f624791e8c4f254430c30f",
+  "cleanup": "removed own /tmp scratch; released own lock"
+}

@@ -1,0 +1,29 @@
+{
+  "vts_request": 1400,
+  "registers": {
+    "original": 1500,
+    "initial": 1400,
+    "final": 1400
+  },
+  "fps": 60.0004,
+  "pts_fps": 60.0002,
+  "frame_count": 481,
+  "timeouts": 0,
+  "duplicate_pts": 0,
+  "mipi": [
+    0,
+    0,
+    0,
+    1,
+    0
+  ],
+  "temperature": 66.82,
+  "exit_code": 0,
+  "raw_count": 3,
+  "raw_valid": true,
+  "raw_transient_bursts": [
+    0,
+    0,
+    0
+  ]
+}

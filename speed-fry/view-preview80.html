@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><title>荔枝派 80 档实时预览</title>
+<style>body{background:#17191c;color:#eee;font:18px sans-serif;text-align:center}img{width:min(96vw,1280px);height:auto}button{padding:10px;margin:12px}</style>
+<h2>GC4653 · 80 档采集 / 实时预览</h2>
+<p>传感器：1280×720，80 档（实际速度以板端日志为准）。低负载预览：320×180，目标不超过 15 FPS。</p>
+<button onclick="document.querySelector('img').src='http://10.133.125.1:8080/live.mjpg?t='+Date.now()">重新连接画面</button><br>
+<img src="http://10.133.125.1:8080/live.mjpg" alt="连接中；请确认板端预览正在运行。">
+<p>仅支持一个直接预览客户端。断开后等待约 3 秒再重连。</p></html>

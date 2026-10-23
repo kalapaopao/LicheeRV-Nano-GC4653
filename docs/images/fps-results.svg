@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 470" role="img" aria-label="GC4653 摄像头不同实验实测采集帧率：69.53、70.69、72.10 与82.37 FPS，后两者存在稳定性或彩条缺陷">
+  <rect width="1120" height="470" rx="24" fill="#101827"/>
+  <text x="48" y="53" fill="#eef4fb" font-family="Microsoft YaHei,Noto Sans CJK SC,Arial,sans-serif" font-size="27" font-weight="bold">GC4653 · 实际采集帧率与质量状态</text>
+  <text x="48" y="82" fill="#98a8bf" font-family="Microsoft YaHei,Arial,sans-serif" font-size="15">LicheeRV Nano / SG2002 · FPS 为 VI / PTS 测得，非浏览器绘制 FPS</text>
+  <g stroke="#34445b" stroke-width="1">
+    <path d="M280 120 V378 M455 120 V378 M630 120 V378 M805 120 V378 M980 120 V378" stroke-dasharray="5 8"/>
+  </g>
+  <g font-family="Microsoft YaHei,Noto Sans CJK SC,Arial,sans-serif" font-size="17" fill="#d9e3f0">
+    <text x="44" y="159">69.53 FPS 冻结基线</text>
+    <text x="44" y="228">70.69 FPS 长测</text>
+    <text x="44" y="297">72.10 FPS RAW</text>
+    <text x="44" y="366">82.37 FPS 720P</text>
+  </g>
+  <rect x="280" y="130" width="541" height="39" rx="8" fill="#4ba98a"/>
+  <rect x="280" y="199" width="550" height="39" rx="8" fill="#4ba98a"/>
+  <rect x="280" y="268" width="561" height="39" rx="8" fill="#c29a45"/>
+  <rect x="280" y="337" width="641" height="39" rx="8" fill="#c56a6a"/>
+  <g font-family="Arial,sans-serif" font-size="18" font-weight="bold" fill="#f4fbff">
+    <text x="834" y="157">69.53</text>
+    <text x="844" y="226">70.69</text>
+    <text x="855" y="295">72.10</text>
+    <text x="933" y="364">82.37</text>
+  </g>
+  <g font-family="Microsoft YaHei,Noto Sans CJK SC,Arial,sans-serif" font-size="15">
+    <text x="280" y="413" fill="#6dd5ab">● 27 MHz：基线 / 长测有效</text>
+    <text x="535" y="413" fill="#ffcb66">● 72 FPS：CRC 错误</text>
+    <text x="752" y="413" fill="#ff9696">● 82 FPS：RAW 彩条</text>
+    <text x="48" y="446" fill="#a3b3c9">36 MHz 合规方案：尚无板端实测；图中不绘制为已达成绩</text>
+  </g>
+</svg>

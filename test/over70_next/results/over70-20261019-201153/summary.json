@@ -1,0 +1,315 @@
+{
+  "binary_sha256": "4272c79862414077a1d123589711b8e9c1f83ffc979cd8868b690c4e18b0b887",
+  "goal": "1920x1080, 27MHz, >70 VI and PTS, zero MIPI CRC/Hdr/Wc/FIFO, no damaged raw sample",
+  "plan": [
+    1175
+  ],
+  "cases": [
+    {
+      "hts": 1175,
+      "vts": "1200",
+      "pid": 1106,
+      "mipi_pre_reset": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "counters": [
+        {
+          "time_elapsed_s": 4,
+          "mipi": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "soc_temp_c": 62.625
+        },
+        {
+          "time_elapsed_s": 8,
+          "mipi": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "soc_temp_c": 64.373
+        },
+        {
+          "time_elapsed_s": 12,
+          "mipi": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "soc_temp_c": 65.421
+        },
+        {
+          "time_elapsed_s": 16,
+          "mipi": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "soc_temp_c": 66.47
+        },
+        {
+          "time_elapsed_s": 20,
+          "mipi": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "soc_temp_c": 66.82
+        },
+        {
+          "time_elapsed_s": 24,
+          "mipi": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "soc_temp_c": 67.519
+        },
+        {
+          "time_elapsed_s": 28,
+          "mipi": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "soc_temp_c": 68.218
+        },
+        {
+          "time_elapsed_s": 32,
+          "mipi": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "soc_temp_c": 68.568
+        },
+        {
+          "time_elapsed_s": 36,
+          "mipi": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "soc_temp_c": 69.267
+        },
+        {
+          "time_elapsed_s": 40,
+          "mipi": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "soc_temp_c": 69.617
+        },
+        {
+          "time_elapsed_s": 44,
+          "mipi": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "soc_temp_c": 69.966
+        },
+        {
+          "time_elapsed_s": 48,
+          "mipi": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "soc_temp_c": 70.316
+        },
+        {
+          "time_elapsed_s": 52,
+          "mipi": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "soc_temp_c": 71.015
+        },
+        {
+          "time_elapsed_s": 56,
+          "mipi": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "soc_temp_c": 71.365
+        },
+        {
+          "time_elapsed_s": 60,
+          "mipi": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "soc_temp_c": 71.714
+        },
+        {
+          "time_elapsed_s": 64,
+          "mipi": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "soc_temp_c": 72.064
+        },
+        {
+          "time_elapsed_s": 68,
+          "mipi": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "soc_temp_c": 72.414
+        },
+        {
+          "time_elapsed_s": 72,
+          "mipi": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "soc_temp_c": 73.113
+        }
+      ],
+      "metrics": [
+        "4698",
+        "71.0935",
+        "71.0944",
+        "0",
+        "0",
+        "0"
+      ],
+      "raw_images": [
+        {
+          "valid": true,
+          "size_bytes": 3110400,
+          "sha256": "0a2eca479818de32182477be3a6f1dfb76dcfa1f053e5fc792f639ba09ac2634",
+          "top_anomaly_ratio": 1.461,
+          "max_row_brightness_jump": 0.3328
+        },
+        {
+          "valid": true,
+          "size_bytes": 3110400,
+          "sha256": "c50aa689db7d46eeea65db5d81151de53caebb9a939817d94fdccb5ae99264fa",
+          "top_anomaly_ratio": 1.289,
+          "max_row_brightness_jump": 0.2786
+        },
+        {
+          "valid": true,
+          "size_bytes": 3110400,
+          "sha256": "3aef217a7d85d7c3fc5168d9f4985d7de8deead4d73046192444a52e4b22c199",
+          "top_anomaly_ratio": 1.326,
+          "max_row_brightness_jump": 0.2891
+        },
+        {
+          "valid": true,
+          "size_bytes": 3110400,
+          "sha256": "4d4e668f01c6dfa745779c4ede91a62b91fc7e9d5e5f6ba4c0b0b9c71061e662",
+          "top_anomaly_ratio": 1.295,
+          "max_row_brightness_jump": 0.2786
+        },
+        {
+          "valid": true,
+          "size_bytes": 3110400,
+          "sha256": "43ac60a3f7884b15235d4e4710b5abecbf47cd70ed2826a30812dfa6aff1f579",
+          "top_anomaly_ratio": 1.277,
+          "max_row_brightness_jump": 0.2797
+        },
+        {
+          "valid": true,
+          "size_bytes": 3110400,
+          "sha256": "1e7e923468c6a7a7bf81f043ee7f1a85d1562ceb2cf1f5ccac1e5a5244715e4a",
+          "top_anomaly_ratio": 1.283,
+          "max_row_brightness_jump": 0.2854
+        }
+      ],
+      "samples": 6,
+      "sample_saves": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "1"
+        ],
+        [
+          "2",
+          "1"
+        ],
+        [
+          "3",
+          "1"
+        ],
+        [
+          "4",
+          "1"
+        ],
+        [
+          "5",
+          "1"
+        ]
+      ],
+      "sensor_mode_logged": true,
+      "experiment_process_alive": false,
+      "board_temp_final_c": 67.869,
+      "mipi_post_stop": [
+        0,
+        18,
+        0,
+        0,
+        0
+      ],
+      "mipi_post_stop_nonzero": true,
+      "actual_fps": 71.0935,
+      "pts_fps": 71.0944
+    }
+  ],
+  "start_soc_temp_c": 58.429,
+  "cleanup": "Removed own /tmp scratch and released own lock; existing camera preview untouched"
+}

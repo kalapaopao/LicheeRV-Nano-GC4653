@@ -1,0 +1,849 @@
+{
+  "fps60_clock27": [
+    {
+      "frame": "raw-0.bin",
+      "row0": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row1": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row2": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row3": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row4": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row5": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row6": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row7": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      }
+    },
+    {
+      "frame": "raw-1.bin",
+      "row0": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row1": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row2": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row3": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row4": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row5": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row6": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row7": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      }
+    },
+    {
+      "frame": "raw-2.bin",
+      "row0": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row1": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row2": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row3": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row4": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row5": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row6": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row7": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      }
+    }
+  ],
+  "fps80_clock37": [
+    {
+      "frame": "raw-0.bin",
+      "row0": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row1": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row2": {
+        "count": 23,
+        "min_x": 647,
+        "max_x": 691,
+        "x_first20": [
+          647,
+          649,
+          651,
+          653,
+          655,
+          657,
+          659,
+          661,
+          663,
+          665,
+          667,
+          669,
+          671,
+          673,
+          675,
+          677,
+          679,
+          681,
+          683,
+          685
+        ]
+      },
+      "row3": {
+        "count": 9,
+        "min_x": 646,
+        "max_x": 662,
+        "x_first20": [
+          646,
+          648,
+          650,
+          652,
+          654,
+          656,
+          658,
+          660,
+          662
+        ]
+      },
+      "row4": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row5": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row6": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row7": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      }
+    },
+    {
+      "frame": "raw-1.bin",
+      "row0": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row1": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row2": {
+        "count": 25,
+        "min_x": 647,
+        "max_x": 695,
+        "x_first20": [
+          647,
+          649,
+          651,
+          653,
+          655,
+          657,
+          659,
+          661,
+          663,
+          665,
+          667,
+          669,
+          671,
+          673,
+          675,
+          677,
+          679,
+          681,
+          683,
+          685
+        ]
+      },
+      "row3": {
+        "count": 15,
+        "min_x": 646,
+        "max_x": 674,
+        "x_first20": [
+          646,
+          648,
+          650,
+          652,
+          654,
+          656,
+          658,
+          660,
+          662,
+          664,
+          666,
+          668,
+          670,
+          672,
+          674
+        ]
+      },
+      "row4": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row5": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row6": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row7": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      }
+    },
+    {
+      "frame": "raw-2.bin",
+      "row0": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row1": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row2": {
+        "count": 24,
+        "min_x": 647,
+        "max_x": 693,
+        "x_first20": [
+          647,
+          649,
+          651,
+          653,
+          655,
+          657,
+          659,
+          661,
+          663,
+          665,
+          667,
+          669,
+          671,
+          673,
+          675,
+          677,
+          679,
+          681,
+          683,
+          685
+        ]
+      },
+      "row3": {
+        "count": 11,
+        "min_x": 646,
+        "max_x": 666,
+        "x_first20": [
+          646,
+          648,
+          650,
+          652,
+          654,
+          656,
+          658,
+          660,
+          662,
+          664,
+          666
+        ]
+      },
+      "row4": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row5": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row6": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row7": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      }
+    }
+  ],
+  "fps60_clock37": [
+    {
+      "frame": "raw-0.bin",
+      "row0": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row1": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row2": {
+        "count": 32,
+        "min_x": 647,
+        "max_x": 709,
+        "x_first20": [
+          647,
+          649,
+          651,
+          653,
+          655,
+          657,
+          659,
+          661,
+          663,
+          665,
+          667,
+          669,
+          671,
+          673,
+          675,
+          677,
+          679,
+          681,
+          683,
+          685
+        ]
+      },
+      "row3": {
+        "count": 22,
+        "min_x": 646,
+        "max_x": 688,
+        "x_first20": [
+          646,
+          648,
+          650,
+          652,
+          654,
+          656,
+          658,
+          660,
+          662,
+          664,
+          666,
+          668,
+          670,
+          672,
+          674,
+          676,
+          678,
+          680,
+          682,
+          684
+        ]
+      },
+      "row4": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row5": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row6": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row7": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      }
+    },
+    {
+      "frame": "raw-1.bin",
+      "row0": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row1": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row2": {
+        "count": 29,
+        "min_x": 647,
+        "max_x": 703,
+        "x_first20": [
+          647,
+          649,
+          651,
+          653,
+          655,
+          657,
+          659,
+          661,
+          663,
+          665,
+          667,
+          669,
+          671,
+          673,
+          675,
+          677,
+          679,
+          681,
+          683,
+          685
+        ]
+      },
+      "row3": {
+        "count": 24,
+        "min_x": 646,
+        "max_x": 692,
+        "x_first20": [
+          646,
+          648,
+          650,
+          652,
+          654,
+          656,
+          658,
+          660,
+          662,
+          664,
+          666,
+          668,
+          670,
+          672,
+          674,
+          676,
+          678,
+          680,
+          682,
+          684
+        ]
+      },
+      "row4": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row5": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row6": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row7": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      }
+    },
+    {
+      "frame": "raw-2.bin",
+      "row0": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row1": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row2": {
+        "count": 33,
+        "min_x": 647,
+        "max_x": 711,
+        "x_first20": [
+          647,
+          649,
+          651,
+          653,
+          655,
+          657,
+          659,
+          661,
+          663,
+          665,
+          667,
+          669,
+          671,
+          673,
+          675,
+          677,
+          679,
+          681,
+          683,
+          685
+        ]
+      },
+      "row3": {
+        "count": 22,
+        "min_x": 646,
+        "max_x": 688,
+        "x_first20": [
+          646,
+          648,
+          650,
+          652,
+          654,
+          656,
+          658,
+          660,
+          662,
+          664,
+          666,
+          668,
+          670,
+          672,
+          674,
+          676,
+          678,
+          680,
+          682,
+          684
+        ]
+      },
+      "row4": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row5": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row6": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row7": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      }
+    }
+  ],
+  "fps80_clock27": [
+    {
+      "frame": "raw-0.bin",
+      "row0": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row1": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row2": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row3": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row4": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row5": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row6": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row7": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      }
+    },
+    {
+      "frame": "raw-1.bin",
+      "row0": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row1": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row2": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row3": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row4": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row5": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row6": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row7": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      }
+    },
+    {
+      "frame": "raw-2.bin",
+      "row0": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row1": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row2": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row3": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row4": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row5": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row6": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      },
+      "row7": {
+        "count": 0,
+        "min_x": null,
+        "max_x": null,
+        "x_first20": []
+      }
+    }
+  ]
+}

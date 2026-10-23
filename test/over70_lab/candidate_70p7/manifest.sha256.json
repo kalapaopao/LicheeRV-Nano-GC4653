@@ -1,0 +1,146 @@
+﻿[
+    {
+        "relative":  "evidence\\analysis.json",
+        "sha256":  "9DE5A3F3FEF0228110218AFA7D1183C799B4854B1482C3687CA92C010B8906A4"
+    },
+    {
+        "relative":  "evidence\\summary.json",
+        "sha256":  "CB92A15D849CAE159356FEC09D1215A0D1AA79CC6BE00DAA06729BB8D5F32B62"
+    },
+    {
+        "relative":  "source\\atomic_compat.c",
+        "sha256":  "D1B81E5131232A0AFB9F0D65AAA10B9362F4848DCFF8EC90A8353B932C84219E"
+    },
+    {
+        "relative":  "source\\build.sh",
+        "sha256":  "D9CFA4BD81708525159AE016B343B3C3EFE6FA8CF4F71684B25E5E1169D8ED02"
+    },
+    {
+        "relative":  "source\\camera_factory_timing",
+        "sha256":  "983B2F05FED2ABD9909DA516EA6A6F531FE9EBBC7DE82AF53F09FB8C0DC5342F"
+    },
+    {
+        "relative":  "source\\exports.list",
+        "sha256":  "B8AC0F11B2431CE8974AA548591348DF3904377C3AD5B0289B1C0ED05B88CD70"
+    },
+    {
+        "relative":  "source\\main.cpp",
+        "sha256":  "DE529223BA5184EEED936BD5024D159707FA8CAC963E81E069E4E8DCA7304E25"
+    },
+    {
+        "relative":  "source\\rebuild-main.sh",
+        "sha256":  "05EBF402821A3C49CA7E123AB04B6A2D34A8E7D3EAFBD32BFC9186760A41222D"
+    },
+    {
+        "relative":  "source\\rebuild-sensor.sh",
+        "sha256":  "45D80D803ACCD996E4D88882E7077E2C402EBCD50881618638A67BD7A574971E"
+    },
+    {
+        "relative":  "source\\build\\atomic.o",
+        "sha256":  "D29D0A28EA9BF639A986D0955F0FF6CC3B2FF5F3E70DFC78AD7E89D8AFA5665C"
+    },
+    {
+        "relative":  "source\\build\\common_bin.o",
+        "sha256":  "1D161016E215BBC5DC0DE3206E21B4E48D3D01B5169BE078014C8AA3475772C2"
+    },
+    {
+        "relative":  "source\\build\\common_isp.o",
+        "sha256":  "84DC05DD4D7CA80F07E6744E05EDBB3D67E81F89827C4F876DB3D0983F4A5A68"
+    },
+    {
+        "relative":  "source\\build\\common_platform.o",
+        "sha256":  "5916426DAF9C20FBEFC96907D6F7E5B4F4C334DFA1F1DE6B23739140B298F80E"
+    },
+    {
+        "relative":  "source\\build\\common_sensor.o",
+        "sha256":  "E29FDC5CC5B48AEA0F5718432BBA39D7B6018E28C34881C300375EF59BD384AC"
+    },
+    {
+        "relative":  "source\\build\\common_sys.o",
+        "sha256":  "761CB12D071263523892E5AE423E4F245334CA86265862B2F969D3920E5F342D"
+    },
+    {
+        "relative":  "source\\build\\common_vi.o",
+        "sha256":  "E79E0C2C1F69A0EAEA4A4E8B7C2AFB981D3F3DFAB9D6DE1420AB4DACA0A2B76D"
+    },
+    {
+        "relative":  "source\\build\\common_vpss.o",
+        "sha256":  "F87914951CFF384A73DE5561B4C9190D19C62DD6DA56F12950C8E40DF2F1DFFF"
+    },
+    {
+        "relative":  "source\\build\\gc4653_cmos.o",
+        "sha256":  "5160D76690180146560BF8E4AB5FCF95E25796BB83E176DFAE0C3C22D45EBCFE"
+    },
+    {
+        "relative":  "source\\build\\gc4653_sensor_ctl.o",
+        "sha256":  "DFCEB5B990BDA5AE50FF9E45D955D9352742BD00F377A0709E62EB49634FA089"
+    },
+    {
+        "relative":  "source\\build\\ini.o",
+        "sha256":  "169F5888CE96AECE0BAC851BD5CCB5D918D5BC7F2A34FAF95EE2336A56D25E88"
+    },
+    {
+        "relative":  "source\\build\\main.o",
+        "sha256":  "2AEF22CF91D81F572D97B739E9708DA270ECE0F42DACC530D215621C2E1F80E5"
+    },
+    {
+        "relative":  "source\\common\\fontmod.h",
+        "sha256":  "FE3FFB4E0534EE264708FD4816ACF44C1A2F6B6EE92CADD22D004ABBBB915791"
+    },
+    {
+        "relative":  "source\\common\\loadbmp.h",
+        "sha256":  "C9289A3F3B87341C61E9D0F3B886D5622EA85214AEE62D9C2A3269ECAF13C583"
+    },
+    {
+        "relative":  "source\\common\\md5sum.h",
+        "sha256":  "EA4332F09F17646DD7143A0423BBC7639A9D433FEFF2873BCA025D4EEED955EA"
+    },
+    {
+        "relative":  "source\\common\\sample_comm.h",
+        "sha256":  "D08EE8589961087E5DF57D69FFA8E57D1F38A4C80A610B275917D1FFF60940CE"
+    },
+    {
+        "relative":  "source\\common\\sample_common_bin.c",
+        "sha256":  "B61BD0D1AD4741ED445FFB1641C2038DE6D0254A00D2388D2E26C3A4B860E7C8"
+    },
+    {
+        "relative":  "source\\common\\sample_common_isp.c",
+        "sha256":  "7DC2210E538106D49CC40FE2B6DE5028CEBDD0F7023432B5F86AE7668B177C18"
+    },
+    {
+        "relative":  "source\\common\\sample_common_platform.c",
+        "sha256":  "B3B2CC081F059D8E0235D902156AD8677727BB844D34ED66047FB64485F4EDAC"
+    },
+    {
+        "relative":  "source\\common\\sample_common_sensor.c",
+        "sha256":  "362D8C766C61972E8DA894F1D32B7735F45732076619C1B01FF278909335A698"
+    },
+    {
+        "relative":  "source\\common\\sample_common_sys.c",
+        "sha256":  "C8CF6BB47E44C5AD82CAE9D6F71D8C79894EBB641F7AEF3FB168FC73BD58B9BB"
+    },
+    {
+        "relative":  "source\\common\\sample_common_vi.c",
+        "sha256":  "F17C076900256A86ADC66F84B79B01FDE8B16E0184B1D4438C497EBCDFF06DDB"
+    },
+    {
+        "relative":  "source\\common\\sample_common_vpss.c",
+        "sha256":  "FF08CF1037F4467EEF4E79BAD2EB3C9EAAC7DF5F5B064FF4640DA5EAD22A7D1A"
+    },
+    {
+        "relative":  "source\\sensor\\gc4653_cmos.c",
+        "sha256":  "BBE5FC64E22BAE283F1632022E197193F8CC384B1B8985B728C9C158BFA0DFF9"
+    },
+    {
+        "relative":  "source\\sensor\\gc4653_cmos_ex.h",
+        "sha256":  "273940F961CAEFF5A77C0B4A88268E131F54F0EA1A3A69AF7086C1F40716F86B"
+    },
+    {
+        "relative":  "source\\sensor\\gc4653_cmos_param.h",
+        "sha256":  "CB7A3B7127AAE347611C03B573832ED36290F1A9CDB9288185CAF1BE39E62509"
+    },
+    {
+        "relative":  "source\\sensor\\gc4653_sensor_ctl.c",
+        "sha256":  "CEEDB0FF334198456743F7170705BC50ABE1AA4167019C6F0AFE4F2D27C03E87"
+    }
+]

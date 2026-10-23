@@ -1,0 +1,146 @@
+﻿[
+    {
+        "RelativePath":  "evidence\\analysis.json",
+        "SHA256":  "E80C17A36B85A96FF99390D8ECA951C872DD697004CB45DB9B6893348E9224FA"
+    },
+    {
+        "RelativePath":  "evidence\\first-raw.nv21",
+        "SHA256":  "87B8CDFDD3ED8FFB99C9E99D94DE85B6E3D252F8DC81BB7702890F11E92516B1"
+    },
+    {
+        "RelativePath":  "evidence\\summary.json",
+        "SHA256":  "ECC159139DDBB42FAB0B02EC0E90A365ED7251D3821417F9A2564D5F20799D81"
+    },
+    {
+        "RelativePath":  "source\\atomic_compat.c",
+        "SHA256":  "D1B81E5131232A0AFB9F0D65AAA10B9362F4848DCFF8EC90A8353B932C84219E"
+    },
+    {
+        "RelativePath":  "source\\build.sh",
+        "SHA256":  "DB8540627A765F0F2A366CB43E485265F611A74C083FD4E9BBE941E63F5FECE1"
+    },
+    {
+        "RelativePath":  "source\\camera_factory_timing",
+        "SHA256":  "2E0B4E16711B31A1963D2C18F479D7DC6D8957EBF3B12F45543798F15DBC5F78"
+    },
+    {
+        "RelativePath":  "source\\exports.list",
+        "SHA256":  "B8AC0F11B2431CE8974AA548591348DF3904377C3AD5B0289B1C0ED05B88CD70"
+    },
+    {
+        "RelativePath":  "source\\main.cpp",
+        "SHA256":  "C0C8C86655E6C452DC15A26635295C76A248811F32BD224A85C21723F1A894E7"
+    },
+    {
+        "RelativePath":  "source\\rebuild-sensor.sh",
+        "SHA256":  "1572FBD7CAA56AC172BE9A83DE252EB1528858AF982B9C764810371EBF51C0A7"
+    },
+    {
+        "RelativePath":  "source\\build\\atomic.o",
+        "SHA256":  "D29D0A28EA9BF639A986D0955F0FF6CC3B2FF5F3E70DFC78AD7E89D8AFA5665C"
+    },
+    {
+        "RelativePath":  "source\\build\\common_bin.o",
+        "SHA256":  "BAE91F9F1091AD34C8B7E15FAD7721D2FE935DC46604F07F363B4BDCF3A0DB0C"
+    },
+    {
+        "RelativePath":  "source\\build\\common_isp.o",
+        "SHA256":  "33693605B73FB0E9E350C73BD7DF75C2F58D47DC15883EAE93C10A3F677B1C34"
+    },
+    {
+        "RelativePath":  "source\\build\\common_platform.o",
+        "SHA256":  "E6C2FFA88804C655FCAB213BD8C88168195A3EE478953E83D77CFCDEE6DF7423"
+    },
+    {
+        "RelativePath":  "source\\build\\common_sensor.o",
+        "SHA256":  "E29FDC5CC5B48AEA0F5718432BBA39D7B6018E28C34881C300375EF59BD384AC"
+    },
+    {
+        "RelativePath":  "source\\build\\common_sys.o",
+        "SHA256":  "7D2C781679DECC1310CEFDA4A2CED6228B1BCBE3051388CE21E0DC3D2BFCC776"
+    },
+    {
+        "RelativePath":  "source\\build\\common_vi.o",
+        "SHA256":  "B765D203783D7ADDFE432A26F003D9CA4CC43091BFF8B71ED075205C9224607E"
+    },
+    {
+        "RelativePath":  "source\\build\\common_vpss.o",
+        "SHA256":  "F87914951CFF384A73DE5561B4C9190D19C62DD6DA56F12950C8E40DF2F1DFFF"
+    },
+    {
+        "RelativePath":  "source\\build\\gc4653_cmos.o",
+        "SHA256":  "090481DF9F33589F8C83DF71519C87BFA7E064772F4EA90EFB4B96D9AA36F9BB"
+    },
+    {
+        "RelativePath":  "source\\build\\gc4653_sensor_ctl.o",
+        "SHA256":  "52332C8040E10F1709D5089A996562D00F280B98DB0A053ABEED717B13AA6FE4"
+    },
+    {
+        "RelativePath":  "source\\build\\ini.o",
+        "SHA256":  "169F5888CE96AECE0BAC851BD5CCB5D918D5BC7F2A34FAF95EE2336A56D25E88"
+    },
+    {
+        "RelativePath":  "source\\build\\main.o",
+        "SHA256":  "EC32C8B9575BDCF3734317F7B81B02E02AA06E8F774F30136A8A9E333983AFBE"
+    },
+    {
+        "RelativePath":  "source\\common\\fontmod.h",
+        "SHA256":  "FE3FFB4E0534EE264708FD4816ACF44C1A2F6B6EE92CADD22D004ABBBB915791"
+    },
+    {
+        "RelativePath":  "source\\common\\loadbmp.h",
+        "SHA256":  "C9289A3F3B87341C61E9D0F3B886D5622EA85214AEE62D9C2A3269ECAF13C583"
+    },
+    {
+        "RelativePath":  "source\\common\\md5sum.h",
+        "SHA256":  "EA4332F09F17646DD7143A0423BBC7639A9D433FEFF2873BCA025D4EEED955EA"
+    },
+    {
+        "RelativePath":  "source\\common\\sample_comm.h",
+        "SHA256":  "D08EE8589961087E5DF57D69FFA8E57D1F38A4C80A610B275917D1FFF60940CE"
+    },
+    {
+        "RelativePath":  "source\\common\\sample_common_bin.c",
+        "SHA256":  "B61BD0D1AD4741ED445FFB1641C2038DE6D0254A00D2388D2E26C3A4B860E7C8"
+    },
+    {
+        "RelativePath":  "source\\common\\sample_common_isp.c",
+        "SHA256":  "7DC2210E538106D49CC40FE2B6DE5028CEBDD0F7023432B5F86AE7668B177C18"
+    },
+    {
+        "RelativePath":  "source\\common\\sample_common_platform.c",
+        "SHA256":  "B3B2CC081F059D8E0235D902156AD8677727BB844D34ED66047FB64485F4EDAC"
+    },
+    {
+        "RelativePath":  "source\\common\\sample_common_sensor.c",
+        "SHA256":  "362D8C766C61972E8DA894F1D32B7735F45732076619C1B01FF278909335A698"
+    },
+    {
+        "RelativePath":  "source\\common\\sample_common_sys.c",
+        "SHA256":  "C8CF6BB47E44C5AD82CAE9D6F71D8C79894EBB641F7AEF3FB168FC73BD58B9BB"
+    },
+    {
+        "RelativePath":  "source\\common\\sample_common_vi.c",
+        "SHA256":  "F17C076900256A86ADC66F84B79B01FDE8B16E0184B1D4438C497EBCDFF06DDB"
+    },
+    {
+        "RelativePath":  "source\\common\\sample_common_vpss.c",
+        "SHA256":  "FF08CF1037F4467EEF4E79BAD2EB3C9EAAC7DF5F5B064FF4640DA5EAD22A7D1A"
+    },
+    {
+        "RelativePath":  "source\\sensor\\gc4653_cmos.c",
+        "SHA256":  "BBE5FC64E22BAE283F1632022E197193F8CC384B1B8985B728C9C158BFA0DFF9"
+    },
+    {
+        "RelativePath":  "source\\sensor\\gc4653_cmos_ex.h",
+        "SHA256":  "273940F961CAEFF5A77C0B4A88268E131F54F0EA1A3A69AF7086C1F40716F86B"
+    },
+    {
+        "RelativePath":  "source\\sensor\\gc4653_cmos_param.h",
+        "SHA256":  "CB7A3B7127AAE347611C03B573832ED36290F1A9CDB9288185CAF1BE39E62509"
+    },
+    {
+        "RelativePath":  "source\\sensor\\gc4653_sensor_ctl.c",
+        "SHA256":  "8F6117FDC925D68D3FE69E116592D9D0607C788836D9750AC037AA47AD34D3CB"
+    }
+]

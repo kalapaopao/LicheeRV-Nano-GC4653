@@ -1,0 +1,7 @@
+{
+  "purpose": "MCLK fixed 27MHz, HTS fixed 1600, VTS-only changes",
+  "cases": [],
+  "binary_sha256": "587814ba2492ec7a8f6a2cfd959acc7adfc72d1f5ab0dd1c1028474bfe4bb739",
+  "exception": "Expecting value: line 1 column 1 (char 0)",
+  "cleanup": "Camera lock released"
+}

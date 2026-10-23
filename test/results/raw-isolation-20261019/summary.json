@@ -1,0 +1,46 @@
+{
+  "binary_sha256": "da864d9169676f150dd2a61621fdcb2e84067bfd6b2b867396b6a0f9b085da2b",
+  "cases": [
+    {
+      "name": "fps60_clock27",
+      "requested": 60,
+      "mclk_mhz": 27,
+      "exit_code": 0,
+      "elapsed_s": 14.06,
+      "temperature_after_c": 58.779,
+      "vi": {
+        "requested_fps": 60,
+        "width": 1280,
+        "height": 720,
+        "frames": 421,
+        "host_fps": 60.0,
+        "pts_fps": 59.9999,
+        "duplicate_pts": 0,
+        "timeouts": 0,
+        "large_intervals": 0
+      },
+      "bayer": [
+        {
+          "status": "invalid_raw_length",
+          "length": 0
+        },
+        {
+          "status": "invalid_raw_length",
+          "length": 0
+        },
+        {
+          "status": "invalid_raw_length",
+          "length": 0
+        }
+      ],
+      "sensor_clock_logged": true
+    }
+  ],
+  "board_temp_dir": "/tmp/lichee-raw-isolation",
+  "preserved_factory_binary": true,
+  "initial_process": "",
+  "temperature_before_c": 55.632,
+  "stopped_reason": "bad_exit_or_missing_raw_or_zero_frames",
+  "restore": "originally off; left the preview stopped",
+  "final_temperature_c": 58.08
+}

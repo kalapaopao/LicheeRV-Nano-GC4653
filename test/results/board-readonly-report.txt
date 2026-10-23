@@ -1,0 +1,101 @@
+
+==========factory_current_log==========
+factory_report=/code/camera/reports/preview-factory-11019-3679
+sensor_mode=60 preview=1920x1080 quality=95 preview_limiter=none
+[SAMPLE_COMM_SNS_ParseIni]-2185: Parse /mnt/data/sensor_cfg.ini
+[parse_source_devnum]-1778: devNum =  1
+[parse_sensor_name]-1859: sensor =  GCORE_GC4653_MIPI_4M_30FPS_10BIT
+[parse_sensor_busid]-1888: bus_id =  4
+[parse_sensor_i2caddr]-1899: sns_i2c_addr =  29
+[parse_sensor_mipidev]-1910: mipi_dev =  0
+[parse_sensor_laneid]-1921: Lane_id =  4, 3, 2, -1, -1
+[parse_sensor_pnswap]-1932: pn_swap =  0, 0, 0, 0, 0
+[parse_sensor_mclken]-1954: mclk_en =  1
+[parse_sensor_mclk]-1965: mclk =  1
+[SAMPLE_PLAT_SYS_INIT]-72: common pool[0] BlkSize 3133440
+ISP Vipipe(0) Allocate pa(0x8c8f0000) va(0x0x3fb86a6000) size(291424)
+stSnsrMode.u16Width 1920 stSnsrMode.u16Height 1080 60.000000 wdrMode 0 pstSnsObj 0x39b88
+[SAMPLE_COMM_VI_StartMIPI]-494: sensor 0 stDevAttr.devno 0
+awbInit ver 6.9@2021500
+0 R:1400 B:3100 CT:2850
+1 R:1500 B:2500 CT:3900
+2 R:2300 B:1600 CT:6500
+Golden 1024 1024 1024
+WB Quadratic:0
+isWdr:0
+FACTORY 1920x1080 60fps table initialized
+********************************************************************************
+cvi_bin_isp message
+capture_frames=156345 host_fps=65.6881 pts_fps=65.6881 duplicate_pts=0 timeouts=0 encoded=156320 encode_errors=0 encode_fps=65.640 sent_fps=0.000 jpeg_mbit_s=0.000 preview_replaced=23
+capture_frames=156674 host_fps=65.6880 pts_fps=65.6881 duplicate_pts=0 timeouts=0 encoded=156649 encode_errors=0 encode_fps=65.658 sent_fps=0.000 jpeg_mbit_s=0.000 preview_replaced=23
+capture_frames=157003 host_fps=65.6880 pts_fps=65.6880 duplicate_pts=0 timeouts=0 encoded=156978 encode_errors=0 encode_fps=65.698 sent_fps=0.000 jpeg_mbit_s=0.000 preview_replaced=23
+capture_frames=157332 host_fps=65.6880 pts_fps=65.6880 duplicate_pts=0 timeouts=0 encoded=157307 encode_errors=0 encode_fps=65.675 sent_fps=0.000 jpeg_mbit_s=0.000 preview_replaced=23
+capture_frames=157661 host_fps=65.6880 pts_fps=65.6880 duplicate_pts=0 timeouts=0 encoded=157636 encode_errors=0 encode_fps=65.669 sent_fps=0.000 jpeg_mbit_s=0.000 preview_replaced=23
+capture_frames=157990 host_fps=65.6879 pts_fps=65.6879 duplicate_pts=0 timeouts=0 encoded=157966 encode_errors=0 encode_fps=65.864 sent_fps=0.000 jpeg_mbit_s=0.000 preview_replaced=23
+capture_frames=158319 host_fps=65.6879 pts_fps=65.6879 duplicate_pts=0 timeouts=0 encoded=158294 encode_errors=0 encode_fps=65.474 sent_fps=0.000 jpeg_mbit_s=0.000 preview_replaced=23
+capture_frames=158648 host_fps=65.6878 pts_fps=65.6878 duplicate_pts=0 timeouts=0 encoded=158623 encode_errors=0 encode_fps=65.640 sent_fps=0.000 jpeg_mbit_s=0.000 preview_replaced=23
+capture_frames=158977 host_fps=65.6878 pts_fps=65.6878 duplicate_pts=0 timeouts=0 encoded=158952 encode_errors=0 encode_fps=65.698 sent_fps=0.000 jpeg_mbit_s=0.000 preview_replaced=23
+capture_frames=159306 host_fps=65.6878 pts_fps=65.6878 duplicate_pts=0 timeouts=0 encoded=159281 encode_errors=0 encode_fps=65.673 sent_fps=0.000 jpeg_mbit_s=0.000 preview_replaced=23
+capture_frames=159635 host_fps=65.6877 pts_fps=65.6877 duplicate_pts=0 timeouts=0 encoded=159610 encode_errors=0 encode_fps=65.676 sent_fps=0.000 jpeg_mbit_s=0.000 preview_replaced=23
+capture_frames=159964 host_fps=65.6877 pts_fps=65.6877 duplicate_pts=0 timeouts=0 encoded=159939 encode_errors=0 encode_fps=65.667 sent_fps=0.000 jpeg_mbit_s=0.000 preview_replaced=23
+capture_frames=160293 host_fps=65.6877 pts_fps=65.6877 duplicate_pts=0 timeouts=0 encoded=160268 encode_errors=0 encode_fps=65.669 sent_fps=0.000 jpeg_mbit_s=0.000 preview_replaced=23
+capture_frames=160622 host_fps=65.6876 pts_fps=65.6876 duplicate_pts=0 timeouts=0 encoded=160597 encode_errors=0 encode_fps=65.641 sent_fps=0.000 jpeg_mbit_s=0.000 preview_replaced=23
+capture_frames=160951 host_fps=65.6876 pts_fps=65.6876 duplicate_pts=0 timeouts=0 encoded=160926 encode_errors=0 encode_fps=65.693 sent_fps=0.000 jpeg_mbit_s=0.000 preview_replaced=23
+
+
+==========mipi==========
+
+Module: [MIPI_RX], Build Time[#10 PREEMPT Mon Dec 29 19:52:50 CST 2025]
+
+------------Combo DEV ATTR--------------
+   Devno  WorkMode  DataType   WDRMode         LinkId        PN Swap  SyncMode  DataEndian  SyncCodeEndian
+       0      MIPI     RAW10      NONE  4, 3, 2,-1,-1  0, 0, 0, 0, 0       N/A         N/A             N/A
+
+------------MIPI info-------------------
+ Devno EccErr CrcErr HdrErr WcErr fifofull   decode
+     0      0      0      0     0        0    raw10
+  Physical:       D0       D1       D2       D3       D4       D5
+                   0        0       42       e8        0        0
+   Digital:       D0       D1       D2       D3    CK_HS  CK_ULPS  CK_STOP   CK_ERR   Deskew
+             hs_idle  hs_idle   hs_hst   hs_hst        1        0        0        0     idle
+
+
+==========sensor_config==========
+[source]
+
+;type = SOURCE_USER_FE
+
+dev_num = 1
+
+; section for sensor
+
+[sensor]
+
+; sensor name
+name = GCORE_GC4653_MIPI_4M_30FPS_10BIT
+
+bus_id = 4
+
+sns_i2c_addr = 29
+
+mipi_dev = 0
+
+lane_id = 4, 3, 2, -1, -1
+
+pn_swap = 0, 0, 0, 0, 0
+
+mclk_en = 1
+
+mclk = 1
+
+;port = 0
+
+;pin = 2
+
+;pol = 1
+
+;fps = 30
+
+
+==========temperature==========
+/sys/class/thermal/thermal_zone0/temp: 76958

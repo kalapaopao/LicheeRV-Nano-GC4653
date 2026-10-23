@@ -1,0 +1,144 @@
+{
+  "binary_sha256": "0f655d5d477ee38d8c399a743ddb15b2b1ff0a90b89b37b0a2837704045d7f09",
+  "plan": "27MHz only; HTS 1600 -> 1575 -> 1550 -> 1525 -> 1500; 8s each",
+  "cases": [
+    {
+      "hts": 1600,
+      "mclk_mhz": 27,
+      "exit_code": 0,
+      "duration_wall_s": 15.063,
+      "temp_c": 58.779,
+      "mipi_counters_during": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "sensor_requested_hts": 1600,
+      "readback_hts": 1600,
+      "readback_vts": 1800,
+      "vi": {
+        "clock": "27",
+        "frames": 481,
+        "fps": 59.9985,
+        "pts_fps": 60.0,
+        "duplicate_pts": 0,
+        "timeouts": 0,
+        "dump_rc": 0
+      },
+      "bayer": [
+        {
+          "file": "bayer-0.bin",
+          "valid": true,
+          "size": 1382400,
+          "sha256": "23a0f0063f5347dc2731bf4f2aca6005766a1c05fbdd96d4880753878180b48b",
+          "row_max_first8": [
+            3460,
+            3380,
+            3336,
+            3596,
+            3324,
+            3688,
+            3432,
+            3688
+          ],
+          "row_gt2500_first8": [
+            3,
+            2,
+            3,
+            2,
+            3,
+            2,
+            2,
+            2
+          ],
+          "suspicious_x_row2": [
+            1160,
+            1170,
+            1172
+          ],
+          "suspicious_x_row3": [
+            1171,
+            1173
+          ]
+        },
+        {
+          "file": "bayer-1.bin",
+          "valid": true,
+          "size": 1382400,
+          "sha256": "4d370454cc504bba25d0dfe51631b1a206079213170c235788deefc17cffa646",
+          "row_max_first8": [
+            3468,
+            3412,
+            3460,
+            3660,
+            3328,
+            3728,
+            3564,
+            3704
+          ],
+          "row_gt2500_first8": [
+            2,
+            2,
+            3,
+            2,
+            3,
+            2,
+            2,
+            2
+          ],
+          "suspicious_x_row2": [
+            1160,
+            1170,
+            1172
+          ],
+          "suspicious_x_row3": [
+            1171,
+            1173
+          ]
+        },
+        {
+          "file": "bayer-2.bin",
+          "valid": true,
+          "size": 1382400,
+          "sha256": "0bd8cc8859d238b10cac30a448aa2229fb632b43977625c714f9b80ccf217bc2",
+          "row_max_first8": [
+            3424,
+            3372,
+            3240,
+            3796,
+            3332,
+            3656,
+            3488,
+            3768
+          ],
+          "row_gt2500_first8": [
+            3,
+            2,
+            3,
+            2,
+            3,
+            2,
+            2,
+            2
+          ],
+          "suspicious_x_row2": [
+            1160,
+            1170,
+            1172
+          ],
+          "suspicious_x_row3": [
+            1171,
+            1173
+          ]
+        }
+      ]
+    }
+  ],
+  "output": "D:\\study\\LicheeRV\\test\\results\\spec27-hts-20261019-140141",
+  "pre_temp_c": 56.681,
+  "pre_df": "tmpfs                    65432       196     65236   0% /tmp",
+  "stopped_reason": "Failed validity/frame/striping/MIPI guard at HTS=1600",
+  "cleanup": "Released own camera lock; initial preview was off"
+}

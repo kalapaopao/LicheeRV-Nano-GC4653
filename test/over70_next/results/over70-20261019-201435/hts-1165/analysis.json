@@ -1,0 +1,304 @@
+{
+  "hts": 1165,
+  "vts": "1200",
+  "pid": 1278,
+  "mipi_pre_reset": [
+    0,
+    0,
+    0,
+    1,
+    0
+  ],
+  "counters": [
+    {
+      "time_elapsed_s": 4,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_temp_c": 67.869
+    },
+    {
+      "time_elapsed_s": 8,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_temp_c": 69.267
+    },
+    {
+      "time_elapsed_s": 12,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_temp_c": 69.966
+    },
+    {
+      "time_elapsed_s": 16,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_temp_c": 69.966
+    },
+    {
+      "time_elapsed_s": 20,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_temp_c": 70.316
+    },
+    {
+      "time_elapsed_s": 24,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_temp_c": 70.666
+    },
+    {
+      "time_elapsed_s": 28,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_temp_c": 71.015
+    },
+    {
+      "time_elapsed_s": 32,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_temp_c": 71.015
+    },
+    {
+      "time_elapsed_s": 36,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_temp_c": 71.365
+    },
+    {
+      "time_elapsed_s": 40,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_temp_c": 71.365
+    },
+    {
+      "time_elapsed_s": 44,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_temp_c": 72.064
+    },
+    {
+      "time_elapsed_s": 48,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_temp_c": 72.064
+    },
+    {
+      "time_elapsed_s": 52,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_temp_c": 72.414
+    },
+    {
+      "time_elapsed_s": 56,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_temp_c": 72.414
+    },
+    {
+      "time_elapsed_s": 60,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_temp_c": 72.763
+    },
+    {
+      "time_elapsed_s": 64,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_temp_c": 73.113
+    },
+    {
+      "time_elapsed_s": 68,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_temp_c": 73.113
+    },
+    {
+      "time_elapsed_s": 72,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_temp_c": 73.462
+    }
+  ],
+  "metrics": [
+    "4715",
+    "71.3063",
+    "71.3053",
+    "0",
+    "0",
+    "0"
+  ],
+  "raw_images": [
+    {
+      "valid": true,
+      "size_bytes": 3110400,
+      "sha256": "25aa7818c98f64ff46a7b3938db6d1159b03ebef4c85d670b7572ec3d9e29d4a",
+      "top_anomaly_ratio": 0.832,
+      "max_row_brightness_jump": 0.2323
+    },
+    {
+      "valid": true,
+      "size_bytes": 3110400,
+      "sha256": "f09e557edc251258d7d598232c0b0acf37a08cf96a32ddcc43008a0f458abf5e",
+      "top_anomaly_ratio": 0.837,
+      "max_row_brightness_jump": 0.2266
+    },
+    {
+      "valid": true,
+      "size_bytes": 3110400,
+      "sha256": "c76e8d5e99b652612ce2e4b48c9138c74dbc0c064332319a88804b454af42d3a",
+      "top_anomaly_ratio": 0.859,
+      "max_row_brightness_jump": 0.2427
+    },
+    {
+      "valid": true,
+      "size_bytes": 3110400,
+      "sha256": "771462b85943a2f8e6d55c2e13ff602bc848f857bc46b8063950e6d12459b236",
+      "top_anomaly_ratio": 0.915,
+      "max_row_brightness_jump": 0.2495
+    },
+    {
+      "valid": true,
+      "size_bytes": 3110400,
+      "sha256": "06e1de04efdaa4c79194f411edec82f123b3a3cfe307683d812ff9b0c29c19d9",
+      "top_anomaly_ratio": 0.838,
+      "max_row_brightness_jump": 0.2302
+    },
+    {
+      "valid": true,
+      "size_bytes": 3110400,
+      "sha256": "588de790c95c89a629414681b4a444970701a64c3f8daeb2dea1991138bd3dc1",
+      "top_anomaly_ratio": 0.906,
+      "max_row_brightness_jump": 0.249
+    }
+  ],
+  "samples": 6,
+  "sample_saves": [
+    [
+      "0",
+      "1"
+    ],
+    [
+      "1",
+      "1"
+    ],
+    [
+      "2",
+      "1"
+    ],
+    [
+      "3",
+      "1"
+    ],
+    [
+      "4",
+      "1"
+    ],
+    [
+      "5",
+      "1"
+    ]
+  ],
+  "sensor_mode_logged": true,
+  "experiment_process_alive": false,
+  "board_temp_final_c": 68.218,
+  "mipi_post_stop": [
+    0,
+    18,
+    0,
+    0,
+    0
+  ],
+  "mipi_post_stop_nonzero": true,
+  "actual_fps": 71.3063,
+  "pts_fps": 71.3053
+}

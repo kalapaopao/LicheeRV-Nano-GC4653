@@ -1,0 +1,56 @@
+ce0e632c34501dc6a6283bbcc047f7d219eb1334d246dcf3c55b204d3eec63fd  /mnt/system/usr/bin/sensor_test
+4d742e0cc3bd4fd72e548582ede5a38afbaded7757afc62e43c0f0298c741e7a  /code/camera/bin/camera_preview_hd
+[source]
+
+;type = SOURCE_USER_FE
+
+dev_num = 1
+
+; section for sensor
+
+[sensor]
+
+; sensor name
+name = GCORE_GC4653_MIPI_4M_30FPS_10BIT
+
+bus_id = 4
+
+sns_i2c_addr = 29
+
+mipi_dev = 0
+
+lane_id = 4, 3, 2, -1, -1
+
+pn_swap = 0, 0, 0, 0, 0
+
+mclk_en = 1
+
+mclk = 1
+
+;port = 0
+
+;pin = 2
+
+;pol = 1
+
+;fps = 30
+
+-------------------------------DEVICE CONFIG------------------------------
+     DevID     DevEn            IntfType            IntfSync     BkClr    DevFrt
+       # 0         N        Unknown Type                 PAL         0         0
+
+-------------------------------VIDEO LAYER STATUS 1-----------------------
+   LayerId   VideoEn              PixFmt      ImgW      ImgH     DispX     DispY     DispW     DispH   DispFrt
+       # 0         N             RGB_888         0         0         0         0         0         0         0
+
+-------------------------------VIDEO LAYER STATUS 2 (continue)------------
+   LayerId     DevId   EnChNum      Luma      Cont       Hue      Satu    BufLen
+       # 0         0         0         0         0         0         0         0
+
+-------------------------------CHN BASIC INFO-----------------------------
+   LayerId     ChnId     ChnEn      Prio      ChnX      ChnY      ChnW      ChnH  RotAngle
+       # 0       # 0         Y         0         0         0         0         0         0
+
+-------------------------------CHN PLAY INFO------------------------------
+   LayerId     ChnId      Show     Pause    Thrshd    ChnFrt          ChnGap(us)             DispPts          PreDonePts
+       # 0       # 0         N         N         0         0                   0                   0                   0

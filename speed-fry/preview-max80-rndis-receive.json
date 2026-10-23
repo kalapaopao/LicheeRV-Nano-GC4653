@@ -1,0 +1,9 @@
+{
+  "content_type": "multipart/x-mixed-replace; boundary=frame",
+  "width": 1280,
+  "height": 720,
+  "frames": 1178,
+  "receive_fps": 58.85,
+  "seconds": 20.0,
+  "distinct_jpeg_hashes": 1178
+}

@@ -1,0 +1,31 @@
+{
+  "test": "GC4653 36MHz kernel module OFFLINE preflight",
+  "when_utc": "2026-10-19T09:29:12.712092+00:00",
+  "status": "OFFLINE_ONLY_NOT_LOADED",
+  "offline_checks": {
+    "original_module_preserved": true,
+    "enum_old_order_preserved": true,
+    "clk_rate_36_exists": true,
+    "new_clock_guarded": true,
+    "kernel_config_CLK_CVITEK": true,
+    "no_37_125_option_in_new_sensor": true,
+    "user_app_explicit_36_enum": true
+  },
+  "original_module_sha256": "27aec4b153561e51446d178ba7788d32301b0a55fb91032ee07dbf2e23b05a00",
+  "theoretical_divide_33_rate_hz": 35999999.63636363,
+  "CLK_rate_theory_within_36MHz": true,
+  "do_not_infer_sensor_clock_quality_from_theory": true,
+  "patch_reverse_apply_check": true,
+  "patch_check_stderr": "",
+  "sipeed_patch_reverse_apply_check": true,
+  "sipeed_patch_check_error": "",
+  "sipeed_module_name_matches_board": true,
+  "riscv_userland_binary_exists": true,
+  "riscv_userland_binary_sha256": "a61c793ecc37128f5548bc09abf2bea56a915637ab1a5f5144392173ae223278",
+  "board_uname": "5.10.4-tag-",
+  "board_camera_clock_hz": "27000000",
+  "board_camera_clock_parent": "clk_cam0pll",
+  "board_lock": "LOCK_FREE",
+  "board_mipi_module_present": true,
+  "all_offline_static_checks_pass": true
+}

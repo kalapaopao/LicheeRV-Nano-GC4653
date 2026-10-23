@@ -1,0 +1,7 @@
+{
+  "tests": [],
+  "binary_sha256": "0bc8a88c403a2f8f151e7e331d3e3b5276a18c53a326b84810fee912c8f81df9",
+  "initial_process": " 1205 root     /code/camera/bin/camera_preview_factory 10.133.124.1 /code/camera/reports/preview-factory-15805-1202 60\n",
+  "temperature_before_c": 77.658,
+  "restore_error": "code=1 command=sh /code/camera/scripts/start-preview-factory.sh 60 10.133.124.1 error= output=Camera is busy\n"
+}

@@ -1,0 +1,3 @@
+mode=80
+duration=60
+extra=

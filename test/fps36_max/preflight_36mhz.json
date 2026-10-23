@@ -1,0 +1,21 @@
+{
+  "purpose": "36MHz actual MCLK requires a kernel-compatible driver; this is an OFFLINE read-only preflight",
+  "board": {
+    "rc": 0,
+    "stdout": "5.10.4-tag-\n27000000\n1187999988\n-r--r--r--    1 root     root             0 Jan  1 00:00 /sys/kernel/debug/clk/clk_cam1/clk_rate\n57730\nLOCK_FREE",
+    "stderr": ""
+  },
+  "original_module_sha256": "27aec4b153561e51446d178ba7788d32301b0a55fb91032ee07dbf2e23b05a00",
+  "driver_patch_sha256": "f6867fda0486251550a3a979b58ed1c42a0a392052f567c75e2a82cee84a8b31",
+  "board_kernel_cc": "riscv64-unknown-linux-musl-gcc (Xuantie-900 linux-5.10.4 musl gcc Toolchain V2.6.1 B-20220906) 10.2.0",
+  "kernel_config_modversions": "not enabled",
+  "checks": {
+    "original_driver_backup_matches_known_sha256": true,
+    "offline_patch_exists": true,
+    "full_vendor_kernel_makefile_present": false,
+    "matching_module_compiled": false,
+    "board_reports_clock_27mhz": true,
+    "board_camera_lock_free": true
+  },
+  "ready_for_module_loading": false
+}

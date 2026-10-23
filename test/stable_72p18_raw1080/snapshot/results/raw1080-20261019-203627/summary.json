@@ -1,0 +1,138 @@
+{
+  "binary_sha256": "f8c6d0b8f84af181c51aff79a4e80b53aeaa5a7476ec7155f057ce715c37e868",
+  "mode": "1080p RAW12, fixed 27 MHz, HTS=1165,VTS=1200",
+  "samples": [
+    {
+      "time_s": 3,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_c": 59.828
+    },
+    {
+      "time_s": 6,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_c": 60.876
+    },
+    {
+      "time_s": 9,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_c": 60.876
+    },
+    {
+      "time_s": 12,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_c": 61.226
+    },
+    {
+      "time_s": 15,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_c": 61.576
+    },
+    {
+      "time_s": 18,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_c": 61.925
+    },
+    {
+      "time_s": 21,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_c": 60.177
+    }
+  ],
+  "board_temperature_start_c": 57.73,
+  "free_tmp_kib": 64984,
+  "mipi_pre": [
+    0,
+    0,
+    0,
+    1,
+    0
+  ],
+  "pid": 1657,
+  "mipi_after_warmup": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "mipi_post": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "soc_temp_post_c": 59.828,
+  "result": {
+    "clock": "27",
+    "frames": 434,
+    "fps": 36.1043,
+    "pts_fps": 36.1045,
+    "duplicate_pts": 0,
+    "timeouts": 0,
+    "dump_rc": 1
+  },
+  "raw_frames": [
+    {
+      "file": "bayer-0.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "valid_raw12": false
+    },
+    {
+      "file": "bayer-1.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "valid_raw12": false
+    },
+    {
+      "file": "bayer-2.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "valid_raw12": false
+    }
+  ],
+  "cleanup": "released own lock; board /tmp evidence retained until PC copies confirmed"
+}

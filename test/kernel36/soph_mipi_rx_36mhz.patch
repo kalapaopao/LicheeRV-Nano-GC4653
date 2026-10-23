@@ -1,0 +1,80 @@
+diff --git a/interdrv/cif/chip/cv181x/cif.c b/interdrv/cif/chip/cv181x/cif.c
+index 2e14aa5..3326093 100644
+--- a/interdrv/cif/chip/cv181x/cif.c
++++ b/interdrv/cif/chip/cv181x/cif.c
+@@ -315,6 +315,8 @@ const char *_to_string_mclk(enum cam_pll_freq_e freq)
+ 		return "CAMPLL_FREQ_24M";
+ 	case CAMPLL_FREQ_26M:
+ 		return "CAMPLL_FREQ_26M";
++	case CAMPLL_FREQ_36M:
++		return "CAMPLL_FREQ_36M";
+ 	default:
+ 		return "unknown";
+ 	}
+@@ -2140,6 +2142,10 @@ const struct cam_pll_s cam_pll_setting[CAMPLL_FREQ_NUM] = {
+ //		.pll_rate = 1188000000,
+ 		.clk_rate = 27000000,
+ 	},
++	[CAMPLL_FREQ_36M] = {
++		/* clk_cam0pll ~1188 MHz / 33, within GC4653 36 MHz max. */
++		.clk_rate = 36000000,
++	},
+ 	[CAMPLL_FREQ_24M] = {
+ //		.pll_rate = 2376000000,
+ 		.clk_rate = 24000000,
+@@ -2284,7 +2290,39 @@ static int _cif_enable_snsr_clk(struct device *dev,
+ 		// clk_set_rate(clk_get_parent(cdev->clk_cam1.clk_o), clk->pll_rate);
+ 
+ 		/* set rate of clk_cam1 */
+-		clk_set_rate(cdev->clk_cam1.clk_o, clk->clk_rate);
++		if (mclk1 == CAMPLL_FREQ_36M) {
++			long rounded;
++			unsigned long previous, actual;
++			int ret;
++
++			/* The new mode is startup-only. Never retune a streaming
++			 * sensor or share this experimental clock with other users.
++			 */
++			if (!on)
++				goto cam1_clock_switch_done;
++			if (cdev->clk_cam1.is_on)
++				return -EBUSY;
++			rounded = clk_round_rate(cdev->clk_cam1.clk_o, 36000000);
++			if (rounded < 35999000 || rounded > 36001000) {
++				dev_err(dev, "36MHz camera rate unavailable: rounded=%ld\n", rounded);
++				return -ERANGE;
++			}
++			previous = clk_get_rate(cdev->clk_cam1.clk_o);
++			ret = clk_set_rate(cdev->clk_cam1.clk_o, 36000000);
++			if (ret)
++				return ret;
++			actual = clk_get_rate(cdev->clk_cam1.clk_o);
++			if (actual < 35999000 || actual > 36001000) {
++				clk_set_rate(cdev->clk_cam1.clk_o, previous);
++				dev_err(dev, "36MHz camera actual invalid: %lu\n", actual);
++				return -ERANGE;
++			}
++			dev_info(dev, "GC4653 experimental cam1 MCLK=%lu Hz\n", actual);
++		} else {
++			/* All existing modes stay identical to the shipping driver. */
++			clk_set_rate(cdev->clk_cam1.clk_o, clk->clk_rate);
++		}
++	cam1_clock_switch_done:
+ 
+ 		if (on) {
+ 			if (!cdev->clk_cam1.is_on) {
+diff --git a/interdrv/include/chip/cv181x/uapi/linux/cif_uapi.h b/interdrv/include/chip/cv181x/uapi/linux/cif_uapi.h
+index 6e2fce6..f7cc6cc 100644
+--- a/interdrv/include/chip/cv181x/uapi/linux/cif_uapi.h
++++ b/interdrv/include/chip/cv181x/uapi/linux/cif_uapi.h
+@@ -31,6 +31,10 @@ enum cam_pll_freq_e {
+ 	CAMPLL_FREQ_27M,
+ 	CAMPLL_FREQ_24M,
+ 	CAMPLL_FREQ_26M,
++	/* SG200x experimental GC4653 input clock: <=36 MHz.
++	 * Append only: keep all existing userspace enum numeric values stable.
++	 */
++	CAMPLL_FREQ_36M,
+ 	CAMPLL_FREQ_NUM
+ };
+ 

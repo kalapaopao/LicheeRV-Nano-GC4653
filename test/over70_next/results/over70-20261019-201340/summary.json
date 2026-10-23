@@ -1,0 +1,128 @@
+{
+  "binary_sha256": "4272c79862414077a1d123589711b8e9c1f83ffc979cd8868b690c4e18b0b887",
+  "goal": "1920x1080, 27MHz, >70 VI and PTS, zero MIPI CRC/Hdr/Wc/FIFO, no damaged raw sample",
+  "plan": [
+    1165
+  ],
+  "cases": [
+    {
+      "hts": 1165,
+      "vts": "1200",
+      "pid": 1206,
+      "mipi_pre_reset": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "counters": [
+        {
+          "time_elapsed_s": 4,
+          "mipi": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "soc_temp_c": 68.568
+        },
+        {
+          "time_elapsed_s": 8,
+          "mipi": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "soc_temp_c": 70.666
+        },
+        {
+          "time_elapsed_s": 12,
+          "mipi": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "soc_temp_c": 71.365
+        },
+        {
+          "time_elapsed_s": 16,
+          "mipi": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "soc_temp_c": 72.064
+        }
+      ],
+      "metrics": [
+        "789",
+        "71.5319",
+        "71.5258",
+        "0",
+        "0",
+        "0"
+      ],
+      "raw_images": [
+        {
+          "valid": true,
+          "size_bytes": 3110400,
+          "sha256": "c8a5c11a6bb3f44c199d22c851c265856555c4c314510916ec0f95042c090767",
+          "top_anomaly_ratio": 1.37,
+          "max_row_brightness_jump": 0.3036
+        },
+        {
+          "valid": true,
+          "size_bytes": 3110400,
+          "sha256": "d72a83f60aeb4e4b48aaa0b907cc43f6dd4cee4c42b6539ad13cf430c7d028b3",
+          "top_anomaly_ratio": 1.37,
+          "max_row_brightness_jump": 0.3104
+        },
+        {
+          "valid": true,
+          "size_bytes": 3110400,
+          "sha256": "2392ada914b80b79e3c18f858e6089a207e7441d4a01e50b8a0cc24b8b54f42d",
+          "top_anomaly_ratio": 1.306,
+          "max_row_brightness_jump": 0.2891
+        }
+      ],
+      "samples": 3,
+      "sample_saves": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "1"
+        ],
+        [
+          "2",
+          "1"
+        ]
+      ],
+      "sensor_mode_logged": true,
+      "experiment_process_alive": false,
+      "board_temp_final_c": 67.869,
+      "mipi_post_stop": [
+        0,
+        14,
+        0,
+        0,
+        0
+      ],
+      "mipi_post_stop_nonzero": true,
+      "actual_fps": 71.5319,
+      "pts_fps": 71.5258
+    }
+  ],
+  "start_soc_temp_c": 65.072,
+  "cleanup": "Removed own /tmp scratch and released own lock; existing camera preview untouched"
+}

@@ -1,0 +1,18 @@
+{
+  "target": "true 1080P 80fps",
+  "hts": 1165,
+  "clock_mhz": 27,
+  "cases": [
+    {
+      "vts": 1180,
+      "fps": 72.1544,
+      "pts_fps": 72.1544,
+      "mipi_during_zero": false,
+      "raw_samples": 3,
+      "result_path": "D:\\study\\LicheeRV\\test\\fps80_vts_trial\\results\\over70-20261019-202954",
+      "passed": false,
+      "errors": null
+    }
+  ],
+  "stop": "First abnormal VTS 1180"
+}

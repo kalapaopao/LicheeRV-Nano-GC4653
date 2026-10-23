@@ -1,0 +1,24 @@
+{
+  "hts": 1170,
+  "pid": 3216,
+  "counters": [
+    {
+      "time_elapsed_s": 4,
+      "mipi": [
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "soc_temp_c": 62.974
+    }
+  ],
+  "metrics": null,
+  "raw_images": [],
+  "samples": 0,
+  "sample_saves": [],
+  "sensor_mode_logged": true,
+  "experiment_process_alive": false,
+  "board_temp_final_c": 59.828
+}

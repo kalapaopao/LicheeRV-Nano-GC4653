@@ -1,0 +1,50 @@
+{
+  "mode_hts": 1200,
+  "elapsed_nominal": 12,
+  "temp_before_mC": 74861,
+  "temp_after_mC": 76259,
+  "speed": {
+    "capture_frames": 412,
+    "host_fps": 68.5292,
+    "pts_fps": 68.5398,
+    "duplicate_pts": 0,
+    "timeouts": 0,
+    "encoded": 407,
+    "encode_errors": 0,
+    "encode_fps": 68.725,
+    "preview_replaced": 4,
+    "last_log": "capture_frames=412 host_fps=68.5292 pts_fps=68.5398 duplicate_pts=0 timeouts=0 encoded=407 encode_errors=0 encode_fps=68.725 sent_fps=54.540 jpeg_mbit_s=50.064 preview_replaced=4"
+  },
+  "image_analysis": {
+    "status": "top_rows_no_similar_stripe",
+    "y_baseline_delta": 0.72,
+    "y_top_max_delta": 0.71,
+    "y_top_max_ratio": 0.98,
+    "top_row_deltas": [
+      0.55,
+      0.69,
+      0.65,
+      0.66,
+      0.71,
+      0.67,
+      0.69,
+      0.69
+    ],
+    "uv_top_max_delta": 0.27
+  },
+  "network": {
+    "exit": 0,
+    "stdout": "{\n  \"url\": \"http://10.133.124.1:8081/live.mjpg\",\n  \"content_type\": \"multipart/x-mixed-replace; boundary=frame\",\n  \"frames\": 272,\n  \"width\": 1920,\n  \"height\": 1080,\n  \"duration_seconds\": 3.953,\n  \"receive_fps\": 68.556,\n  \"jpeg_distinct_sha256\": 272,\n  \"malformed_or_changed_dimensions\": 0,\n  \"bytes\": 31209629,\n  \"payload_mbps\": 63.161,\n  \"interarrival_p50_ms\": 16.0,\n  \"interarrival_max_ms\": 31.0,\n  \"note\": \"Network JPEG arrival FPS, not sensor FPS or monitor drawing FPS. JPEG syntax check does NOT detect stripes; visually inspect first.jpg/last.jpg and RAW evidence.\"\n}\n",
+    "stderr": ""
+  },
+  "mipi_errors": [
+    [
+      "0",
+      "0",
+      "0",
+      "0",
+      "0"
+    ]
+  ],
+  "experiment_sha256": "8ce46e8f2e778fa2f3e6b6e2621b883938613c74551feec4c902e8b35e3edd10"
+}

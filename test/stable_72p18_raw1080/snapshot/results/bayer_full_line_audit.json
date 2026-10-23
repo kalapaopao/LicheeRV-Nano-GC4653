@@ -1,0 +1,486 @@
+{
+  "raw1080-20261019-204324": {
+    "mode": "1080p RAW12, fixed 27 MHz, HTS=1165,VTS=1200",
+    "mipi_pre": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "mipi_after_warmup": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "mipi_post": [
+      0,
+      16,
+      0,
+      0,
+      0
+    ],
+    "capture": {
+      "clock": "27",
+      "frames": 867,
+      "fps": 72.1839,
+      "pts_fps": 72.1835,
+      "duplicate_pts": 0,
+      "timeouts": 0,
+      "dump_rc": 0
+    },
+    "frames": {
+      "bayer-0.bin": {
+        "raw_sha256": "5673f5a0072a1d24019b6c38a8f022d5293bafa433352860f4cb8818c7e1ba29",
+        "size_bytes": 3110400,
+        "row_mean_min": 453.01,
+        "row_mean_max": 953.84,
+        "typical_same_bayer_row_mean_diff": 0.758,
+        "largest_line_discontinuities": [
+          {
+            "row": 646,
+            "delta": 3.94,
+            "relative_to_median": 5.2
+          },
+          {
+            "row": 17,
+            "delta": 3.85,
+            "relative_to_median": 5.08
+          },
+          {
+            "row": 76,
+            "delta": 3.83,
+            "relative_to_median": 5.06
+          },
+          {
+            "row": 451,
+            "delta": 3.81,
+            "relative_to_median": 5.02
+          },
+          {
+            "row": 63,
+            "delta": 3.74,
+            "relative_to_median": 4.94
+          },
+          {
+            "row": 791,
+            "delta": 3.73,
+            "relative_to_median": 4.92
+          },
+          {
+            "row": 789,
+            "delta": 3.67,
+            "relative_to_median": 4.84
+          },
+          {
+            "row": 7,
+            "delta": 3.64,
+            "relative_to_median": 4.8
+          },
+          {
+            "row": 359,
+            "delta": 3.59,
+            "relative_to_median": 4.73
+          },
+          {
+            "row": 16,
+            "delta": 3.43,
+            "relative_to_median": 4.53
+          },
+          {
+            "row": 318,
+            "delta": 3.39,
+            "relative_to_median": 4.47
+          },
+          {
+            "row": 151,
+            "delta": 3.33,
+            "relative_to_median": 4.39
+          }
+        ]
+      },
+      "bayer-1.bin": {
+        "raw_sha256": "cdfc9a3e79044b91d2c6b600dec15c7e59fc241e9d7a1b9423e86ea459bede06",
+        "size_bytes": 3110400,
+        "row_mean_min": 452.23,
+        "row_mean_max": 952.04,
+        "typical_same_bayer_row_mean_diff": 0.807,
+        "largest_line_discontinuities": [
+          {
+            "row": 49,
+            "delta": 4.48,
+            "relative_to_median": 5.56
+          },
+          {
+            "row": 979,
+            "delta": 4.36,
+            "relative_to_median": 5.4
+          },
+          {
+            "row": 157,
+            "delta": 4.03,
+            "relative_to_median": 4.99
+          },
+          {
+            "row": 521,
+            "delta": 3.8,
+            "relative_to_median": 4.71
+          },
+          {
+            "row": 159,
+            "delta": 3.74,
+            "relative_to_median": 4.64
+          },
+          {
+            "row": 224,
+            "delta": 3.69,
+            "relative_to_median": 4.58
+          },
+          {
+            "row": 167,
+            "delta": 3.68,
+            "relative_to_median": 4.56
+          },
+          {
+            "row": 1015,
+            "delta": 3.62,
+            "relative_to_median": 4.49
+          },
+          {
+            "row": 718,
+            "delta": 3.54,
+            "relative_to_median": 4.39
+          },
+          {
+            "row": 923,
+            "delta": 3.54,
+            "relative_to_median": 4.39
+          },
+          {
+            "row": 616,
+            "delta": 3.51,
+            "relative_to_median": 4.36
+          },
+          {
+            "row": 981,
+            "delta": 3.31,
+            "relative_to_median": 4.1
+          }
+        ]
+      },
+      "bayer-2.bin": {
+        "raw_sha256": "731c3c75f4d6a84a4c6d1a82be370b5bb29c11df6ee0b5a53d94ff8543a16dbc",
+        "size_bytes": 3110400,
+        "row_mean_min": 451.48,
+        "row_mean_max": 954.07,
+        "typical_same_bayer_row_mean_diff": 0.806,
+        "largest_line_discontinuities": [
+          {
+            "row": 173,
+            "delta": 4.14,
+            "relative_to_median": 5.14
+          },
+          {
+            "row": 175,
+            "delta": 3.85,
+            "relative_to_median": 4.77
+          },
+          {
+            "row": 105,
+            "delta": 3.83,
+            "relative_to_median": 4.75
+          },
+          {
+            "row": 97,
+            "delta": 3.8,
+            "relative_to_median": 4.71
+          },
+          {
+            "row": 963,
+            "delta": 3.71,
+            "relative_to_median": 4.6
+          },
+          {
+            "row": 517,
+            "delta": 3.59,
+            "relative_to_median": 4.46
+          },
+          {
+            "row": 103,
+            "delta": 3.49,
+            "relative_to_median": 4.32
+          },
+          {
+            "row": 179,
+            "delta": 3.48,
+            "relative_to_median": 4.31
+          },
+          {
+            "row": 95,
+            "delta": 3.42,
+            "relative_to_median": 4.24
+          },
+          {
+            "row": 81,
+            "delta": 3.34,
+            "relative_to_median": 4.14
+          },
+          {
+            "row": 469,
+            "delta": 3.31,
+            "relative_to_median": 4.11
+          },
+          {
+            "row": 515,
+            "delta": 3.23,
+            "relative_to_median": 4.01
+          }
+        ]
+      }
+    }
+  },
+  "raw1080-20261019-204558": {
+    "mode": "1080p RAW12, fixed 27 MHz, HTS=1165,VTS=1140",
+    "mipi_pre": [
+      0,
+      16,
+      0,
+      0,
+      0
+    ],
+    "mipi_after_warmup": [
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    "mipi_post": [
+      0,
+      22,
+      0,
+      1,
+      0
+    ],
+    "capture": {
+      "clock": "27",
+      "frames": 866,
+      "fps": 72.1007,
+      "pts_fps": 72.1004,
+      "duplicate_pts": 0,
+      "timeouts": 0,
+      "dump_rc": 0
+    },
+    "frames": {
+      "bayer-0.bin": {
+        "raw_sha256": "78f9d927727f12228ee5c0a877719dc6b0aeaa8bace363614708d62166629730",
+        "size_bytes": 3110400,
+        "row_mean_min": 452.88,
+        "row_mean_max": 954.38,
+        "typical_same_bayer_row_mean_diff": 0.848,
+        "largest_line_discontinuities": [
+          {
+            "row": 256,
+            "delta": 3.64,
+            "relative_to_median": 4.3
+          },
+          {
+            "row": 910,
+            "delta": 3.61,
+            "relative_to_median": 4.25
+          },
+          {
+            "row": 779,
+            "delta": 3.59,
+            "relative_to_median": 4.23
+          },
+          {
+            "row": 584,
+            "delta": 3.45,
+            "relative_to_median": 4.06
+          },
+          {
+            "row": 621,
+            "delta": 3.43,
+            "relative_to_median": 4.05
+          },
+          {
+            "row": 254,
+            "delta": 3.43,
+            "relative_to_median": 4.05
+          },
+          {
+            "row": 49,
+            "delta": 3.39,
+            "relative_to_median": 4.0
+          },
+          {
+            "row": 870,
+            "delta": 3.39,
+            "relative_to_median": 4.0
+          },
+          {
+            "row": 908,
+            "delta": 3.33,
+            "relative_to_median": 3.93
+          },
+          {
+            "row": 199,
+            "delta": 3.26,
+            "relative_to_median": 3.84
+          },
+          {
+            "row": 33,
+            "delta": 3.22,
+            "relative_to_median": 3.8
+          },
+          {
+            "row": 769,
+            "delta": 3.13,
+            "relative_to_median": 3.69
+          }
+        ]
+      },
+      "bayer-1.bin": {
+        "raw_sha256": "658ddc317e2ad555469b8df88ce733f70504f18423e4ac89417e808e6a49ec86",
+        "size_bytes": 3110400,
+        "row_mean_min": 451.96,
+        "row_mean_max": 955.09,
+        "typical_same_bayer_row_mean_diff": 0.783,
+        "largest_line_discontinuities": [
+          {
+            "row": 1031,
+            "delta": 3.79,
+            "relative_to_median": 4.85
+          },
+          {
+            "row": 872,
+            "delta": 3.35,
+            "relative_to_median": 4.28
+          },
+          {
+            "row": 106,
+            "delta": 3.26,
+            "relative_to_median": 4.17
+          },
+          {
+            "row": 499,
+            "delta": 3.17,
+            "relative_to_median": 4.05
+          },
+          {
+            "row": 497,
+            "delta": 3.16,
+            "relative_to_median": 4.04
+          },
+          {
+            "row": 1033,
+            "delta": 3.15,
+            "relative_to_median": 4.02
+          },
+          {
+            "row": 123,
+            "delta": 3.1,
+            "relative_to_median": 3.96
+          },
+          {
+            "row": 433,
+            "delta": 3.06,
+            "relative_to_median": 3.91
+          },
+          {
+            "row": 594,
+            "delta": 3.03,
+            "relative_to_median": 3.87
+          },
+          {
+            "row": 812,
+            "delta": 3.02,
+            "relative_to_median": 3.86
+          },
+          {
+            "row": 38,
+            "delta": 3.01,
+            "relative_to_median": 3.84
+          },
+          {
+            "row": 943,
+            "delta": 2.98,
+            "relative_to_median": 3.81
+          }
+        ]
+      },
+      "bayer-2.bin": {
+        "raw_sha256": "eab9fbee44c54aa133c775f8853638313f8fce9187fb717feade0a5f6f8462a9",
+        "size_bytes": 3110400,
+        "row_mean_min": 452.36,
+        "row_mean_max": 954.74,
+        "typical_same_bayer_row_mean_diff": 0.812,
+        "largest_line_discontinuities": [
+          {
+            "row": 505,
+            "delta": 4.85,
+            "relative_to_median": 5.98
+          },
+          {
+            "row": 37,
+            "delta": 4.11,
+            "relative_to_median": 5.06
+          },
+          {
+            "row": 821,
+            "delta": 4.1,
+            "relative_to_median": 5.05
+          },
+          {
+            "row": 507,
+            "delta": 3.85,
+            "relative_to_median": 4.74
+          },
+          {
+            "row": 31,
+            "delta": 3.66,
+            "relative_to_median": 4.5
+          },
+          {
+            "row": 518,
+            "delta": 3.62,
+            "relative_to_median": 4.45
+          },
+          {
+            "row": 819,
+            "delta": 3.34,
+            "relative_to_median": 4.11
+          },
+          {
+            "row": 58,
+            "delta": 3.33,
+            "relative_to_median": 4.11
+          },
+          {
+            "row": 235,
+            "delta": 3.32,
+            "relative_to_median": 4.09
+          },
+          {
+            "row": 934,
+            "delta": 3.27,
+            "relative_to_median": 4.03
+          },
+          {
+            "row": 621,
+            "delta": 3.13,
+            "relative_to_median": 3.86
+          },
+          {
+            "row": 106,
+            "delta": 3.09,
+            "relative_to_median": 3.81
+          }
+        ]
+      }
+    }
+  }
+}

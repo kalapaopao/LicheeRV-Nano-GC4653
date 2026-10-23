@@ -1,0 +1,182 @@
+{
+  "binary_sha256": "bb1528bb328dbcdb6ac79a78a63ad801bc5fc2ec393ed5b7264a30e6e54a9dad",
+  "mode": "1080p RAW12, fixed 27 MHz, HTS=1165,VTS=1140",
+  "samples": [
+    {
+      "time_s": 3,
+      "mipi": [
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "soc_c": 60.527
+    },
+    {
+      "time_s": 6,
+      "mipi": [
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "soc_c": 63.673
+    },
+    {
+      "time_s": 9,
+      "mipi": [
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "soc_c": 64.373
+    },
+    {
+      "time_s": 12,
+      "mipi": [
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "soc_c": 65.421
+    },
+    {
+      "time_s": 15,
+      "mipi": [
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "soc_c": 65.771
+    },
+    {
+      "time_s": 18,
+      "mipi": [
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "soc_c": 66.47
+    },
+    {
+      "time_s": 21,
+      "mipi": [
+        0,
+        22,
+        0,
+        1,
+        0
+      ],
+      "soc_c": 62.625
+    }
+  ],
+  "vts": "1140",
+  "board_temperature_start_c": 58.429,
+  "free_tmp_kib": 55568,
+  "mipi_pre": [
+    0,
+    16,
+    0,
+    0,
+    0
+  ],
+  "pid": 1855,
+  "mipi_after_warmup": [
+    0,
+    0,
+    0,
+    1,
+    0
+  ],
+  "abort": "MIPI counter increased AFTER warmup",
+  "mipi_post": [
+    0,
+    22,
+    0,
+    1,
+    0
+  ],
+  "soc_temp_post_c": 61.576,
+  "result": {
+    "clock": "27",
+    "frames": 866,
+    "fps": 72.1007,
+    "pts_fps": 72.1004,
+    "duplicate_pts": 0,
+    "timeouts": 0,
+    "dump_rc": 0
+  },
+  "raw_frames": [
+    {
+      "file": "bayer-0.bin",
+      "bytes": 3110400,
+      "sha256": "78f9d927727f12228ee5c0a877719dc6b0aeaa8bace363614708d62166629730",
+      "valid_raw12": true,
+      "top10_bright_ge2500": [
+        167,
+        166,
+        168,
+        168,
+        166,
+        167,
+        166,
+        166,
+        165,
+        164
+      ],
+      "isolated_top_spikes": 0,
+      "isolated_top_spike_positions": []
+    },
+    {
+      "file": "bayer-1.bin",
+      "bytes": 3110400,
+      "sha256": "658ddc317e2ad555469b8df88ce733f70504f18423e4ac89417e808e6a49ec86",
+      "valid_raw12": true,
+      "top10_bright_ge2500": [
+        166,
+        169,
+        167,
+        166,
+        165,
+        166,
+        166,
+        166,
+        162,
+        164
+      ],
+      "isolated_top_spikes": 0,
+      "isolated_top_spike_positions": []
+    },
+    {
+      "file": "bayer-2.bin",
+      "bytes": 3110400,
+      "sha256": "eab9fbee44c54aa133c775f8853638313f8fce9187fb717feade0a5f6f8462a9",
+      "valid_raw12": true,
+      "top10_bright_ge2500": [
+        167,
+        166,
+        167,
+        167,
+        167,
+        166,
+        166,
+        167,
+        163,
+        165
+      ],
+      "isolated_top_spikes": 0,
+      "isolated_top_spike_positions": []
+    }
+  ],
+  "cleanup": "released own lock; board /tmp evidence retained until PC copies confirmed"
+}

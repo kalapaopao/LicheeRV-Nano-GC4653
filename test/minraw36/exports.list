@@ -1,0 +1,1 @@
+{ __sync_fetch_and_add_1; __sync_fetch_and_and_1; };

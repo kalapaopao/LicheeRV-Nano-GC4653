@@ -1,0 +1,3 @@
+mode=30
+duration=8
+extra=

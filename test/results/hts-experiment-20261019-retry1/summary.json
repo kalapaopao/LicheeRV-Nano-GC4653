@@ -1,0 +1,38 @@
+{
+  "tests": [
+    {
+      "hts": 1250,
+      "pid": 1573,
+      "temp_c": 74.511,
+      "last_metrics": [
+        "728",
+        "66.0042",
+        "66.0048",
+        "0",
+        "0",
+        "0"
+      ],
+      "had_sensor_timing_log": true
+    },
+    {
+      "hts": 1200,
+      "pid": 1617,
+      "temp_c": 74.162,
+      "last_metrics": [
+        "759",
+        "68.7895",
+        "68.7944",
+        "0",
+        "0",
+        "0"
+      ],
+      "had_sensor_timing_log": true
+    }
+  ],
+  "binary_sha256": "0bc8a88c403a2f8f151e7e331d3e3b5276a18c53a326b84810fee912c8f81df9",
+  "initial_process": " 1516 root     /code/camera/bin/camera_preview_factory 10.133.124.1 /code/camera/reports/preview-factory-18338-1513 60\n",
+  "temperature_before_c": 74.511,
+  "restore": "factory start command sent",
+  "restored_processes": " 1667 root     /code/camera/bin/camera_preview_factory 10.133.124.1 /code/camera/reports/preview-factory-18412-1664 60\n",
+  "restored_temperature_c": 72.064
+}

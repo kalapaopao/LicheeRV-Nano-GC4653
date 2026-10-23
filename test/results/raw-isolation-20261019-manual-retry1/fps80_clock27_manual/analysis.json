@@ -1,0 +1,24 @@
+{
+  "name": "fps80_clock27_manual",
+  "requested": 80,
+  "mclk_mhz": 27,
+  "exit_code": 0,
+  "elapsed_s": 14.02,
+  "temperature_after_c": 65.771,
+  "result_parse_error": "Expecting value: line 1 column 1 (char 0)",
+  "bayer": [
+    {
+      "status": "invalid_raw_length",
+      "length": 1318912
+    },
+    {
+      "status": "invalid_raw_length",
+      "length": 0
+    },
+    {
+      "status": "invalid_raw_length",
+      "length": 0
+    }
+  ],
+  "sensor_clock_logged": true
+}

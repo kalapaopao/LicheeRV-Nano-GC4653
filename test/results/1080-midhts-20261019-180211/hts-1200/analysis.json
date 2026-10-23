@@ -1,0 +1,29 @@
+{
+  "hts": 1200,
+  "pid": 2678,
+  "temp_c": 71.714,
+  "process_still_alive": false,
+  "mipi_absolute": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "raw_quality": {
+    "valid": true,
+    "bytes": 3110400,
+    "top_ratio": 2.326,
+    "max_top_row_jump": 0.7,
+    "sha256": "87b8cdfdd3ed8ffb99c9e99d94de85b6e3d252f8dc81bb7702890f11e92516b1"
+  },
+  "metrics": [
+    "2507",
+    "69.5319",
+    "69.5320",
+    "0",
+    "0",
+    "0"
+  ],
+  "sensor_timing_confirmed": true
+}

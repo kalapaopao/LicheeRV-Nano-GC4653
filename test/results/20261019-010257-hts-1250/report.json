@@ -1,0 +1,16 @@
+{
+  "url": "http://10.133.124.1:8081/live.mjpg",
+  "content_type": "multipart/x-mixed-replace; boundary=frame",
+  "frames": 262,
+  "width": 1920,
+  "height": 1080,
+  "duration_seconds": 3.953,
+  "receive_fps": 66.026,
+  "jpeg_distinct_sha256": 262,
+  "malformed_or_changed_dimensions": 0,
+  "bytes": 33051673,
+  "payload_mbps": 66.889,
+  "interarrival_p50_ms": 16.0,
+  "interarrival_max_ms": 31.0,
+  "note": "Network JPEG arrival FPS, not sensor FPS or monitor drawing FPS. JPEG syntax check does NOT detect stripes; visually inspect first.jpg/last.jpg and RAW evidence."
+}

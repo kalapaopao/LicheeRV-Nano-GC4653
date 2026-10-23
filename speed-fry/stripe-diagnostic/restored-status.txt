@@ -1,0 +1,10 @@
+4d742e0cc3bd4fd72e548582ede5a38afbaded7757afc62e43c0f0298c741e7a  /code/camera/bin/camera_preview_hd
+/code/camera/reports/preview-hd-8680-3025
+capture_frames=13712 host_fps=82.5000 pts_fps=82.5000 duplicate_pts=0 timeouts=0 encoded=13695 encode_errors=0 encode_fps=82.504 sent_fps=0.000 jpeg_mbit_s=0.000 preview_replaced=15
+capture_frames=14125 host_fps=82.4999 pts_fps=82.5000 duplicate_pts=0 timeouts=0 encoded=14108 encode_errors=0 encode_fps=82.497 sent_fps=0.000 jpeg_mbit_s=0.000 preview_replaced=15
+capture_frames=14538 host_fps=82.5000 pts_fps=82.5000 duplicate_pts=0 timeouts=0 encoded=14521 encode_errors=0 encode_fps=82.502 sent_fps=0.000 jpeg_mbit_s=0.000 preview_replaced=15
+capture_frames=14951 host_fps=82.5000 pts_fps=82.5000 duplicate_pts=0 timeouts=0 encoded=14934 encode_errors=0 encode_fps=82.498 sent_fps=0.000 jpeg_mbit_s=0.000 preview_replaced=15
+capture_frames=15364 host_fps=82.4995 pts_fps=82.5000 duplicate_pts=0 timeouts=0 encoded=15347 encode_errors=0 encode_fps=82.484 sent_fps=0.000 jpeg_mbit_s=0.000 preview_replaced=15
+capture_frames=15777 host_fps=82.5000 pts_fps=82.5000 duplicate_pts=0 timeouts=0 encoded=15760 encode_errors=0 encode_fps=82.516 sent_fps=0.000 jpeg_mbit_s=0.000 preview_replaced=15
+ 3028 root     /code/camera/bin/camera_preview_hd 10.133.124.1 /code/camera/reports/preview-hd-8680-3025 80
+ 3092 root     sh -c sha256sum /code/camera/bin/camera_preview_hd; cat /code/camera/run/preview-hd.report; tail -6 "$(cat /code/camera/run/preview-hd.report)/run.log"; ps | grep "[c]amera_preview_hd"

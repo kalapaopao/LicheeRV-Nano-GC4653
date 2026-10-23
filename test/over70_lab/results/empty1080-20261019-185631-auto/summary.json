@@ -1,0 +1,54 @@
+{
+  "mode": "auto",
+  "resolution": "1920x1080",
+  "fps_request": 80,
+  "HTS": 1200,
+  "VTS": 1200,
+  "MCLK_target_MHz": 27,
+  "duration_seconds": 20,
+  "binary_sha256": "44c1163f7ce6571fe9c0ea57034b3b8eafe0afbe1339a9bbaf85e79551b0c798",
+  "MCLK_route": "current test sensor driver forces 27MHz for MAIX_SENSOR_FPS>=80",
+  "mipi_samples": [],
+  "temperature_samples_c": [],
+  "soc_temp_start_c": 57.031,
+  "mipi_pre_reset": [
+    0,
+    0,
+    0,
+    1,
+    0
+  ],
+  "stop": "MIPI error present at initial active sample",
+  "vi_result": {
+    "requested_fps": 80,
+    "width": 1920,
+    "height": 1080,
+    "frames": 0,
+    "host_fps": 0.0,
+    "pts_fps": 0.0,
+    "duplicate_pts": 0,
+    "timeouts": 0,
+    "large_intervals": 0
+  },
+  "sensor_registers_after": {
+    "VTS": 2400,
+    "exposure_lines": 2392
+  },
+  "ae_after": {
+    "exposure_us": 33222,
+    "again": 5454,
+    "dgain": 1024,
+    "isp_gain": 1028,
+    "luma": 28,
+    "fps_field": 3000
+  },
+  "frame_quality": {
+    "valid": true,
+    "size_bytes": 3110400,
+    "sha256": "0f1d9c32acae849f5a894a7fd8405b4fffd187ffa1732ab3b1e19e5835a4c282",
+    "top_anomaly_ratio": 0.835,
+    "max_row_brightness_jump": 0.5542
+  },
+  "run_log_sha256": "7cfad82d0682eac09834f02d1a8a2aa48c5c446e5a19da16e415520532f6aa5a",
+  "cleanup": "removed own /tmp scratch; released own lock"
+}

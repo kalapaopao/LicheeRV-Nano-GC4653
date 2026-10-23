@@ -1,0 +1,13 @@
+﻿from pathlib import Path
+p=Path('/tmp/lrv-workspace/workspace/camera/src/camera_stream.cpp')
+p.write_text(Path('/tmp/lrv-workspace/workspace/camera/src/camera_bench.cpp').read_text())
+s=p.read_text()
+s=s.replace('// Native GC4653 frame benchmark. Uses CVI VI buffers, no JPEG/disk work in timed loop.','// GC4653 low-latency MJPEG stream.')
+s=s.replace('static bool snapshot(const VIDEO_FRAME_INFO_S& frame,const char* dir){','static bool write_nv21(const VIDEO_FRAME_INFO_S& frame, FILE* fp){')
+s=s.replace('char path[512]; snprintf(path,sizeof(path),"%s/frame.nv21",dir);\n    FILE* fp=fopen(path,"wb"); if(!fp) return false;','if(!fp) return false;',1)
+s=s.replace('    fclose(fp); return true;\n}\nint main', '    return true;\n}\nstatic bool snapshot(const VIDEO_FRAME_INFO_S& frame,const char* dir){\n    char path[512]; snprintf(path,sizeof(path),"%s/frame.nv21",dir);\n    FILE* fp=fopen(path,"wb"); if(!fp) return false;\n    bool ok=write_nv21(frame,fp); fclose(fp); return ok;\n}\nint main',1)
+s=s.replace('if(argc!=4&&argc!=5){fprintf(stderr,"Usage: %s FPS SECONDS REPORT_DIR\\n",argv[0]);return 2;}','if(argc!=4&&argc!=5){fprintf(stderr,"Usage: %s FPS SECONDS REPORT_DIR [stream]\\n",argv[0]);return 2;}\n    bool stream = argc==5 && strcmp(argv[4],"stream")==0;\n    if(argc==5 && !stream){fprintf(stderr,"Only optional mode is stream\\n");return 2;}')
+s=s.replace('uint64_t count=0,dup=0,timeouts=0,prevpts=0,firstpts=0,lastpts=0,gaps=0;','FILE* stream_pipe=nullptr;\n    if(stream){\n        const char* cmd="ffmpeg -hide_banner -loglevel error -f rawvideo -pix_fmt nv21 -s 1280x720 -r 15 -i pipe:0 -c:v mjpeg -q:v 6 -f mpjpeg -listen 1 http://0.0.0.0:8080/live.mjpg";\n        stream_pipe=popen(cmd,"w");\n        if(!stream_pipe){fprintf(stderr,"cannot start ffmpeg\\n"); return 7;}\n        setvbuf(stream_pipe,nullptr,_IOFBF,1024*1024);\n        fprintf(stderr,"MJPEG stream: http://<board-ip>:8080/live.mjpg\\n");\n    }\n    uint64_t count=0,dup=0,timeouts=0,prevpts=0,firstpts=0,lastpts=0,gaps=0;')
+s=s.replace('if(csv) fprintf(csv,"%.9f,%llu,%u\\n",now,(unsigned long long)pts,frame.stVFrame.u32TimeRef);\n        count++; CVI_VI_ReleaseChnFrame(0,0,&frame);','if(csv) fprintf(csv,"%.9f,%llu,%u\\n",now,(unsigned long long)pts,frame.stVFrame.u32TimeRef);\n        if(stream){ if(!write_nv21(frame,stream_pipe)) running=0; fflush(stream_pipe); }\n        count++; CVI_VI_ReleaseChnFrame(0,0,&frame);')
+s=s.replace('if(csv) fclose(csv);','if(csv) fclose(csv);\n    if(stream_pipe){ pclose(stream_pipe); stream_pipe=nullptr; }')
+p.write_text(s)

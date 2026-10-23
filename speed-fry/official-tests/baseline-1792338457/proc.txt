@@ -1,0 +1,99 @@
+
+-------------------------------MODULE PARAM-------------------------------------
+	DetectErrFrame	DropErrFrame
+		0		0
+
+-------------------------------VI MODE------------------------------------------
+	DevID	PrerawFE	PrerawBE	Postraw		Scaler
+	  0	 online		 online		offline		offline
+
+-------------------------------VI DEV ATTR1-------------------------------------
+	DevID	DevEn	BindPipe	Width	Height	IntfM	WkM	ScanM
+	  0	  Y	   Y		2560	1440	MIPI	1MUX	  P
+
+-------------------------------VI DEV ATTR2-------------------------------------
+	DevID	AD0	AD1	AD2	AD3	Seq	DataType	WDRMode
+	  0	-1	-1	-1	-1	N/A	 RGB		None
+
+-------------------------------VI BIND ATTR-------------------------------------
+	DevID	PipeNum		PipeId
+	  0	  0		  0
+
+-------------------------------VI DEV TIMING ATTR-------------------------------
+	DevID	DevTimingEn	DevFrmRate	DevWidth	DevHeight
+	  0	    N		   0		 2560		 1440
+
+-------------------------------VI CHN ATTR1-------------------------------------
+	DevID	ChnID	Width	Height	Mirror	Flip	SrcFRate	DstFRate	PixFmt	VideoFmt	BindPool
+	  0	  0	2560	1440	  N	 N	  -1		  -1		NV21	  SDR8		  -1
+
+-------------------------------VI CHN ATT2--------------------------------------
+	DevID	ChnID	CompressMode	Depth	Align
+	  0	  0	   Y		  0	 32
+
+-------------------------------VI CHN OUTPUT RESOLUTION-------------------------
+	DevID	ChnID	Mirror	Flip	Width	Height	PixFmt	VideoFmt	CompressMode	FrameRate
+	  0	  0	  N	 N	2560	1440	NV21	  SDR8		     Y		   -1
+
+-------------------------------VI CHN ROTATE INFO-------------------------------
+	DevID	ChnID	Rotate
+	  0	  0	  0
+
+-------------------------------VI CHN EARLY INTERRUPT INFO----------------------
+	DevID	ChnID	Enable	LineCnt
+	  0	  0	  N	   0
+
+-------------------------------VI CHN CROP INFO---------------------------------
+	DevID	ChnID	CropEn	CoorType	CoorX	CoorY	Width	Height	TrimX	TrimY	TrimWid	TrimHgt
+	  0	  0	  N	  RAT		   0	   0	   0	   0	   0	  0	  0	   0
+
+-------------------------------VI CHN STATUS------------------------------------
+	DevID	ChnID	Enable	FrameRate	IntCnt	RecvPic	LostFrame	VbFail	Width	Height
+	  0	  0	  Y	   30		  779	  779	    0		    0	2560	1440
+[VI BE_Dbg_Info]
+VIPreBEDoneSts		:0x10		VIPreBEDmaIdleStatus	:0x4
+[VI Post_Dbg_Info]
+VIIspTopStatus		:0x386
+[VI DMA_Dbg_Info]
+VIWdma0ErrStatus	:0x3000000	VIWdma0IdleStatus	:0xfffffeaf
+VIWdma1ErrStatus	:0x3000000	VIWdma1IdleStatus	:0xffffe054
+VIRdmaErrStatus		:0x3000000	VIRdmaIdleStatus	:0xfffff9bf
+[VI ISP_PIPE_A FE_Dbg_Info]
+VIPreFERawDbgSts	:0x3f0		VIPreFEDbgInfo		:0x2f
+[VI ISP_PIPE_A]
+VIOutImgWidth		:2560
+VIOutImgHeight		:1440
+VIInImgWidth		:2560
+VIInImgHeight		:1440
+VIDevFPS		:  30
+VIFPS			:  30
+VISofCh0Cnt		: 811
+VIPreFECh0Cnt		: 810
+VIPreBECh0Cnt		: 810
+VIPostCnt		: 809
+VIDropCnt		:   0
+VIDumpCnt		:   0
+[VI ISP_PIPE_A Csi_Dbg_Info]
+VICsiIntStatus0		:0x0
+VICsiIntStatus1		:0x0
+VICsiCh0Dbg		:0x0
+VICsiCh1Dbg		:0x0
+VICsiOverFlowCnt	:   0
+VICsiCh0WidthGTCnt	:   0
+VICsiCh0WidthLSCnt	:   0
+VICsiCh0HeightGTCnt	:   0
+VICsiCh0HeightLSCnt	:   0
+
+Module: [MIPI_RX], Build Time[#10 PREEMPT Mon Dec 29 19:52:50 CST 2025]
+
+------------Combo DEV ATTR--------------
+   Devno  WorkMode  DataType   WDRMode         LinkId        PN Swap  SyncMode  DataEndian  SyncCodeEndian
+       0      MIPI     RAW10      NONE  4, 3, 2,-1,-1  0, 0, 0, 0, 0       N/A         N/A             N/A
+
+------------MIPI info-------------------
+ Devno EccErr CrcErr HdrErr WcErr fifofull   decode
+     0      0      0      0     0        0    raw10
+  Physical:       D0       D1       D2       D3       D4       D5
+                   0        0        e       26        0        0
+   Digital:       D0       D1       D2       D3    CK_HS  CK_ULPS  CK_STOP   CK_ERR   Deskew
+             hs_idle  hs_idle   hs_hst   hs_hst        1        0        0        0     idle

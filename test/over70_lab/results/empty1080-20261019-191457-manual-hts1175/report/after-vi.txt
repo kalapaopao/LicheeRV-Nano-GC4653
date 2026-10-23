@@ -1,0 +1,52 @@
+
+-------------------------------MODULE PARAM-------------------------------------
+	DetectErrFrame	DropErrFrame
+		0		0
+
+-------------------------------VI MODE------------------------------------------
+	DevID	PrerawFE	PrerawBE	Postraw		Scaler
+	  0	 online		 online		offline		offline
+
+-------------------------------VI DEV ATTR1-------------------------------------
+	DevID	DevEn	BindPipe	Width	Height	IntfM	WkM	ScanM
+	  0	  Y	   Y		1920	1080	MIPI	1MUX	  P
+
+-------------------------------VI DEV ATTR2-------------------------------------
+	DevID	AD0	AD1	AD2	AD3	Seq	DataType	WDRMode
+	  0	-1	-1	-1	-1	N/A	 RGB		None
+
+-------------------------------VI BIND ATTR-------------------------------------
+	DevID	PipeNum		PipeId
+	  0	  0		  0
+
+-------------------------------VI DEV TIMING ATTR-------------------------------
+	DevID	DevTimingEn	DevFrmRate	DevWidth	DevHeight
+	  0	    N		   0		 1920		 1080
+
+-------------------------------VI CHN ATTR1-------------------------------------
+	DevID	ChnID	Width	Height	Mirror	Flip	SrcFRate	DstFRate	PixFmt	VideoFmt	BindPool
+	  0	  0	1920	1080	  N	 N	  -1		  -1		NV21	  SDR8		  -1
+
+-------------------------------VI CHN ATT2--------------------------------------
+	DevID	ChnID	CompressMode	Depth	Align
+	  0	  0	   Y		  0	 32
+
+-------------------------------VI CHN OUTPUT RESOLUTION-------------------------
+	DevID	ChnID	Mirror	Flip	Width	Height	PixFmt	VideoFmt	CompressMode	FrameRate
+	  0	  0	  N	 N	1920	1080	NV21	  SDR8		     Y		   -1
+
+-------------------------------VI CHN ROTATE INFO-------------------------------
+	DevID	ChnID	Rotate
+	  0	  0	  0
+
+-------------------------------VI CHN EARLY INTERRUPT INFO----------------------
+	DevID	ChnID	Enable	LineCnt
+	  0	  0	  N	   0
+
+-------------------------------VI CHN CROP INFO---------------------------------
+	DevID	ChnID	CropEn	CoorType	CoorX	CoorY	Width	Height	TrimX	TrimY	TrimWid	TrimHgt
+	  0	  0	  N	  RAT		   0	   0	   0	   0	   0	  0	  0	   0
+
+-------------------------------VI CHN STATUS------------------------------------
+	DevID	ChnID	Enable	FrameRate	IntCnt	RecvPic	LostFrame	VbFail	Width	Height
+	  0	  0	  Y	   72		 1927	 1927	    0		    0	1920	1080

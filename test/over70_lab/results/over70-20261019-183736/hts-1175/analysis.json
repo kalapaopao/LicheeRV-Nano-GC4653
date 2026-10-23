@@ -1,0 +1,101 @@
+{
+  "hts": 1175,
+  "pid": 3166,
+  "counters": [
+    {
+      "time_elapsed_s": 4,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_temp_c": 60.177
+    },
+    {
+      "time_elapsed_s": 8,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_temp_c": 62.275
+    },
+    {
+      "time_elapsed_s": 12,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_temp_c": 63.324
+    },
+    {
+      "time_elapsed_s": 16,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_temp_c": 64.373
+    }
+  ],
+  "metrics": [
+    "789",
+    "71.5981",
+    "71.5981",
+    "0",
+    "0",
+    "0"
+  ],
+  "raw_images": [
+    {
+      "valid": true,
+      "size_bytes": 3110400,
+      "sha256": "5e0afd4f669cad18c8faeae16a3c3422d0d7df5947523456b1609845c88e39ae",
+      "top_anomaly_ratio": 1.759,
+      "max_row_brightness_jump": 0.4031
+    },
+    {
+      "valid": true,
+      "size_bytes": 3110400,
+      "sha256": "a0027d7c8614a56f10010ad33a7c8445e9da8f31f50625f30b426de658457b5f",
+      "top_anomaly_ratio": 1.831,
+      "max_row_brightness_jump": 0.4344
+    },
+    {
+      "valid": true,
+      "size_bytes": 3110400,
+      "sha256": "664adec9ee0bb8dada961448fd9947ca7a8798ce9487b1b0443b2d51cdd59f01",
+      "top_anomaly_ratio": 1.428,
+      "max_row_brightness_jump": 0.3755
+    }
+  ],
+  "samples": 3,
+  "sample_saves": [
+    [
+      "0",
+      "1"
+    ],
+    [
+      "1",
+      "1"
+    ],
+    [
+      "2",
+      "1"
+    ]
+  ],
+  "sensor_mode_logged": true,
+  "experiment_process_alive": false,
+  "board_temp_final_c": 60.177,
+  "actual_fps": 71.5981,
+  "pts_fps": 71.5981
+}

@@ -1,0 +1,37 @@
+{
+  "purpose": "MCLK fixed 27MHz, HTS fixed 1600, VTS-only changes",
+  "cases": [
+    {
+      "vts_request": 1700,
+      "registers": {
+        "original": 1500,
+        "initial": 1700,
+        "final": 1700
+      },
+      "fps": 52.9407,
+      "pts_fps": 52.941,
+      "frame_count": 424,
+      "timeouts": 0,
+      "duplicate_pts": 0,
+      "mipi": [
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "temperature": 66.82,
+      "exit_code": 0,
+      "raw_count": 3,
+      "raw_valid": true,
+      "raw_transient_bursts": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "binary_sha256": "57118f25c5fe8799e4ac71b806d841e2ce1d77f7fd70f50b5e256c2abcfd37fb",
+  "stop": "First unsatisfactory VTS case",
+  "cleanup": "Camera lock released"
+}

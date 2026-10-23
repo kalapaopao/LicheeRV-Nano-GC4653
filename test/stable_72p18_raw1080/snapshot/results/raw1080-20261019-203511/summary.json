@@ -1,0 +1,38 @@
+{
+  "binary_sha256": "f8c6d0b8f84af181c51aff79a4e80b53aeaa5a7476ec7155f057ce715c37e868",
+  "mode": "1080p RAW12, fixed 27 MHz, HTS=1165,VTS=1200",
+  "samples": [
+    {
+      "time_s": 3,
+      "mipi": [
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "soc_c": 59.828
+    }
+  ],
+  "board_temperature_start_c": 58.08,
+  "free_tmp_kib": 65104,
+  "mipi_pre": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "pid": 1589,
+  "abort": "MIPI counter increased",
+  "mipi_post": [
+    0,
+    0,
+    0,
+    1,
+    0
+  ],
+  "soc_temp_post_c": 58.779,
+  "error": "Expecting value: line 1 column 1 (char 0)",
+  "cleanup": "released own lock; board /tmp evidence retained until PC copies confirmed"
+}

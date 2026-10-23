@@ -1,0 +1,10 @@
+{
+  "binary_sha256": "53db78de966790f2207e26530279487393cbd5f587fa3634086e22ff1dccb410",
+  "cases": [],
+  "board_temp_dir": "/tmp/lichee-raw-isolation-manual",
+  "preserved_factory_binary": true,
+  "initial_process": "",
+  "temperature_before_c": 66.121,
+  "restore": "originally off; left the preview stopped",
+  "final_temperature_c": 67.169
+}

@@ -1,0 +1,399 @@
+{
+  "binary_sha256": "53db78de966790f2207e26530279487393cbd5f587fa3634086e22ff1dccb410",
+  "cases": [
+    {
+      "name": "fps60_clock27",
+      "requested": 60,
+      "mclk_mhz": 27,
+      "exit_code": 0,
+      "elapsed_s": 14.11,
+      "temperature_after_c": 61.925,
+      "vi": {
+        "requested_fps": 60,
+        "width": 1280,
+        "height": 720,
+        "frames": 421,
+        "host_fps": 60.0002,
+        "pts_fps": 60.0,
+        "duplicate_pts": 0,
+        "timeouts": 0,
+        "large_intervals": 0
+      },
+      "bayer": [
+        {
+          "status": "ok",
+          "sha256": "cf9da72f4ce5bbd47dd07f0d78c11fd116cad893178c8407764c27da8a8cfc2a",
+          "row_max_first8": [
+            828,
+            808,
+            824,
+            804,
+            820,
+            828,
+            816,
+            820
+          ],
+          "count_gt3000_rows2_3": 0,
+          "row_count_gt3000_first8": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "status": "ok",
+          "sha256": "568847140485e2abd2fb2ce40c64c1ba406bd6df2317bbc5f3bba21fcef0b9d9",
+          "row_max_first8": [
+            792,
+            804,
+            828,
+            804,
+            796,
+            828,
+            804,
+            808
+          ],
+          "count_gt3000_rows2_3": 0,
+          "row_count_gt3000_first8": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "status": "ok",
+          "sha256": "318413bbcc4cceaf590f4ef027fe86c2db533d82797b29dd789a2f8d799a4700",
+          "row_max_first8": [
+            812,
+            824,
+            792,
+            828,
+            800,
+            840,
+            808,
+            828
+          ],
+          "count_gt3000_rows2_3": 0,
+          "row_count_gt3000_first8": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "sensor_clock_logged": true
+    },
+    {
+      "name": "fps80_clock37",
+      "requested": 80,
+      "mclk_mhz": 37.125,
+      "exit_code": 0,
+      "elapsed_s": 14.16,
+      "temperature_after_c": 63.673,
+      "vi": {
+        "requested_fps": 80,
+        "width": 1280,
+        "height": 720,
+        "frames": 579,
+        "host_fps": 82.4981,
+        "pts_fps": 82.5001,
+        "duplicate_pts": 0,
+        "timeouts": 0,
+        "large_intervals": 0
+      },
+      "bayer": [
+        {
+          "status": "ok",
+          "sha256": "bacefbbdcc60b164eb71cecc0db1b65cb4c65588d6cf8fb233b420b5f9164857",
+          "row_max_first8": [
+            804,
+            812,
+            3596,
+            3596,
+            832,
+            812,
+            824,
+            812
+          ],
+          "count_gt3000_rows2_3": 32,
+          "row_count_gt3000_first8": [
+            0,
+            0,
+            23,
+            9,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "status": "ok",
+          "sha256": "e5c66a8f844e18dceb2d51ddcc646236f3d1efe96980afd256022a17a4c29b7d",
+          "row_max_first8": [
+            820,
+            828,
+            3596,
+            3596,
+            812,
+            796,
+            804,
+            828
+          ],
+          "count_gt3000_rows2_3": 40,
+          "row_count_gt3000_first8": [
+            0,
+            0,
+            25,
+            15,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "status": "ok",
+          "sha256": "8083a6040c8cbce3e97108a06aeb92fc189d9044a305c98a92a30b6dcb730d74",
+          "row_max_first8": [
+            808,
+            812,
+            3596,
+            3596,
+            820,
+            800,
+            796,
+            812
+          ],
+          "count_gt3000_rows2_3": 35,
+          "row_count_gt3000_first8": [
+            0,
+            0,
+            24,
+            11,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "sensor_clock_logged": true
+    },
+    {
+      "name": "fps60_clock37",
+      "requested": 60,
+      "mclk_mhz": 37.125,
+      "exit_code": 0,
+      "elapsed_s": 14.14,
+      "temperature_after_c": 64.373,
+      "vi": {
+        "requested_fps": 60,
+        "width": 1280,
+        "height": 720,
+        "frames": 578,
+        "host_fps": 82.5104,
+        "pts_fps": 82.5005,
+        "duplicate_pts": 0,
+        "timeouts": 0,
+        "large_intervals": 0
+      },
+      "bayer": [
+        {
+          "status": "ok",
+          "sha256": "7c10c2cdb991d9f55b9120fc2b1d8c5ba03fd2322305ea0faacc14deb1159e19",
+          "row_max_first8": [
+            828,
+            812,
+            3484,
+            3484,
+            824,
+            840,
+            844,
+            812
+          ],
+          "count_gt3000_rows2_3": 54,
+          "row_count_gt3000_first8": [
+            0,
+            0,
+            32,
+            22,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "status": "ok",
+          "sha256": "7636c0318a652cbacffadc50b0f3bc3012d021a57431ab73a045f94cb38e423b",
+          "row_max_first8": [
+            784,
+            808,
+            3436,
+            3436,
+            800,
+            840,
+            836,
+            828
+          ],
+          "count_gt3000_rows2_3": 53,
+          "row_count_gt3000_first8": [
+            0,
+            0,
+            29,
+            24,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "status": "ok",
+          "sha256": "b69573f86fc54307e5ff21f6681930fb0b9a7ea2e7198849dee0ffcb325ce942",
+          "row_max_first8": [
+            796,
+            812,
+            3436,
+            3436,
+            812,
+            860,
+            804,
+            812
+          ],
+          "count_gt3000_rows2_3": 55,
+          "row_count_gt3000_first8": [
+            0,
+            0,
+            33,
+            22,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "sensor_clock_logged": true
+    },
+    {
+      "name": "fps80_clock27",
+      "requested": 80,
+      "mclk_mhz": 27,
+      "exit_code": 0,
+      "elapsed_s": 14.06,
+      "temperature_after_c": 64.722,
+      "vi": {
+        "requested_fps": 80,
+        "width": 1280,
+        "height": 720,
+        "frames": 421,
+        "host_fps": 60.0003,
+        "pts_fps": 59.9999,
+        "duplicate_pts": 0,
+        "timeouts": 0,
+        "large_intervals": 0
+      },
+      "bayer": [
+        {
+          "status": "ok",
+          "sha256": "11152cebeaa2cd32b765fcfe1264995add6782253c73463f4822025922eb038c",
+          "row_max_first8": [
+            820,
+            844,
+            828,
+            840,
+            828,
+            828,
+            828,
+            840
+          ],
+          "count_gt3000_rows2_3": 0,
+          "row_count_gt3000_first8": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "status": "ok",
+          "sha256": "3f1596d419927c2b98ed0149eca4ad21bf2ee4ea4504535e8179065ec3de4116",
+          "row_max_first8": [
+            808,
+            816,
+            824,
+            832,
+            816,
+            832,
+            824,
+            844
+          ],
+          "count_gt3000_rows2_3": 0,
+          "row_count_gt3000_first8": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "status": "ok",
+          "sha256": "9273631e3d203cb8495a9d10e97dc8662384e1c445c662adba4fb4b13686dc55",
+          "row_max_first8": [
+            820,
+            824,
+            824,
+            816,
+            828,
+            844,
+            856,
+            824
+          ],
+          "count_gt3000_rows2_3": 0,
+          "row_count_gt3000_first8": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "sensor_clock_logged": true
+    }
+  ],
+  "board_temp_dir": "/tmp/lichee-raw-isolation-retry1",
+  "preserved_factory_binary": true,
+  "initial_process": "",
+  "temperature_before_c": 60.177,
+  "restore": "originally off; left the preview stopped",
+  "final_temperature_c": 64.722
+}

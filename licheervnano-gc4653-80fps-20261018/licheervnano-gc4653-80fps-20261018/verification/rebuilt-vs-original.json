@@ -1,0 +1,56 @@
+[
+  {
+    "file": "camera_bench",
+    "original_sha256": "a2c160667db976f6fb7585e4ac784e9f14f2195e0cd7017c01c95ed806df0866",
+    "rebuilt_sha256": "a2c160667db976f6fb7585e4ac784e9f14f2195e0cd7017c01c95ed806df0866",
+    "identical": true
+  },
+  {
+    "file": "camera_bench_ae_fix",
+    "original_sha256": "2c06fa927375eeac73a1874bdcfd81f14f7ad08eb5589a047fe837537435ae8a",
+    "rebuilt_sha256": "2c06fa927375eeac73a1874bdcfd81f14f7ad08eb5589a047fe837537435ae8a",
+    "identical": true
+  },
+  {
+    "file": "camera_bench_baseline",
+    "original_sha256": "732332fa774db2b1f4fb79fb935ce52534c6bed89423e7793879e2f2e8e2501c",
+    "rebuilt_sha256": "732332fa774db2b1f4fb79fb935ce52534c6bed89423e7793879e2f2e8e2501c",
+    "identical": true
+  },
+  {
+    "file": "camera_bench_empty",
+    "original_sha256": "000e545ccbc01497b2560837471764dd9d57b7654291e388d91f74131453f905",
+    "rebuilt_sha256": "000e545ccbc01497b2560837471764dd9d57b7654291e388d91f74131453f905",
+    "identical": true
+  },
+  {
+    "file": "camera_bench_factory1080",
+    "original_sha256": "3128e751da2174e4ed654099c1d92cc38d1c4dee1c78d1fbc826a8be196a8898",
+    "rebuilt_sha256": "3128e751da2174e4ed654099c1d92cc38d1c4dee1c78d1fbc826a8be196a8898",
+    "identical": true
+  },
+  {
+    "file": "camera_bench_roi",
+    "original_sha256": "981196fea018efc6c85e0324a15071c1e05e8b424b57350257353bc7e64c880e",
+    "rebuilt_sha256": "981196fea018efc6c85e0324a15071c1e05e8b424b57350257353bc7e64c880e",
+    "identical": true
+  },
+  {
+    "file": "camera_bench_roi720",
+    "original_sha256": "67a0ed652dbe7dd07724ffdca380e7cad59bf47d37fd39b5b12c49157d24a6ca",
+    "rebuilt_sha256": "67a0ed652dbe7dd07724ffdca380e7cad59bf47d37fd39b5b12c49157d24a6ca",
+    "identical": true
+  },
+  {
+    "file": "camera_bench_roi_output_only",
+    "original_sha256": "e8e538f0d16eff0ec09b62c0915634feeac4526b8abc16d7620e89dd5b078017",
+    "rebuilt_sha256": "e8e538f0d16eff0ec09b62c0915634feeac4526b8abc16d7620e89dd5b078017",
+    "identical": true
+  },
+  {
+    "file": "camera_bench_roi_window",
+    "original_sha256": "b05b176090f66297ecf144c384c8c11a0d63ead95a5f95b14be7777e097902ed",
+    "rebuilt_sha256": "b05b176090f66297ecf144c384c8c11a0d63ead95a5f95b14be7777e097902ed",
+    "identical": true
+  }
+]

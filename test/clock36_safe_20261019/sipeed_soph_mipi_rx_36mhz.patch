@@ -1,0 +1,68 @@
+--- a/osdrv/interdrv/v2/cif/chip/mars/cif.c
++++ b/osdrv/interdrv/v2/cif/chip/mars/cif.c
+@@ -310,6 +310,8 @@
+ 		return "CAMPLL_FREQ_24M";
+ 	case CAMPLL_FREQ_26M:
+ 		return "CAMPLL_FREQ_26M";
++	case CAMPLL_FREQ_36M:
++		return "CAMPLL_FREQ_36M";
+ 	default:
+ 		return "unknown";
+ 	}
+@@ -2118,6 +2120,10 @@
+ //		.pll_rate = 1188000000,
+ 		.clk_rate = 27000000,
+ 	},
++	[CAMPLL_FREQ_36M] = {
++		/* 1188 MHz CAM0PLL divided by 33 in CCF */
++		.clk_rate = 36000000,
++	},
+ 	[CAMPLL_FREQ_24M] = {
+ //		.pll_rate = 2376000000,
+ 		.clk_rate = 24000000,
+@@ -2262,7 +2268,34 @@
+ 		// clk_set_rate(clk_get_parent(cdev->clk_cam1.clk_o), clk->pll_rate);
+ 
+ 		/* set rate of clk_cam1 */
+-		clk_set_rate(cdev->clk_cam1.clk_o, clk->clk_rate);
++		if (mclk1 == CAMPLL_FREQ_36M) {
++			long rounded;
++			unsigned long previous, actual;
++			int ret;
++			/* Never retune a sensor clock while the sensor is streaming. */
++			if (on) {
++				if (cdev->clk_cam1.is_on)
++					return -EBUSY;
++				rounded = clk_round_rate(cdev->clk_cam1.clk_o, 36000000);
++				if (rounded < 35999000 || rounded > 36001000) {
++					dev_err(dev, "cam1 36MHz unavailable: rounded=%ld\n", rounded);
++					return -ERANGE;
++				}
++				previous = clk_get_rate(cdev->clk_cam1.clk_o);
++				ret = clk_set_rate(cdev->clk_cam1.clk_o, 36000000);
++				if (ret)
++					return ret;
++				actual = clk_get_rate(cdev->clk_cam1.clk_o);
++				if (actual < 35999000 || actual > 36001000) {
++					clk_set_rate(cdev->clk_cam1.clk_o, previous);
++					return -ERANGE;
++				}
++				dev_info(dev, "GC4653 experimental cam1=%luHz\n", actual);
++			}
++		} else {
++			/* Original modes retain their pre-existing behavior. */
++			clk_set_rate(cdev->clk_cam1.clk_o, clk->clk_rate);
++		}
+ 
+ 		if (on) {
+ 			if (!cdev->clk_cam1.is_on) {
+--- a/osdrv/interdrv/v2/include/chip/mars/uapi/linux/cif_uapi.h
++++ b/osdrv/interdrv/v2/include/chip/mars/uapi/linux/cif_uapi.h
+@@ -28,6 +28,7 @@
+ 	CAMPLL_FREQ_27M,
+ 	CAMPLL_FREQ_24M,
+ 	CAMPLL_FREQ_26M,
++	CAMPLL_FREQ_36M, /* New experimental option; append to preserve ABI. */
+ 	CAMPLL_FREQ_NUM
+ };
+ 

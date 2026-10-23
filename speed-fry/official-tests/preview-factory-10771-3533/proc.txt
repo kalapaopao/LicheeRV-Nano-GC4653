@@ -1,0 +1,47 @@
+[VI BE_Dbg_Info]
+VIPreBEDoneSts		:0x10		VIPreBEDmaIdleStatus	:0x4
+[VI Post_Dbg_Info]
+VIIspTopStatus		:0x3f6
+[VI DMA_Dbg_Info]
+VIWdma0ErrStatus	:0x3000000	VIWdma0IdleStatus	:0xfffffeaf
+VIWdma1ErrStatus	:0x3000000	VIWdma1IdleStatus	:0xffffffff
+VIRdmaErrStatus		:0x3000000	VIRdmaIdleStatus	:0xffffffff
+[VI ISP_PIPE_A FE_Dbg_Info]
+VIPreFERawDbgSts	:0x3f0		VIPreFEDbgInfo		:0x2f
+[VI ISP_PIPE_A]
+VIOutImgWidth		:1920
+VIOutImgHeight		:1080
+VIInImgWidth		:1920
+VIInImgHeight		:1080
+VIDevFPS		:  33
+VIFPS			:  33
+VISofCh0Cnt		:1286
+VIPreFECh0Cnt		:1285
+VIPreBECh0Cnt		:1285
+VIPostCnt		:1285
+VIDropCnt		:   0
+VIDumpCnt		:   0
+[VI ISP_PIPE_A Csi_Dbg_Info]
+VICsiIntStatus0		:0x6
+VICsiIntStatus1		:0x0
+VICsiCh0Dbg		:0x0
+VICsiCh1Dbg		:0x0
+VICsiOverFlowCnt	:   0
+VICsiCh0WidthGTCnt	:   0
+VICsiCh0WidthLSCnt	:   0
+VICsiCh0HeightGTCnt	:   0
+VICsiCh0HeightLSCnt	:   0
+
+Module: [MIPI_RX], Build Time[#10 PREEMPT Mon Dec 29 19:52:50 CST 2025]
+
+------------Combo DEV ATTR--------------
+   Devno  WorkMode  DataType   WDRMode         LinkId        PN Swap  SyncMode  DataEndian  SyncCodeEndian
+       0      MIPI     RAW10      NONE  4, 3, 2,-1,-1  0, 0, 0, 0, 0       N/A         N/A             N/A
+
+------------MIPI info-------------------
+ Devno EccErr CrcErr HdrErr WcErr fifofull   decode
+     0      0      0      0     1        0    raw10
+  Physical:       D0       D1       D2       D3       D4       D5
+                   0        0       2a       8a        0        0
+   Digital:       D0       D1       D2       D3    CK_HS  CK_ULPS  CK_STOP   CK_ERR   Deskew
+             hs_idle  hs_idle  hs_idle  hs_idle        1        0        0        0     idle

@@ -1,0 +1,30 @@
+[
+  {
+    "mode_hts": 1150,
+    "elapsed_nominal": 14,
+    "temp_before_mC": 74511,
+    "temp_after_mC": 68218,
+    "speed": {
+      "error": "no_rate_log"
+    },
+    "image_analysis": {
+      "status": "missing_or_wrong_size",
+      "size": 0
+    },
+    "network": {
+      "exit": 0,
+      "stdout": "{\n  \"url\": \"http://10.133.124.1:8081/live.mjpg\",\n  \"content_type\": \"multipart/x-mixed-replace; boundary=frame\",\n  \"frames\": 0,\n  \"width\": null,\n  \"height\": null,\n  \"duration_seconds\": 0,\n  \"receive_fps\": 0,\n  \"jpeg_distinct_sha256\": 0,\n  \"malformed_or_changed_dimensions\": 0,\n  \"bytes\": 0,\n  \"payload_mbps\": 0,\n  \"interarrival_p50_ms\": null,\n  \"interarrival_max_ms\": null,\n  \"note\": \"Network JPEG arrival FPS, not sensor FPS or monitor drawing FPS. JPEG syntax check does NOT detect stripes; visually inspect first.jpg/last.jpg and RAW evidence.\"\n}\n",
+      "stderr": ""
+    },
+    "mipi_errors": [
+      [
+        "0",
+        "1",
+        "0",
+        "0",
+        "0"
+      ]
+    ],
+    "experiment_sha256": "8ce46e8f2e778fa2f3e6b6e2621b883938613c74551feec4c902e8b35e3edd10"
+  }
+]

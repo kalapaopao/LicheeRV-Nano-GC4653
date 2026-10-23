@@ -1,0 +1,117 @@
+{
+  "hts": 1175,
+  "vts": "1200",
+  "pid": 1029,
+  "mipi_pre_reset": [
+    0,
+    0,
+    0,
+    1,
+    0
+  ],
+  "counters": [
+    {
+      "time_elapsed_s": 4,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_temp_c": 60.876
+    },
+    {
+      "time_elapsed_s": 8,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_temp_c": 62.974
+    },
+    {
+      "time_elapsed_s": 12,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_temp_c": 64.023
+    },
+    {
+      "time_elapsed_s": 16,
+      "mipi": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "soc_temp_c": 64.722
+    }
+  ],
+  "metrics": [
+    "790",
+    "71.6537",
+    "71.6538",
+    "0",
+    "0",
+    "0"
+  ],
+  "raw_images": [
+    {
+      "valid": true,
+      "size_bytes": 3110400,
+      "sha256": "5fc051b570a1998bef6a26930dbfd158832a665af73b0c0319034d779db8feae",
+      "top_anomaly_ratio": 1.222,
+      "max_row_brightness_jump": 0.2714
+    },
+    {
+      "valid": true,
+      "size_bytes": 3110400,
+      "sha256": "3bf636719da5df08d94b03a8b48a1dbc60c740cbd3d8c69be70a1cb210e397cc",
+      "top_anomaly_ratio": 1.166,
+      "max_row_brightness_jump": 0.2453
+    },
+    {
+      "valid": true,
+      "size_bytes": 3110400,
+      "sha256": "2dde375bae87f0aeca70ae65c0f7735df758a4711c592c78bbf330cd17d8e965",
+      "top_anomaly_ratio": 1.227,
+      "max_row_brightness_jump": 0.2573
+    }
+  ],
+  "samples": 3,
+  "sample_saves": [
+    [
+      "0",
+      "1"
+    ],
+    [
+      "1",
+      "1"
+    ],
+    [
+      "2",
+      "1"
+    ]
+  ],
+  "sensor_mode_logged": true,
+  "experiment_process_alive": false,
+  "board_temp_final_c": 60.527,
+  "mipi_post_stop": [
+    0,
+    14,
+    0,
+    0,
+    0
+  ],
+  "mipi_post_stop_nonzero": true,
+  "actual_fps": 71.6537,
+  "pts_fps": 71.6538
+}

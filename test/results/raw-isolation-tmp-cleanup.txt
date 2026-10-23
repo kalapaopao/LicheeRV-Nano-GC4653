@@ -1,0 +1,39 @@
+> df -h /tmp
+rc=0
+Filesystem                Size      Used Available Use% Mounted on
+tmpfs                    63.9M     63.9M         0 100% /tmp
+
+> test -d /tmp/lichee-raw-isolation && test ! -L /tmp/lichee-raw-isolation && test -f /tmp/lichee-raw-isolation/camera_raw_isolation
+rc=0
+
+> du -sh /tmp/lichee-raw-isolation
+rc=0
+1.4M	/tmp/lichee-raw-isolation
+
+> rm -rf /tmp/lichee-raw-isolation
+rc=0
+
+> test -d /tmp/lichee-raw-isolation-retry1 && test ! -L /tmp/lichee-raw-isolation-retry1 && test -f /tmp/lichee-raw-isolation-retry1/camera_raw_isolation
+rc=0
+
+> du -sh /tmp/lichee-raw-isolation-retry1
+rc=0
+21.3M	/tmp/lichee-raw-isolation-retry1
+
+> rm -rf /tmp/lichee-raw-isolation-retry1
+rc=0
+
+> test -d /tmp/lichee-raw-isolation-manual-retry1 && test ! -L /tmp/lichee-raw-isolation-manual-retry1 && test -f /tmp/lichee-raw-isolation-manual-retry1/camera_raw_isolation
+rc=0
+
+> du -sh /tmp/lichee-raw-isolation-manual-retry1
+rc=0
+6.7M	/tmp/lichee-raw-isolation-manual-retry1
+
+> rm -rf /tmp/lichee-raw-isolation-manual-retry1
+rc=0
+
+> df -h /tmp
+rc=0
+Filesystem                Size      Used Available Use% Mounted on
+tmpfs                    63.9M     34.5M     29.4M  54% /tmp

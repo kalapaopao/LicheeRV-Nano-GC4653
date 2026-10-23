@@ -1,0 +1,98 @@
+﻿[
+    {
+        "Relative":  "build.sh",
+        "SHA256":  "0E29C8E90FAB29B13815EEA1230E4A2E1895557A60AE1C42B326AE9D742648CD"
+    },
+    {
+        "Relative":  "main.cpp",
+        "SHA256":  "BA364AF412E68B2CBE33706058AFA3BB53FB6AA1A495352582001B7771E42BE1"
+    },
+    {
+        "Relative":  "minraw1080",
+        "SHA256":  "BB1528BB328DBCDB6AC79A78A63AD801BC5FC2EC393ED5B7264A30E6E54A9DAD"
+    },
+    {
+        "Relative":  "common\\fontmod.h",
+        "SHA256":  "FE3FFB4E0534EE264708FD4816ACF44C1A2F6B6EE92CADD22D004ABBBB915791"
+    },
+    {
+        "Relative":  "common\\loadbmp.h",
+        "SHA256":  "C9289A3F3B87341C61E9D0F3B886D5622EA85214AEE62D9C2A3269ECAF13C583"
+    },
+    {
+        "Relative":  "common\\md5sum.h",
+        "SHA256":  "EA4332F09F17646DD7143A0423BBC7639A9D433FEFF2873BCA025D4EEED955EA"
+    },
+    {
+        "Relative":  "common\\sample_comm.h",
+        "SHA256":  "D08EE8589961087E5DF57D69FFA8E57D1F38A4C80A610B275917D1FFF60940CE"
+    },
+    {
+        "Relative":  "common\\sample_common_bin.c",
+        "SHA256":  "B61BD0D1AD4741ED445FFB1641C2038DE6D0254A00D2388D2E26C3A4B860E7C8"
+    },
+    {
+        "Relative":  "common\\sample_common_isp.c",
+        "SHA256":  "7DC2210E538106D49CC40FE2B6DE5028CEBDD0F7023432B5F86AE7668B177C18"
+    },
+    {
+        "Relative":  "common\\sample_common_platform.c",
+        "SHA256":  "B3B2CC081F059D8E0235D902156AD8677727BB844D34ED66047FB64485F4EDAC"
+    },
+    {
+        "Relative":  "common\\sample_common_sensor.c",
+        "SHA256":  "63EAA7A2854768DD086591C10E7C84E21BA130C51CB4E0B82AAFF2DB2AB453D7"
+    },
+    {
+        "Relative":  "common\\sample_common_sys.c",
+        "SHA256":  "C8CF6BB47E44C5AD82CAE9D6F71D8C79894EBB641F7AEF3FB168FC73BD58B9BB"
+    },
+    {
+        "Relative":  "common\\sample_common_vi.c",
+        "SHA256":  "F17C076900256A86ADC66F84B79B01FDE8B16E0184B1D4438C497EBCDFF06DDB"
+    },
+    {
+        "Relative":  "common\\sample_common_vpss.c",
+        "SHA256":  "FF08CF1037F4467EEF4E79BAD2EB3C9EAAC7DF5F5B064FF4640DA5EAD22A7D1A"
+    },
+    {
+        "Relative":  "proof_72p1839\\bayer-0.bin",
+        "SHA256":  "5673F5A0072A1D24019B6C38A8F022D5293BAFA433352860F4CB8818C7E1BA29"
+    },
+    {
+        "Relative":  "proof_72p1839\\bayer-1.bin",
+        "SHA256":  "CDFC9A3E79044B91D2C6B600DEC15C7E59FC241E9D7A1B9423E86EA459BEDE06"
+    },
+    {
+        "Relative":  "proof_72p1839\\bayer-2.bin",
+        "SHA256":  "731C3C75F4D6A84A4C6D1A82BE370B5BB29C11DF6EE0B5A53D94FF8543A16DBC"
+    },
+    {
+        "Relative":  "proof_72p1839\\result.json",
+        "SHA256":  "6E0A4009047646547B7712545B5FDE2FC94563A7AD21A5E617C7A846F2AF6379"
+    },
+    {
+        "Relative":  "proof_72p1839\\run.log",
+        "SHA256":  "5C7E6A0BB7E9F12E90C96213738A984AFAE5CC42651FD3F56015035330F30109"
+    },
+    {
+        "Relative":  "proof_72p1839\\summary.json",
+        "SHA256":  "8F0071B10C90384B77721F5E865EAAC5F117FCD4893F09A24AA8DA5268E6E76C"
+    },
+    {
+        "Relative":  "sensor\\gc4653_cmos.c",
+        "SHA256":  "BBE5FC64E22BAE283F1632022E197193F8CC384B1B8985B728C9C158BFA0DFF9"
+    },
+    {
+        "Relative":  "sensor\\gc4653_cmos_ex.h",
+        "SHA256":  "273940F961CAEFF5A77C0B4A88268E131F54F0EA1A3A69AF7086C1F40716F86B"
+    },
+    {
+        "Relative":  "sensor\\gc4653_cmos_param.h",
+        "SHA256":  "CB7A3B7127AAE347611C03B573832ED36290F1A9CDB9288185CAF1BE39E62509"
+    },
+    {
+        "Relative":  "sensor\\gc4653_sensor_ctl.c",
+        "SHA256":  "2B65403AE5053CB27F0CDF087E6244595E13ADCE0B76A1C68983CB5FCED0DCD8"
+    }
+]

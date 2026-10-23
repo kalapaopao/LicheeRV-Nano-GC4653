@@ -1,0 +1,115 @@
+{
+  "binary_sha256": "841267e2e87d4a9512360b5f8cfd5530bda8791ec41f7fd72714187e6921920b",
+  "goal": "1920x1080, 27MHz, >70 VI and PTS, zero MIPI CRC/Hdr/Wc/FIFO, no damaged raw sample",
+  "plan": [
+    1180,
+    1170,
+    1165
+  ],
+  "cases": [
+    {
+      "hts": 1180,
+      "pid": 2854,
+      "counters": [
+        {
+          "time_elapsed_s": 4,
+          "mipi": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "soc_temp_c": 59.478
+        },
+        {
+          "time_elapsed_s": 8,
+          "mipi": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "soc_temp_c": 61.576
+        },
+        {
+          "time_elapsed_s": 12,
+          "mipi": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "soc_temp_c": 62.625
+        },
+        {
+          "time_elapsed_s": 16,
+          "mipi": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "soc_temp_c": 63.324
+        }
+      ],
+      "metrics": [
+        "787",
+        "71.3875",
+        "71.3881",
+        "0",
+        "0",
+        "0"
+      ],
+      "raw_images": [
+        {
+          "valid": true,
+          "size_bytes": 3110400,
+          "sha256": "aecf35c778ab18e56cc634270bb87c77a073e147171d423e6aff4501e5ceb587",
+          "top_anomaly_ratio": 1.17,
+          "max_row_brightness_jump": 0.2401
+        },
+        {
+          "valid": true,
+          "size_bytes": 3110400,
+          "sha256": "1398e00eda7a0bef27fe8b5a70063a4362a15bf77d5f79868be0b753f815d874",
+          "top_anomaly_ratio": 1.094,
+          "max_row_brightness_jump": 0.1885
+        },
+        {
+          "valid": true,
+          "size_bytes": 3110400,
+          "sha256": "9240934461422b8fe2390a215705ac3049b5219db04e95e5a8cfce244f72094a",
+          "top_anomaly_ratio": 1.191,
+          "max_row_brightness_jump": 0.2115
+        }
+      ],
+      "samples": 3,
+      "sample_saves": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "1"
+        ],
+        [
+          "2",
+          "1"
+        ]
+      ],
+      "sensor_mode_logged": true,
+      "experiment_process_alive": false,
+      "board_temp_final_c": 59.478,
+      "actual_fps": 71.3875,
+      "pts_fps": 71.3881
+    }
+  ],
+  "start_soc_temp_c": 55.982,
+  "first_above70_hts": 1180,
+  "cleanup": "Released own lock, existing camera preview untouched"
+}

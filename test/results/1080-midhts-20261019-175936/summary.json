@@ -1,0 +1,38 @@
+{
+  "description": "27MHz Factory1080 HTS 1190 -> 1180 -> 1170 -> 1160, stop at first error",
+  "binary_sha256": "2e0b4e16711b31a1963d2c18f479d7dc6d8957ebf3b12f45543798f15dbc5f78",
+  "cases": [
+    {
+      "hts": 1190,
+      "pid": 2552,
+      "temp_c": 69.966,
+      "process_still_alive": false,
+      "mipi_absolute": [
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "raw_quality": {
+        "valid": true,
+        "bytes": 3110400,
+        "top_ratio": 0.961,
+        "max_top_row_jump": 0.23,
+        "sha256": "742edc7fd8cd25e806692d642d7f5f41995ed7a56fe1d91810904bacdbab41af"
+      },
+      "metrics": [
+        "419",
+        "69.7110",
+        "69.7107",
+        "0",
+        "0",
+        "0"
+      ],
+      "sensor_timing_confirmed": true
+    }
+  ],
+  "initial_temp_c": 62.625,
+  "stopped_reason": "Safety/quality/VI/MIPI guard at HTS 1190",
+  "cleanup": "Own camera lock released; preview initial state was off"
+}

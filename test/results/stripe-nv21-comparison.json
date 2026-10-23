@@ -1,0 +1,404 @@
+{
+  "archived_80_raw_stripes": {
+    "file": "D:\\study\\LicheeRV\\speed-fry\\stripe-diagnostic\\linearraw80-1792336666\\first-raw.nv21",
+    "width": 1280,
+    "height": 720,
+    "y_reference_adjacent_diff": 1.101,
+    "top12_y_rows": [
+      {
+        "row": 0,
+        "y_mean": 117.52,
+        "bright_gt235": 15,
+        "adjacent_diff": 0.0,
+        "relative_to_ref": 0.0
+      },
+      {
+        "row": 1,
+        "y_mean": 118.67,
+        "bright_gt235": 7,
+        "adjacent_diff": 9.56,
+        "relative_to_ref": 8.68
+      },
+      {
+        "row": 2,
+        "y_mean": 100.66,
+        "bright_gt235": 0,
+        "adjacent_diff": 28.73,
+        "relative_to_ref": 26.1
+      },
+      {
+        "row": 3,
+        "y_mean": 95.56,
+        "bright_gt235": 0,
+        "adjacent_diff": 21.38,
+        "relative_to_ref": 19.43
+      },
+      {
+        "row": 4,
+        "y_mean": 112.85,
+        "bright_gt235": 1,
+        "adjacent_diff": 28.93,
+        "relative_to_ref": 26.28
+      },
+      {
+        "row": 5,
+        "y_mean": 117.76,
+        "bright_gt235": 8,
+        "adjacent_diff": 8.84,
+        "relative_to_ref": 8.03
+      },
+      {
+        "row": 6,
+        "y_mean": 115.83,
+        "bright_gt235": 0,
+        "adjacent_diff": 5.1,
+        "relative_to_ref": 4.63
+      },
+      {
+        "row": 7,
+        "y_mean": 115.21,
+        "bright_gt235": 0,
+        "adjacent_diff": 1.91,
+        "relative_to_ref": 1.74
+      },
+      {
+        "row": 8,
+        "y_mean": 115.37,
+        "bright_gt235": 0,
+        "adjacent_diff": 1.64,
+        "relative_to_ref": 1.49
+      },
+      {
+        "row": 9,
+        "y_mean": 115.17,
+        "bright_gt235": 0,
+        "adjacent_diff": 1.08,
+        "relative_to_ref": 0.98
+      },
+      {
+        "row": 10,
+        "y_mean": 115.3,
+        "bright_gt235": 0,
+        "adjacent_diff": 1.4,
+        "relative_to_ref": 1.27
+      },
+      {
+        "row": 11,
+        "y_mean": 115.54,
+        "bright_gt235": 0,
+        "adjacent_diff": 1.07,
+        "relative_to_ref": 0.97
+      }
+    ],
+    "top16_uv_rows": [
+      {
+        "row": 0,
+        "uv_chroma_deviation_mean": 4.9,
+        "uv_row_delta": 0.0
+      },
+      {
+        "row": 2,
+        "uv_chroma_deviation_mean": 7.84,
+        "uv_row_delta": 5.64
+      },
+      {
+        "row": 4,
+        "uv_chroma_deviation_mean": 1.6,
+        "uv_row_delta": 6.86
+      },
+      {
+        "row": 6,
+        "uv_chroma_deviation_mean": 1.1,
+        "uv_row_delta": 1.16
+      },
+      {
+        "row": 8,
+        "uv_chroma_deviation_mean": 1.15,
+        "uv_row_delta": 0.27
+      },
+      {
+        "row": 10,
+        "uv_chroma_deviation_mean": 1.17,
+        "uv_row_delta": 0.3
+      },
+      {
+        "row": 12,
+        "uv_chroma_deviation_mean": 1.18,
+        "uv_row_delta": 0.2
+      },
+      {
+        "row": 14,
+        "uv_chroma_deviation_mean": 1.15,
+        "uv_row_delta": 0.2
+      }
+    ]
+  },
+  "archived_60_control": {
+    "file": "D:\\study\\LicheeRV\\speed-fry\\stripe-diagnostic\\linearraw60-1792336645\\first-raw.nv21",
+    "width": 1280,
+    "height": 720,
+    "y_reference_adjacent_diff": 0.923,
+    "top12_y_rows": [
+      {
+        "row": 0,
+        "y_mean": 120.31,
+        "bright_gt235": 0,
+        "adjacent_diff": 0.0,
+        "relative_to_ref": 0.0
+      },
+      {
+        "row": 1,
+        "y_mean": 120.66,
+        "bright_gt235": 0,
+        "adjacent_diff": 1.25,
+        "relative_to_ref": 1.35
+      },
+      {
+        "row": 2,
+        "y_mean": 120.74,
+        "bright_gt235": 0,
+        "adjacent_diff": 1.96,
+        "relative_to_ref": 2.13
+      },
+      {
+        "row": 3,
+        "y_mean": 120.63,
+        "bright_gt235": 0,
+        "adjacent_diff": 0.9,
+        "relative_to_ref": 0.97
+      },
+      {
+        "row": 4,
+        "y_mean": 120.21,
+        "bright_gt235": 0,
+        "adjacent_diff": 1.17,
+        "relative_to_ref": 1.26
+      },
+      {
+        "row": 5,
+        "y_mean": 119.97,
+        "bright_gt235": 0,
+        "adjacent_diff": 0.92,
+        "relative_to_ref": 1.0
+      },
+      {
+        "row": 6,
+        "y_mean": 119.63,
+        "bright_gt235": 0,
+        "adjacent_diff": 1.41,
+        "relative_to_ref": 1.53
+      },
+      {
+        "row": 7,
+        "y_mean": 119.53,
+        "bright_gt235": 0,
+        "adjacent_diff": 0.96,
+        "relative_to_ref": 1.04
+      },
+      {
+        "row": 8,
+        "y_mean": 119.89,
+        "bright_gt235": 0,
+        "adjacent_diff": 1.84,
+        "relative_to_ref": 1.99
+      },
+      {
+        "row": 9,
+        "y_mean": 119.79,
+        "bright_gt235": 0,
+        "adjacent_diff": 1.07,
+        "relative_to_ref": 1.16
+      },
+      {
+        "row": 10,
+        "y_mean": 119.84,
+        "bright_gt235": 0,
+        "adjacent_diff": 1.44,
+        "relative_to_ref": 1.56
+      },
+      {
+        "row": 11,
+        "y_mean": 120.03,
+        "bright_gt235": 0,
+        "adjacent_diff": 1.04,
+        "relative_to_ref": 1.12
+      }
+    ],
+    "top16_uv_rows": [
+      {
+        "row": 0,
+        "uv_chroma_deviation_mean": 1.55,
+        "uv_row_delta": 0.0
+      },
+      {
+        "row": 2,
+        "uv_chroma_deviation_mean": 1.55,
+        "uv_row_delta": 0.25
+      },
+      {
+        "row": 4,
+        "uv_chroma_deviation_mean": 1.65,
+        "uv_row_delta": 0.32
+      },
+      {
+        "row": 6,
+        "uv_chroma_deviation_mean": 1.6,
+        "uv_row_delta": 0.24
+      },
+      {
+        "row": 8,
+        "uv_chroma_deviation_mean": 1.53,
+        "uv_row_delta": 0.25
+      },
+      {
+        "row": 10,
+        "uv_chroma_deviation_mean": 1.47,
+        "uv_row_delta": 0.3
+      },
+      {
+        "row": 12,
+        "uv_chroma_deviation_mean": 1.46,
+        "uv_row_delta": 0.22
+      },
+      {
+        "row": 14,
+        "uv_chroma_deviation_mean": 1.49,
+        "uv_row_delta": 0.2
+      }
+    ]
+  },
+  "current_factory_1080": {
+    "file": "D:\\study\\LicheeRV\\test\\results\\factory-existing-baseline-20261019\\first-raw.nv21",
+    "width": 1920,
+    "height": 1080,
+    "y_reference_adjacent_diff": 1.22,
+    "top12_y_rows": [
+      {
+        "row": 0,
+        "y_mean": 127.23,
+        "bright_gt235": 45,
+        "adjacent_diff": 0.0,
+        "relative_to_ref": 0.0
+      },
+      {
+        "row": 1,
+        "y_mean": 127.6,
+        "bright_gt235": 43,
+        "adjacent_diff": 1.16,
+        "relative_to_ref": 0.95
+      },
+      {
+        "row": 2,
+        "y_mean": 127.77,
+        "bright_gt235": 44,
+        "adjacent_diff": 1.48,
+        "relative_to_ref": 1.21
+      },
+      {
+        "row": 3,
+        "y_mean": 127.76,
+        "bright_gt235": 46,
+        "adjacent_diff": 0.94,
+        "relative_to_ref": 0.77
+      },
+      {
+        "row": 4,
+        "y_mean": 127.55,
+        "bright_gt235": 43,
+        "adjacent_diff": 1.08,
+        "relative_to_ref": 0.89
+      },
+      {
+        "row": 5,
+        "y_mean": 127.11,
+        "bright_gt235": 41,
+        "adjacent_diff": 1.06,
+        "relative_to_ref": 0.87
+      },
+      {
+        "row": 6,
+        "y_mean": 127.02,
+        "bright_gt235": 42,
+        "adjacent_diff": 1.1,
+        "relative_to_ref": 0.91
+      },
+      {
+        "row": 7,
+        "y_mean": 127.44,
+        "bright_gt235": 48,
+        "adjacent_diff": 1.36,
+        "relative_to_ref": 1.12
+      },
+      {
+        "row": 8,
+        "y_mean": 127.76,
+        "bright_gt235": 46,
+        "adjacent_diff": 1.17,
+        "relative_to_ref": 0.96
+      },
+      {
+        "row": 9,
+        "y_mean": 127.78,
+        "bright_gt235": 45,
+        "adjacent_diff": 0.99,
+        "relative_to_ref": 0.81
+      },
+      {
+        "row": 10,
+        "y_mean": 127.9,
+        "bright_gt235": 44,
+        "adjacent_diff": 1.08,
+        "relative_to_ref": 0.88
+      },
+      {
+        "row": 11,
+        "y_mean": 127.88,
+        "bright_gt235": 44,
+        "adjacent_diff": 1.01,
+        "relative_to_ref": 0.83
+      }
+    ],
+    "top16_uv_rows": [
+      {
+        "row": 0,
+        "uv_chroma_deviation_mean": 1.96,
+        "uv_row_delta": 0.0
+      },
+      {
+        "row": 2,
+        "uv_chroma_deviation_mean": 1.96,
+        "uv_row_delta": 0.24
+      },
+      {
+        "row": 4,
+        "uv_chroma_deviation_mean": 2.0,
+        "uv_row_delta": 0.24
+      },
+      {
+        "row": 6,
+        "uv_chroma_deviation_mean": 1.92,
+        "uv_row_delta": 0.28
+      },
+      {
+        "row": 8,
+        "uv_chroma_deviation_mean": 1.9,
+        "uv_row_delta": 0.26
+      },
+      {
+        "row": 10,
+        "uv_chroma_deviation_mean": 1.8,
+        "uv_row_delta": 0.23
+      },
+      {
+        "row": 12,
+        "uv_chroma_deviation_mean": 1.78,
+        "uv_row_delta": 0.27
+      },
+      {
+        "row": 14,
+        "uv_chroma_deviation_mean": 1.72,
+        "uv_row_delta": 0.29
+      }
+    ]
+  }
+}

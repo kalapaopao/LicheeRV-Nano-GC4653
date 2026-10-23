@@ -1,0 +1,117 @@
+{
+  "label": "c-27",
+  "clock": "27",
+  "exit_code": 0,
+  "elapsed_wall_s": 16.829,
+  "raw_samples": [
+    {
+      "file": "bayer-0.bin",
+      "sha256": "4b17d54939ee31c2a4999bc951a49c7c69efbb00fa08d0c66437d7d8fe9707ba",
+      "top6_max": [
+        828,
+        840,
+        828,
+        840,
+        824,
+        832
+      ],
+      "top6_over2500": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "top6_over3000": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "row2_high_x": [],
+      "row3_high_x": []
+    },
+    {
+      "file": "bayer-1.bin",
+      "sha256": "92d53a3c3b172948c9f4e999cfea595206cb3e9ec9cfb057a1a50a4834e971e0",
+      "top6_max": [
+        860,
+        836,
+        844,
+        828,
+        824,
+        856
+      ],
+      "top6_over2500": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "top6_over3000": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "row2_high_x": [],
+      "row3_high_x": []
+    },
+    {
+      "file": "bayer-2.bin",
+      "sha256": "f851a9b964e5ff40dc17d92d39bbee45554b101522c9032e04d788342d7c5b44",
+      "top6_max": [
+        828,
+        836,
+        836,
+        836,
+        836,
+        844
+      ],
+      "top6_over2500": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "top6_over3000": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "row2_high_x": [],
+      "row3_high_x": []
+    }
+  ],
+  "capture": {
+    "clock": "27",
+    "frames": 601,
+    "fps": 59.9997,
+    "pts_fps": 60.0,
+    "duplicate_pts": 0,
+    "timeouts": 0,
+    "dump_rc": 0
+  },
+  "mipi_preflight": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "mipi_pre": null,
+  "mipi_post": null,
+  "temperature_c": 66.121
+}

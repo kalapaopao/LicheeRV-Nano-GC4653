@@ -1,0 +1,155 @@
+{
+  "mode": "factory",
+  "resolution": "1920x1080",
+  "fps_request": 80,
+  "HTS": 1200,
+  "VTS": 1200,
+  "MCLK_target_MHz": 27,
+  "duration_seconds": 20,
+  "binary_sha256": "70f26a214b8ce2f251bbf55c3e31fde18403bd0896ba7718cee3f8b851da29bf",
+  "MCLK_route": "current test sensor driver forces 27MHz for MAIX_SENSOR_FPS>=80",
+  "mipi_samples": [
+    {
+      "t_s": 4,
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "t_s": 8,
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "t_s": 12,
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "t_s": 16,
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "t_s": 20,
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "t_s": 24,
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "t_s": 28,
+      "counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "temperature_samples_c": [
+    {
+      "t_s": 4,
+      "soc_c": 62.275
+    },
+    {
+      "t_s": 8,
+      "soc_c": 63.673
+    },
+    {
+      "t_s": 12,
+      "soc_c": 64.722
+    },
+    {
+      "t_s": 16,
+      "soc_c": 65.072
+    },
+    {
+      "t_s": 20,
+      "soc_c": 66.121
+    },
+    {
+      "t_s": 24,
+      "soc_c": 66.47
+    },
+    {
+      "t_s": 28,
+      "soc_c": 67.169
+    }
+  ],
+  "soc_temp_start_c": 58.08,
+  "mipi_pre_reset": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "pre_reset_nonzero_unattributed": false,
+  "mipi_counter_reset": "reset 0 via documented /proc/mipi-rx debug command",
+  "vi_result": {
+    "requested_fps": 80,
+    "width": 1920,
+    "height": 1080,
+    "frames": 1398,
+    "host_fps": 69.8718,
+    "pts_fps": 69.8754,
+    "duplicate_pts": 0,
+    "timeouts": 0,
+    "large_intervals": 0
+  },
+  "sensor_registers_after": {
+    "VTS": 1200,
+    "exposure_lines": 860
+  },
+  "ae_after": {
+    "exposure_us": 11944,
+    "again": 8192,
+    "dgain": 1024,
+    "isp_gain": 1031,
+    "luma": 31,
+    "fps_field": 6000
+  },
+  "frame_quality": {
+    "valid": true,
+    "size_bytes": 3110400,
+    "sha256": "8b3d40d1546e4ae5567577e30007df0aaaf20045c63f90545f7f8d3b3227cb0b",
+    "top_anomaly_ratio": 0.881,
+    "max_row_brightness_jump": 0.2953
+  },
+  "run_log_sha256": "e9ca8b255525b6dd52afee6a75002f90d14ee0e45f7fd79a841498a7b1c7c91d",
+  "cleanup": "removed own /tmp scratch; released own lock"
+}

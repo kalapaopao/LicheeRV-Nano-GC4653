@@ -1,0 +1,10 @@
+{
+  "host": "10.133.124.1",
+  "content_type": "multipart/x-mixed-replace; boundary=frame",
+  "width": 1280,
+  "height": 720,
+  "frames": 1619,
+  "receive_fps": 80.96477181746717,
+  "seconds": 19.98399999999674,
+  "distinct_jpeg_hashes": 1619
+}

@@ -1,0 +1,69 @@
+{
+  "source": "D:\\study\\LicheeRV\\test\\over70_lab\\results\\over70-20261019-182205",
+  "sample_count": 6,
+  "files": [
+    {
+      "file": "raw-0.nv21",
+      "size_bytes": 3110400,
+      "size_valid": true,
+      "sha256": "40bfaaac3368b7def86b4ce4a8cf57a93526e6bea1eb9908fa6cbf2aa89e0d97"
+    },
+    {
+      "file": "raw-1.nv21",
+      "size_bytes": 3110400,
+      "size_valid": true,
+      "sha256": "92799a8906e1438f5cb5765dc8ac779ffc0ae6e806b718ac07fe31136fab50bb"
+    },
+    {
+      "file": "raw-2.nv21",
+      "size_bytes": 3110400,
+      "size_valid": true,
+      "sha256": "337469f225d579ae30d5b93f77da4bf17ecb458de00420747c360c628055ea77"
+    },
+    {
+      "file": "raw-3.nv21",
+      "size_bytes": 3110400,
+      "size_valid": true,
+      "sha256": "823dfd3a2c903a1b6bdcc226e51fcd6d09663540a98560bd990bd44afd46eac5"
+    },
+    {
+      "file": "raw-4.nv21",
+      "size_bytes": 3110400,
+      "size_valid": true,
+      "sha256": "06da284e653dc603513b4f992afa648fd1b1fe54cf0babb67dff87c1b7298bab"
+    },
+    {
+      "file": "raw-5.nv21",
+      "size_bytes": 3110400,
+      "size_valid": true,
+      "sha256": "da8dcf687fa4d8909d8b8debe45f1fa44d4b608b2ebd57bd5386452bda3cb6b5"
+    }
+  ],
+  "mipi_snapshots": 28,
+  "all_mipi_counters_zero": true,
+  "temperature_start_c": 60.876,
+  "temperature_peak_c": 74.162,
+  "temperature_last_c": 74.162,
+  "fps_long": 70.6936,
+  "pts_long": 70.693,
+  "capture_frames_counter_at_last_print": 7505,
+  "five_second_window_fps_first": [
+    71.3549,
+    71.2297,
+    71.1388,
+    71.0552,
+    70.9838,
+    70.9097
+  ],
+  "five_second_window_fps_last": [
+    70.4126,
+    70.364,
+    70.3538,
+    70.3007,
+    70.2588,
+    70.2516
+  ],
+  "five_second_window_min": 70.2516,
+  "five_second_window_max": 71.3549,
+  "note": "Temperature and FPS trend correlated in this run, not a controlled causality experiment. NV21 comes after ISP; Bayer RAW not validated."
+}
