@@ -1,0 +1,15 @@
+# Normalize text in repository; board-side shell scripts must use LF
+* text=auto
+*.sh text eol=lf
+*.py text eol=lf
+*.c text eol=lf
+*.h text eol=lf
+*.cpp text eol=lf
+*.patch text eol=lf
+*.md text eol=lf
+*.svg text eol=lf
+*.json text eol=lf
+*.csv text eol=lf
+*.jpg binary
+*.jpeg binary
+*.png binary
