@@ -25,11 +25,11 @@
 |---|---|
 | [camera_36long.cpp](camera_36long.cpp) | 本次真正运行的 RISC-V C++ 摄像头程序：GC4653 初始化、VI/PTS 采集、VENC JPEG 编码、HTTP MJPEG 服务、分阶段 Bayer 样本 |
 | [live_36_supervisor.sh](live_36_supervisor.sh) | 本次真正运行的 Shell 管理程序：启动、独占锁、写 CAM1 分频、温度/MIPI巡检、300秒上限、自动回退 |
-| [build_long.sh](build_long.sh) | 本次已验证的交叉编译命令（依赖外部 SDK 与本地先前编译好的公共对象） |
+| [build_long.sh](build_long.sh) | **当前唯一推荐的构建入口**，已在WSL成功从匹配SDK源码重建所有公共与Sensor对象，不再依赖旧 .o 缓存 |
 | [summarize_live_5min.py](summarize_live_5min.py) | 从本地未删减日志计算统计 JSON、CSV 和帧率 SVG 的只读分析脚本 |
 | [analyze_raw.py](analyze_raw.py) | 将 CVI 导出的压缩关闭后的 Bayer 12bit packed 样本展开、计算顶部行差异 |
 | [camera_36probe.cpp](camera_36probe.cpp) | 早期短时 A/B 程序，不是5分钟程序 |
-| [run_board_long.sh](run_board_long.sh) | 曾准备的单轮长测草稿，**不是本次实测使用的脚本** |
+| [历史旧启动清单](../../docs/history/RETIRED_LAUNCHERS.md) | 较早的单轮启动/编译/对照脚本已从主分支退役，原始内容仍可通过Git历史恢复 |
 
 以上源码和统计已推送 GitHub。实际交叉编译得到的 RISC-V 二进制是**本地保留的构建产物**，不作为源码上传：
 
@@ -47,10 +47,10 @@ SHA-256: a959fe08f85165fa689db3c6f6d62f5778ba01af41ea3435e46a79637e6ac4bc
 - **Windows 项目根目录：** `D:\study\LicheeRV`（只允许在这里写入项目文件）。
 - **WSL Ubuntu 22.04** 和项目冻结的 Sipeed RISC-V musl 交叉编译器。
 - 外部/本地 SDK：`speed-fry/workspace/LicheeRV-Nano-Build/`。
-- 先前保存的 `speed-fry/build-preview-hd/*.o`（`common_vi.o`、`common_isp.o`、`common_sys.o` 等）。
+- 需要与本机板端配套的 `speed-fry/workspace/camera/src/`，内含 `sample_common_*.c`、GC4653 Sensor源码、链接exports.list和board-libs；**构建脚本会从这些源文件自动重建对象**，不需要旧 `.o`。
 - 与板端匹配的 CVITEK MMF/ISP/VENC 链接库和传感器代码。
 
-这些大型 SDK、工具链、`.o` 文件因为体积、上游授权与平台匹配问题，被 `.gitignore` 排除，没有上传到 Public GitHub。**只克隆此仓库并不能复现可执行文件；必须另外恢复匹配的 SDK 与公共对象。** 仓库保留了 [历史公共对象构建脚本](../../speed-fry/build-preview-hd.sh)，但其本地环境依赖和相容性需要重新检查。
+这些大型 SDK、工具链、`.o` 文件因为体积、上游授权与平台匹配问题，被 `.gitignore` 排除，没有上传到 Public GitHub。**只克隆此仓库并不能编译可执行文件；必须另外取得与板端匹配的SDK/工具链与camera公共源。** 当前脚本已重建公共对象并成功编译，无需恢复旧的 `.o`。旧脚本的全量原始版本在[历史归档](../../docs/history/RETIRED_LAUNCHERS.md)可查。
 
 现有研究电脑、依赖已就绪时，执行（WSL shell）：
 
@@ -58,7 +58,13 @@ SHA-256: a959fe08f85165fa689db3c6f6d62f5778ba01af41ea3435e46a79637e6ac4bc
 bash /mnt/d/study/LicheeRV/test/clock36_live_20261023/build_long.sh
 ```
 
-输出保存在当前项目下 `test/clock36_live_20261023/camera_36long`。
+默认输出到 `test/clock36_live_20261023/camera_36long`。为保护已实机验证的冻结二进制，**首次重编建议给独立输出路径**：
+
+```bash
+bash /mnt/d/study/LicheeRV/test/clock36_live_20261023/build_long.sh /mnt/d/study/LicheeRV/test/clock36_live_20261023/build_long/camera_36long_rebuild_test
+```
+
+本次已在 WSL 验证了完整重新编译，输出为 riscv64 musl ELF。该重新编译产物 SHA-256 为 `c00b3ea66402c5e7a115627d35e7f9fab7f2a6aef061b951282fc2871a2bb878`，不同于历史冻结实机二进制 `a959fe08...`，**不可直接把新产物当成已实机长测的相同文件**。源文件仍为相同主方案，新构建二进制如需板端使用应另测。
 
 ## 4. 板端临时部署（研究用途）
 
@@ -107,7 +113,13 @@ test ! -d /code/camera/run/lock && echo CAMERA_UNLOCKED
 
 期望回到 `0x00200001`；debugfs 会报 `37125000`。板端旧版系统时钟可能不准确，实验时长以日志 monotonic/程序累计测量为准。
 
-## 5. 关于“80帧无损”的精确定义
+## 5. 第二次连续300秒重测
+
+同一天相同方案再次采集**24,252帧**，最后一个5秒窗口 `80.0179 FPS`、PTS `79.9997 FPS`，停止时没有编码错误。采集起步（分频33切换之前）已经出现MIPI WordCount累计 `1`，**切换后的全程监测没有继续增加**。通过 JPEG 手工查看未见之前的大面积彩条；使用 Bayer RAW 顶部同奇偶行参考校正，基线第2/3行超额为 `+117.67/+97.29`，切换后为 `-1.45/+1.10`，约55秒后的再次采样为 `-1.00/+0.58`，可以说**采样坏行明显改善**，不能扩大为逐帧零花屏。
+
+本地完整日志和RAW位于 `recheck_20261023/`（不公开原图）。第二轮的脱敏数据已整理为 [RECHECK_5MIN_SUMMARY.json](RECHECK_5MIN_SUMMARY.json) 和 [RECHECK_5MIN_WINDOWS.csv](RECHECK_5MIN_WINDOWS.csv)，可复核历史 MIPI WordCount 起点、后续无增长，以及 Bayer 顶部奇偶行校正指标。技术演进与被淘汰方法参见[历代方案](../../docs/history/EXPERIMENT_DECISIONS.md)。
+
+## 6. 关于“80帧无损”的精确定义
 
 - **已验证：** VI/PTS 测得约80FPS、5分钟内采集未报超时/重复PTS、MIPI 97次监测无错误；3次 Bayer 抽样里切分频后顶部亮行显著改善。
 - **非无损 JPEG：** 网页中的 JPEG/MJPEG 使用有损压缩；不能称为像素无损视频。

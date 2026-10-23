@@ -1,0 +1,72 @@
+{
+  "mode": "GC4653 1280x720 CAM1 divider33 calculated approximately 36MHz, CCF debugfs stale",
+  "run_time_supervisor_s": 300,
+  "final_frames": 24252,
+  "final_encoded": 24246,
+  "final_encoding_errors": 0,
+  "final_reported_capture_fps": 80.0097,
+  "final_reported_pts_fps": 80.0097,
+  "final_reported_duplicate_pts": 0,
+  "final_reported_timeouts": 0,
+  "last_window": {
+    "capture_elapsed_s": 305.45,
+    "frames_in_window": 401,
+    "host_fps": 80.0179,
+    "pts_fps": 79.9997
+  },
+  "post_switch_5s_windows": 59,
+  "post_switch_5s_fps_mean": 79.98647,
+  "mipi_before_switch": "0 0 0 1 0",
+  "mipi_final": "0 0 0 1 0",
+  "mipi_increment_after_switch": false,
+  "mipi_monitored_poll_count": 98,
+  "highest_soc_temp_mC": 68917,
+  "end_soc_temp_mC": 68917,
+  "register_restored_to": "0x00200001",
+  "thermal_limit_mC": 74500,
+  "quality_assessment": "JPEG samples visually no obvious old top stripe; 3 uncompressed Bayer RAW samples parity-corrected top lines improve; not entire video pixel-perfect",
+  "bayer_top_row_comparison": {
+    "before": {
+      "file": "bayer-before.bin",
+      "private_raw_size": 1382400,
+      "reference_even_rows_4_to_18_mean": 692.56,
+      "reference_odd_rows_5_to_19_mean": 702.64,
+      "y0_3_parity_adjusted_excess": [
+        -2.72,
+        50.61,
+        117.67,
+        97.29
+      ]
+    },
+    "after": {
+      "file": "bayer-after.bin",
+      "private_raw_size": 1382400,
+      "reference_even_rows_4_to_18_mean": 695.94,
+      "reference_odd_rows_5_to_19_mean": 707.12,
+      "y0_3_parity_adjusted_excess": [
+        -2.71,
+        2.15,
+        -1.45,
+        1.1
+      ]
+    },
+    "late": {
+      "file": "bayer-late.bin",
+      "private_raw_size": 1382400,
+      "reference_even_rows_4_to_18_mean": 728.9,
+      "reference_odd_rows_5_to_19_mean": 740.5,
+      "y0_3_parity_adjusted_excess": [
+        -2.31,
+        3.26,
+        -1.0,
+        0.58
+      ]
+    }
+  },
+  "caveats": [
+    "WordCount=1 existed before divider switch; no increments after switch.",
+    "Clock pin was not physically measured; direct MMIO may disagree with CCF.",
+    "The program encodes JPEG Q85, not lossless JPEG or RAW video.",
+    "No browser drawn-FPS measurement; not all frames visually inspected."
+  ]
+}

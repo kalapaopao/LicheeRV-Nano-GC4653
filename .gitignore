@@ -145,3 +145,10 @@ credentials*
 /test/clock36_live_20261023/camera_36long
 # Source, build scripts, rollback supervisor are intentionally public;
 # large raw frames and compiled binaries remain untracked.
+/test/clock36_live_20261023/build_long/
+/test/clock36_live_20261023/build/
+/test/clock36_live_20261023/results/
+/test/clock36_live_20261023/results_linear/
+/test/clock36_live_20261023/results_live/
+/test/clock36_live_20261023/recheck_20261023/
+/test/clock36_live_20261023/camera_36long_rebuild*

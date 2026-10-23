@@ -13,7 +13,8 @@
 | 2026-10-19，36 MHz 研发 | 内核/时钟枚举、驱动补丁和候选参数 | [状态](../test/clock36_safe_20261019/STATUS_20261019.md) | **未验证36MHz物理输出** |
 | 2026-10-22，复现 70 FPS | 27 MHz、1920×1080 JPEG、约 71.5 初期 → 70.7 持续运行、MIPI 0 错误 | [最新复现](../test/view70_20261022/RUN_STATUS.md) | 成功拉流与单帧抓拍；SoC 长运行温度约 74.5°C |
 | 2026-10-23，CAM1 分频33实机 A/B | 1280×720 packed RAW12，寄存器÷33≈36MHz，约80.0 FPS；顶行异常改善 | [36MHz分频实验](../test/clock36_live_20261023/RESULTS_36MHZ_20261023.md)、[RAW量化图](images/36mhz-raw-row-comparison.svg) | 短时对照验证通过，Linux CCF仍读37.125MHz |
-| **2026-10-23，5分钟实时采集** | 1280×720；24,222帧；最终累计**80.0098FPS**、PTS80.0099；97次MIPI零错；最高72.414°C | [5分钟报告与代码](../test/clock36_live_20261023/LIVE_5MIN_RESULTS.md)、[曲线](images/36mhz-live-5min-fps.svg) | **连续300秒取帧通过**，RAW抽样正常；原时钟已恢复；引脚物理MCLK与全部帧画质仍待验证 |
+| **2026-10-23，5分钟实时采集** | 1280×720；24,222帧；最终累计**80.0098FPS**、PTS80.0099；97次MIPI零错；最高72.414°C | [5分钟报告与代码](../test/clock36_live_20261023/LIVE_5MIN_RESULTS.md)、[曲线](images/36mhz-live-5min-fps.svg) | **连续300秒取帧通过**，RAW抽样顶部异常显著改善；原时钟已恢复；引脚物理MCLK与全部帧画质仍待验证 |
+| **2026-10-23，再次5分钟复测** | 同样分频33，24,252帧，最后5秒80.0179FPS，无重复PTS/取帧超时/编码错误；WcErr1在切换前已存在且切换后未增长 | [复核 JSON](../test/clock36_live_20261023/RECHECK_5MIN_SUMMARY.json) · [复核CSV](../test/clock36_live_20261023/RECHECK_5MIN_WINDOWS.csv) | JPEG样本未见旧大块紫红彩条；Bayer奇偶行校正后前2/3行突变明显减轻；正常退出/恢复原时钟 |
 
 ## 性能数字的含义
 
