@@ -12,7 +12,7 @@
 
 ![5分钟实时采集FPS](docs/images/36mhz-live-5min-fps.svg)
 
-[五分钟完整实测报告与源码](test/clock36_live_20261023/LIVE_5MIN_RESULTS.md) · [结构化指标](test/clock36_live_20261023/LIVE_5MIN_SUMMARY.json) · [每5秒窗口CSV](test/clock36_live_20261023/LIVE_5MIN_WINDOWS.csv)
+[五分钟完整实测报告与源码](test/clock36_live_20261023/LIVE_5MIN_RESULTS.md) · [80FPS源码清单、编译依赖及板端启动指南](test/clock36_live_20261023/README.md) · [结构化指标](test/clock36_live_20261023/LIVE_5MIN_SUMMARY.json) · [每5秒窗口CSV](test/clock36_live_20261023/LIVE_5MIN_WINDOWS.csv)
 
 ![CAM1分频32与33的RAW顶部异常对比](docs/images/36mhz-raw-row-comparison.svg)
 
