@@ -1,0 +1,474 @@
+{
+  "before": {
+    "ref_mean_y20_80": 435.795,
+    "top_row_excess": [
+      -6.0,
+      50.1,
+      127.5,
+      126.4,
+      4.0,
+      1.3,
+      -4.0,
+      0.8,
+      -3.9,
+      1.5,
+      -5.5,
+      -0.2
+    ],
+    "rows_0_24": [
+      {
+        "y": 0,
+        "mean": 429.8,
+        "max": 684,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 1,
+        "mean": 485.88,
+        "max": 3772,
+        "saturated": 0,
+        "high": 18
+      },
+      {
+        "y": 2,
+        "mean": 563.33,
+        "max": 3772,
+        "saturated": 0,
+        "high": 50
+      },
+      {
+        "y": 3,
+        "mean": 562.18,
+        "max": 3772,
+        "saturated": 0,
+        "high": 47
+      },
+      {
+        "y": 4,
+        "mean": 439.78,
+        "max": 3772,
+        "saturated": 0,
+        "high": 3
+      },
+      {
+        "y": 5,
+        "mean": 437.05,
+        "max": 780,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 6,
+        "mean": 431.76,
+        "max": 852,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 7,
+        "mean": 436.59,
+        "max": 812,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 8,
+        "mean": 431.85,
+        "max": 888,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 9,
+        "mean": 437.33,
+        "max": 916,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 10,
+        "mean": 430.3,
+        "max": 808,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 11,
+        "mean": 435.6,
+        "max": 780,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 12,
+        "mean": 430.24,
+        "max": 824,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 13,
+        "mean": 435.14,
+        "max": 728,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 14,
+        "mean": 428.16,
+        "max": 716,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 15,
+        "mean": 433.75,
+        "max": 744,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 16,
+        "mean": 429.19,
+        "max": 732,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 17,
+        "mean": 433.71,
+        "max": 748,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 18,
+        "mean": 428.39,
+        "max": 712,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 19,
+        "mean": 433.62,
+        "max": 772,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 20,
+        "mean": 427.68,
+        "max": 772,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 21,
+        "mean": 434.69,
+        "max": 772,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 22,
+        "mean": 427.66,
+        "max": 760,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 23,
+        "mean": 433.12,
+        "max": 756,
+        "saturated": 0,
+        "high": 0
+      }
+    ],
+    "row_bands_mean_saturated": [
+      [
+        0,
+        2,
+        457.84,
+        0
+      ],
+      [
+        2,
+        6,
+        500.58,
+        0
+      ],
+      [
+        6,
+        16,
+        433.07,
+        0
+      ],
+      [
+        16,
+        32,
+        432.26,
+        0
+      ],
+      [
+        32,
+        64,
+        434.64,
+        0
+      ],
+      [
+        64,
+        128,
+        536.24,
+        1566
+      ],
+      [
+        128,
+        720,
+        628.03,
+        20011
+      ]
+    ],
+    "total_saturated": 21577,
+    "sha256": "4c9005269a8d46135fd48d695a91ca672def5e356921617ee07b65bc1adddd17",
+    "width": 1280,
+    "height": 720,
+    "packing": "RAW12 little 3-byte pair"
+  },
+  "after": {
+    "ref_mean_y20_80": 422.805,
+    "top_row_excess": [
+      -0.8,
+      2.7,
+      -2.0,
+      3.1,
+      -0.0,
+      4.2,
+      -1.1,
+      3.7,
+      0.4,
+      3.7,
+      -2.1,
+      2.6
+    ],
+    "rows_0_24": [
+      {
+        "y": 0,
+        "mean": 422.05,
+        "max": 720,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 1,
+        "mean": 425.5,
+        "max": 732,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 2,
+        "mean": 420.83,
+        "max": 804,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 3,
+        "mean": 425.93,
+        "max": 728,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 4,
+        "mean": 422.8,
+        "max": 848,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 5,
+        "mean": 427.02,
+        "max": 856,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 6,
+        "mean": 421.72,
+        "max": 896,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 7,
+        "mean": 426.51,
+        "max": 888,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 8,
+        "mean": 423.16,
+        "max": 968,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 9,
+        "mean": 426.5,
+        "max": 916,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 10,
+        "mean": 420.67,
+        "max": 880,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 11,
+        "mean": 425.44,
+        "max": 812,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 12,
+        "mean": 421.7,
+        "max": 880,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 13,
+        "mean": 425.01,
+        "max": 844,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 14,
+        "mean": 420.78,
+        "max": 860,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 15,
+        "mean": 424.1,
+        "max": 784,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 16,
+        "mean": 419.84,
+        "max": 828,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 17,
+        "mean": 424.88,
+        "max": 752,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 18,
+        "mean": 419.09,
+        "max": 824,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 19,
+        "mean": 424.12,
+        "max": 772,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 20,
+        "mean": 418.12,
+        "max": 772,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 21,
+        "mean": 423.36,
+        "max": 808,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 22,
+        "mean": 417.98,
+        "max": 776,
+        "saturated": 0,
+        "high": 0
+      },
+      {
+        "y": 23,
+        "mean": 422.72,
+        "max": 828,
+        "saturated": 0,
+        "high": 0
+      }
+    ],
+    "row_bands_mean_saturated": [
+      [
+        0,
+        2,
+        423.77,
+        0
+      ],
+      [
+        2,
+        6,
+        424.14,
+        0
+      ],
+      [
+        6,
+        16,
+        423.56,
+        0
+      ],
+      [
+        16,
+        32,
+        422.37,
+        0
+      ],
+      [
+        32,
+        64,
+        421.67,
+        0
+      ],
+      [
+        64,
+        128,
+        432.49,
+        0
+      ],
+      [
+        128,
+        720,
+        628.83,
+        16541
+      ]
+    ],
+    "total_saturated": 16541,
+    "sha256": "37d4a2a70390a545e2450314d7fa496b9fa7efe9711daba816e8182c0239f74e",
+    "width": 1280,
+    "height": 720,
+    "packing": "RAW12 little 3-byte pair"
+  }
+}

@@ -139,3 +139,10 @@ credentials*
 # Final local helper outputs (never publish private audit matches)
 /docs/public_audit_private.*
 /docs/local_inventory_private.*
+
+# RISC-V experiment binaries and unverified long-run work-in-progress
+/test/clock36_live_20261023/camera_36probe
+/test/clock36_live_20261023/camera_36long
+/test/clock36_live_20261023/camera_36long.cpp
+/test/clock36_live_20261023/build_long.sh
+/test/clock36_live_20261023/run_board_long.sh
