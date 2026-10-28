@@ -1,0 +1,5 @@
+mode=60
+wb=native
+manual_exp_us=5000
+gains=1024,1024,1024
+internal_capture_limit_sec=24

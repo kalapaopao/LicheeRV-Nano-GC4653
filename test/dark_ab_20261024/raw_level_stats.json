@@ -1,0 +1,177 @@
+[
+  {
+    "file": "results\\60_blc256_24625_743\\sensor-bayer-after.bin",
+    "packing": "repository RAW12 3-byte pair decoder",
+    "bayer": "GRBG",
+    "scene_not_dark_calibration": true,
+    "channel_percentiles": {
+      "Gr": {
+        "p01": 256,
+        "p05": 256,
+        "p50": 260
+      },
+      "R": {
+        "p01": 252,
+        "p05": 256,
+        "p50": 260
+      },
+      "B": {
+        "p01": 256,
+        "p05": 256,
+        "p50": 260
+      },
+      "Gb": {
+        "p01": 256,
+        "p05": 256,
+        "p50": 260
+      }
+    },
+    "dark_cells_all_channels_below_280": 154658,
+    "dark_cells_channel_means": {
+      "Gr": 258.8613,
+      "R": 260.1245,
+      "B": 260.2593,
+      "Gb": 259.1026
+    }
+  },
+  {
+    "file": "results\\60_native_24344_3912\\sensor-bayer-after.bin",
+    "packing": "repository RAW12 3-byte pair decoder",
+    "bayer": "GRBG",
+    "scene_not_dark_calibration": true,
+    "channel_percentiles": {
+      "Gr": {
+        "p01": 256,
+        "p05": 256,
+        "p50": 260
+      },
+      "R": {
+        "p01": 256,
+        "p05": 256,
+        "p50": 260
+      },
+      "B": {
+        "p01": 256,
+        "p05": 256,
+        "p50": 260
+      },
+      "Gb": {
+        "p01": 256,
+        "p05": 256,
+        "p50": 260
+      }
+    },
+    "dark_cells_all_channels_below_280": 151991,
+    "dark_cells_channel_means": {
+      "Gr": 259.1403,
+      "R": 260.5042,
+      "B": 260.5059,
+      "Gb": 259.2766
+    }
+  },
+  {
+    "file": "results\\60_unity_24452_522\\sensor-bayer-after.bin",
+    "packing": "repository RAW12 3-byte pair decoder",
+    "bayer": "GRBG",
+    "scene_not_dark_calibration": true,
+    "channel_percentiles": {
+      "Gr": {
+        "p01": 256,
+        "p05": 256,
+        "p50": 260
+      },
+      "R": {
+        "p01": 244,
+        "p05": 256,
+        "p50": 260
+      },
+      "B": {
+        "p01": 256,
+        "p05": 256,
+        "p50": 260
+      },
+      "Gb": {
+        "p01": 256,
+        "p05": 256,
+        "p50": 260
+      }
+    },
+    "dark_cells_all_channels_below_280": 153799,
+    "dark_cells_channel_means": {
+      "Gr": 258.9689,
+      "R": 260.1851,
+      "B": 260.4161,
+      "Gb": 259.206
+    }
+  },
+  {
+    "file": "results\\80_blc256_24709_939\\sensor-bayer-after.bin",
+    "packing": "repository RAW12 3-byte pair decoder",
+    "bayer": "GRBG",
+    "scene_not_dark_calibration": true,
+    "channel_percentiles": {
+      "Gr": {
+        "p01": 240,
+        "p05": 256,
+        "p50": 260
+      },
+      "R": {
+        "p01": 240,
+        "p05": 244,
+        "p50": 260
+      },
+      "B": {
+        "p01": 240,
+        "p05": 244,
+        "p50": 260
+      },
+      "Gb": {
+        "p01": 240,
+        "p05": 256,
+        "p50": 260
+      }
+    },
+    "dark_cells_all_channels_below_280": 166866,
+    "dark_cells_channel_means": {
+      "Gr": 258.784,
+      "R": 258.6592,
+      "B": 258.8315,
+      "Gb": 258.8102
+    }
+  },
+  {
+    "file": "results\\80_native_24391_4093\\sensor-bayer-after.bin",
+    "packing": "repository RAW12 3-byte pair decoder",
+    "bayer": "GRBG",
+    "scene_not_dark_calibration": true,
+    "channel_percentiles": {
+      "Gr": {
+        "p01": 240,
+        "p05": 256,
+        "p50": 260
+      },
+      "R": {
+        "p01": 240,
+        "p05": 244,
+        "p50": 260
+      },
+      "B": {
+        "p01": 240,
+        "p05": 244,
+        "p50": 260
+      },
+      "Gb": {
+        "p01": 240,
+        "p05": 256,
+        "p50": 260
+      }
+    },
+    "dark_cells_all_channels_below_280": 165078,
+    "dark_cells_channel_means": {
+      "Gr": 258.8672,
+      "R": 258.905,
+      "B": 259.0398,
+      "Gb": 258.9951
+    }
+  }
+]

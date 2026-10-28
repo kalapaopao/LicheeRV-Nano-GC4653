@@ -1,0 +1,42 @@
+<!doctype html><html lang="zh"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GC4653 80FPS 录像采集</title><style>
+body{margin:0;background:#101827;color:#edf4ff;font:15px "Microsoft Yahei",sans-serif}
+main{max-width:1250px;margin:auto;padding:20px}
+h2{font-size:22px}.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:16px 0}
+button{border:0;border-radius:8px;color:#fff;background:#276b58;padding:12px 20px;font-size:15px;cursor:pointer}
+button.stop{background:#a83d48}button:disabled{opacity:.4}
+#status{color:#9de6d5}#view{width:100%;height:auto;background:black;border-radius:8px}
+small{color:#a6bdcf;display:block;line-height:1.8}
+</style><main><h2>GC4653 · 1280×720 · 80FPS 采集 / 40FPS Q85 录像</h2>
+<div class="toolbar"><button id="start" onclick="cmd('start')" disabled>● 开始录像</button>
+<button id="stop" class="stop" onclick="cmd('stop')" disabled>■ 停止录像</button>
+<button id="reconnect" onclick="location.reload()" hidden>重新连接</button>
+<span id="status">正在连接录像控制服务…</span></div>
+<img id="view" src="/live.mjpg"><p id="detail"></p>
+<small>录像格式 MJPEG AVI，记录每2帧中的1帧（40FPS），原始取流维持80FPS，无二次 JPEG 编码。录像在板端 /code/camera/recordings，每段最多60秒。视频 FPS 以实际文件解码检测为准。网页显示速率不等于摄像头采集速率。</small>
+<script>
+const api='http://'+location.hostname+':8082';
+let disconnected=false,pollTimer=null,refreshBusy=false;
+const requests=new Set();
+function offline(reason){if(disconnected)return;disconnected=true;clearTimeout(pollTimer);
+for(const controller of requests)controller.abort();
+document.getElementById('start').disabled=true;document.getElementById('stop').disabled=true;
+document.getElementById('reconnect').hidden=false;document.getElementById('view').remove();
+document.getElementById('status').textContent='连接已断开，已停止自动请求';
+document.getElementById('detail').textContent=reason+'。请确认摄像头已启动，再点击“重新连接”。';}
+async function request(path,options){const controller=new AbortController();requests.add(controller);
+const timeout=setTimeout(()=>controller.abort(),3000);
+try{const r=await fetch(api+path,{...options,signal:controller.signal});if(!r.ok)throw Error('HTTP '+r.status);return await r.json();}
+finally{clearTimeout(timeout);requests.delete(controller);}}
+async function cmd(action){if(disconnected)return;try{await request('/'+action,{method:'POST'});if(!disconnected)await refresh();}
+catch(e){offline('录像控制请求失败：'+e.message);}}
+async function refresh(){if(disconnected||refreshBusy)return;clearTimeout(pollTimer);refreshBusy=true;
+try{const d=await request('/status',{cache:'no-store'});if(disconnected)return;document.getElementById('start').disabled=d.requested;
+document.getElementById('stop').disabled=!d.requested;document.getElementById('status').textContent=d.recording?'● 正在录制：'+d.file:(d.requested?'准备中':'未录像');
+document.getElementById('detail').textContent='已录编码帧：'+d.written+' · 队列丢帧：'+d.dropped+' · 输出：'+(d.bytes/1048576).toFixed(1)+' MB · 已完成：'+d.segments+'段 · '+(d.error||'正常');
+}catch(e){offline('摄像头服务或网络不可用：'+e.message);}
+finally{refreshBusy=false;if(!disconnected)pollTimer=setTimeout(refresh,1000);}}
+document.getElementById('view').addEventListener('error',()=>offline('预览连接中断'));
+window.addEventListener('pagehide',()=>offline('页面已关闭'));
+refresh();
+</script></main></html>

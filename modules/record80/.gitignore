@@ -1,0 +1,7 @@
+# Generated builds and raw captured datasets stay local.
+/build/
+/bin/
+/captures/
+/dataset_frames/
+*.tmp
+*.log

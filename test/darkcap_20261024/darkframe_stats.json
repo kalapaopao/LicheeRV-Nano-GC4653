@@ -1,0 +1,407 @@
+[
+  {
+    "session": "60_native_25238_1206",
+    "cap_state": "covered_by_user",
+    "exposure_us": 5000,
+    "ae_gains": [
+      1024,
+      1024,
+      1024
+    ],
+    "crop_border_px": 16,
+    "packing": "RAW12_3byte_pair",
+    "bayer": "GRBG",
+    "raw_after": {
+      "Gr": {
+        "count": 214656,
+        "mean": 255.9541,
+        "spatial_std": 5.69078,
+        "p01": 240,
+        "p50": 256,
+        "p99": 268,
+        "mode": 256
+      },
+      "R": {
+        "count": 214656,
+        "mean": 255.7983,
+        "spatial_std": 5.74032,
+        "p01": 240,
+        "p50": 256,
+        "p99": 268,
+        "mode": 256
+      },
+      "B": {
+        "count": 214656,
+        "mean": 255.79588,
+        "spatial_std": 5.7193,
+        "p01": 240,
+        "p50": 256,
+        "p99": 268,
+        "mode": 256
+      },
+      "Gb": {
+        "count": 214656,
+        "mean": 255.97311,
+        "spatial_std": 5.66322,
+        "p01": 240,
+        "p50": 256,
+        "p99": 268,
+        "mode": 256
+      }
+    },
+    "first_nv21": {
+      "Y": {
+        "count": 858624,
+        "mean": 8.09765,
+        "spatial_std": 1.6623,
+        "p01": 6,
+        "p50": 8,
+        "p99": 12,
+        "mode": 8
+      },
+      "U": {
+        "count": 214656,
+        "mean": 130.47878,
+        "spatial_std": 0.61957,
+        "p01": 130,
+        "p50": 130,
+        "p99": 132,
+        "mode": 130
+      },
+      "V": {
+        "count": 214656,
+        "mean": 132.93349,
+        "spatial_std": 1.51023,
+        "p01": 131,
+        "p50": 133,
+        "p99": 137,
+        "mode": 133
+      },
+      "neutral_chroma": 128
+    }
+  },
+  {
+    "session": "60_reference_25511_1617",
+    "cap_state": "covered_by_user",
+    "exposure_us": 5000,
+    "ae_gains": [
+      1024,
+      1024,
+      1024
+    ],
+    "crop_border_px": 16,
+    "packing": "RAW12_3byte_pair",
+    "bayer": "GRBG",
+    "raw_after": {
+      "Gr": {
+        "count": 214656,
+        "mean": 255.95776,
+        "spatial_std": 5.51461,
+        "p01": 240,
+        "p50": 256,
+        "p99": 268,
+        "mode": 256
+      },
+      "R": {
+        "count": 214656,
+        "mean": 255.87379,
+        "spatial_std": 5.53765,
+        "p01": 240,
+        "p50": 256,
+        "p99": 268,
+        "mode": 256
+      },
+      "B": {
+        "count": 214656,
+        "mean": 255.86525,
+        "spatial_std": 5.4741,
+        "p01": 240,
+        "p50": 256,
+        "p99": 268,
+        "mode": 256
+      },
+      "Gb": {
+        "count": 214656,
+        "mean": 255.98137,
+        "spatial_std": 5.42882,
+        "p01": 240,
+        "p50": 256,
+        "p99": 268,
+        "mode": 256
+      }
+    },
+    "first_nv21": {
+      "Y": {
+        "count": 858624,
+        "mean": 9.01699,
+        "spatial_std": 1.66077,
+        "p01": 7,
+        "p50": 9,
+        "p99": 12,
+        "mode": 9
+      },
+      "U": {
+        "count": 214656,
+        "mean": 132.60036,
+        "spatial_std": 0.9819,
+        "p01": 131,
+        "p50": 132,
+        "p99": 135,
+        "mode": 132
+      },
+      "V": {
+        "count": 214656,
+        "mean": 137.22466,
+        "spatial_std": 1.729,
+        "p01": 134,
+        "p50": 137,
+        "p99": 141,
+        "mode": 137
+      },
+      "neutral_chroma": 128
+    }
+  },
+  {
+    "session": "60_reference_blc256_25608_1805",
+    "cap_state": "covered_by_user",
+    "exposure_us": 5000,
+    "ae_gains": [
+      1024,
+      1024,
+      1024
+    ],
+    "crop_border_px": 16,
+    "packing": "RAW12_3byte_pair",
+    "bayer": "GRBG",
+    "raw_after": {
+      "Gr": {
+        "count": 214656,
+        "mean": 255.92634,
+        "spatial_std": 5.72481,
+        "p01": 240,
+        "p50": 256,
+        "p99": 268,
+        "mode": 256
+      },
+      "R": {
+        "count": 214656,
+        "mean": 255.81606,
+        "spatial_std": 5.75706,
+        "p01": 240,
+        "p50": 256,
+        "p99": 268,
+        "mode": 256
+      },
+      "B": {
+        "count": 214656,
+        "mean": 255.82456,
+        "spatial_std": 5.6792,
+        "p01": 240,
+        "p50": 256,
+        "p99": 268,
+        "mode": 256
+      },
+      "Gb": {
+        "count": 214656,
+        "mean": 255.95988,
+        "spatial_std": 5.64148,
+        "p01": 240,
+        "p50": 256,
+        "p99": 268,
+        "mode": 256
+      }
+    },
+    "first_nv21": {
+      "Y": {
+        "count": 858624,
+        "mean": 0.40981,
+        "spatial_std": 0.51479,
+        "p01": 0,
+        "p50": 0,
+        "p99": 1,
+        "mode": 0
+      },
+      "U": {
+        "count": 214656,
+        "mean": 128.00007,
+        "spatial_std": 0.05808,
+        "p01": 128,
+        "p50": 128,
+        "p99": 128,
+        "mode": 128
+      },
+      "V": {
+        "count": 214656,
+        "mean": 128.00287,
+        "spatial_std": 0.05744,
+        "p01": 128,
+        "p50": 128,
+        "p99": 128,
+        "mode": 128
+      },
+      "neutral_chroma": 128
+    }
+  },
+  {
+    "session": "80_native_25319_1406",
+    "cap_state": "covered_by_user",
+    "exposure_us": 5000,
+    "ae_gains": [
+      1024,
+      1024,
+      1024
+    ],
+    "crop_border_px": 16,
+    "packing": "RAW12_3byte_pair",
+    "bayer": "GRBG",
+    "raw_after": {
+      "Gr": {
+        "count": 214656,
+        "mean": 255.09904,
+        "spatial_std": 10.21678,
+        "p01": 240,
+        "p50": 256,
+        "p99": 268,
+        "mode": 256
+      },
+      "R": {
+        "count": 214656,
+        "mean": 255.22205,
+        "spatial_std": 10.21128,
+        "p01": 240,
+        "p50": 256,
+        "p99": 268,
+        "mode": 256
+      },
+      "B": {
+        "count": 214656,
+        "mean": 255.38389,
+        "spatial_std": 10.10628,
+        "p01": 240,
+        "p50": 256,
+        "p99": 268,
+        "mode": 256
+      },
+      "Gb": {
+        "count": 214656,
+        "mean": 254.99398,
+        "spatial_std": 10.12337,
+        "p01": 240,
+        "p50": 256,
+        "p99": 268,
+        "mode": 256
+      }
+    },
+    "first_nv21": {
+      "Y": {
+        "count": 858624,
+        "mean": 6.89417,
+        "spatial_std": 1.06798,
+        "p01": 5,
+        "p50": 7,
+        "p99": 9,
+        "mode": 6
+      },
+      "U": {
+        "count": 214656,
+        "mean": 129.86423,
+        "spatial_std": 0.92361,
+        "p01": 128,
+        "p50": 130,
+        "p99": 132,
+        "mode": 130
+      },
+      "V": {
+        "count": 214656,
+        "mean": 135.91865,
+        "spatial_std": 1.74935,
+        "p01": 133,
+        "p50": 136,
+        "p99": 140,
+        "mode": 137
+      },
+      "neutral_chroma": 128
+    }
+  },
+  {
+    "session": "80_reference_blc256_25696_2037",
+    "cap_state": "covered_by_user",
+    "exposure_us": 5000,
+    "ae_gains": [
+      1024,
+      1024,
+      1024
+    ],
+    "crop_border_px": 16,
+    "packing": "RAW12_3byte_pair",
+    "bayer": "GRBG",
+    "raw_after": {
+      "Gr": {
+        "count": 214656,
+        "mean": 255.14906,
+        "spatial_std": 10.04097,
+        "p01": 240,
+        "p50": 256,
+        "p99": 268,
+        "mode": 256
+      },
+      "R": {
+        "count": 214656,
+        "mean": 255.27422,
+        "spatial_std": 10.03047,
+        "p01": 240,
+        "p50": 256,
+        "p99": 268,
+        "mode": 256
+      },
+      "B": {
+        "count": 214656,
+        "mean": 255.25894,
+        "spatial_std": 10.02867,
+        "p01": 240,
+        "p50": 256,
+        "p99": 268,
+        "mode": 256
+      },
+      "Gb": {
+        "count": 214656,
+        "mean": 255.14673,
+        "spatial_std": 10.04152,
+        "p01": 240,
+        "p50": 256,
+        "p99": 268,
+        "mode": 256
+      }
+    },
+    "first_nv21": {
+      "Y": {
+        "count": 858624,
+        "mean": 0.08065,
+        "spatial_std": 0.54009,
+        "p01": 0,
+        "p50": 0,
+        "p99": 4,
+        "mode": 0
+      },
+      "U": {
+        "count": 214656,
+        "mean": 128.00018,
+        "spatial_std": 0.04917,
+        "p01": 128,
+        "p50": 128,
+        "p99": 128,
+        "mode": 128
+      },
+      "V": {
+        "count": 214656,
+        "mean": 128.00003,
+        "spatial_std": 0.01101,
+        "p01": 128,
+        "p50": 128,
+        "p99": 128,
+        "mode": 128
+      },
+      "neutral_chroma": 128
+    }
+  }
+]

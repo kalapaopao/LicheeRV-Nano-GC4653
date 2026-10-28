@@ -1,0 +1,21 @@
+# 仅支持顶层 key: value 标量；不要使用嵌套、列表、引号或行尾注释。
+# 由 scripts/run_board.sh 在接触摄像头前校验。1024 表示 1 倍增益。
+schema_version: 1
+camera_mode: 80
+max_run_sec: 300
+auto_record: false
+jpeg_quality: 85
+
+# auto: 保留 ISP 自动曝光；非零 max 值限制 AE 上限。
+# manual: 固定曝光和三种增益；研究用途，尚未上板验收。
+exposure_mode: auto
+auto_exposure_max_us: 0
+auto_analog_gain_max_x1024: 0
+auto_digital_gain_max_x1024: 0
+auto_isp_gain_max_x1024: 0
+manual_exposure_us: 5000
+manual_analog_gain_x1024: 1024
+manual_digital_gain_x1024: 1024
+manual_isp_gain_x1024: 1024
+
+auto_record: true

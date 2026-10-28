@@ -1,0 +1,159 @@
+{
+  "date": "2026-10-26",
+  "scope": "资料包文件完整性；不是功能/命中/计分验证",
+  "download_success": 8,
+  "download_requests": 10,
+  "download_failures": [
+    {
+      "file": "official/rules_2026_v1.4.0.pdf",
+      "error": "Failed to perform, curl: (28) Failed to connect to bbs-web-static.robomaster.com:443 after 21068 ms: Could not connect to server. See https://curl.se/libcurl/c/libcurl-errors.html first for more details."
+    },
+    {
+      "file": "code_reference/misaka21_LICENSE",
+      "error": "HTTP 404"
+    }
+  ],
+  "checks": [
+    {
+      "check": "正文标记 official/rules_2027_index.html",
+      "passed": true
+    },
+    {
+      "check": "正文标记 articles/lingbug_2024_rendered.html",
+      "passed": true
+    },
+    {
+      "check": "正文标记 articles/dreamchaser_2026_full.html",
+      "passed": true
+    },
+    {
+      "check": "失败请求未写入伪文件 official/rules_2026_v1.4.0.pdf",
+      "passed": true
+    },
+    {
+      "check": "SHA256 official/dart_trigger_manual_zh_2020.pdf",
+      "passed": true
+    },
+    {
+      "check": "字节数 official/dart_trigger_manual_zh_2020.pdf",
+      "passed": true
+    },
+    {
+      "check": "PDF文件头尾 official/dart_trigger_manual_zh_2020.pdf",
+      "passed": true
+    },
+    {
+      "check": "SHA256 articles/team_report_2025_53pages.pdf",
+      "passed": true
+    },
+    {
+      "check": "字节数 articles/team_report_2025_53pages.pdf",
+      "passed": true
+    },
+    {
+      "check": "PDF文件头尾 articles/team_report_2025_53pages.pdf",
+      "passed": true
+    },
+    {
+      "check": "SHA256 code_reference/misaka21_README.md",
+      "passed": true
+    },
+    {
+      "check": "字节数 code_reference/misaka21_README.md",
+      "passed": true
+    },
+    {
+      "check": "SHA256 code_reference/misaka21_detector.cpp",
+      "passed": true
+    },
+    {
+      "check": "字节数 code_reference/misaka21_detector.cpp",
+      "passed": true
+    },
+    {
+      "check": "SHA256 code_reference/misaka21_param.toml",
+      "passed": true
+    },
+    {
+      "check": "字节数 code_reference/misaka21_param.toml",
+      "passed": true
+    },
+    {
+      "check": "SHA256 official/rules_2027_v1.0.0.pdf",
+      "passed": true
+    },
+    {
+      "check": "字节数 official/rules_2027_v1.0.0.pdf",
+      "passed": true
+    },
+    {
+      "check": "PDF文件头尾 official/rules_2027_v1.0.0.pdf",
+      "passed": true
+    },
+    {
+      "check": "SHA256 official/robot_spec_2027_v1.0.0.pdf",
+      "passed": true
+    },
+    {
+      "check": "字节数 official/robot_spec_2027_v1.0.0.pdf",
+      "passed": true
+    },
+    {
+      "check": "PDF文件头尾 official/robot_spec_2027_v1.0.0.pdf",
+      "passed": true
+    },
+    {
+      "check": "SHA256 articles/dreamchaser_2026_technical_report.pdf",
+      "passed": true
+    },
+    {
+      "check": "字节数 articles/dreamchaser_2026_technical_report.pdf",
+      "passed": true
+    },
+    {
+      "check": "PDF文件头尾 articles/dreamchaser_2026_technical_report.pdf",
+      "passed": true
+    },
+    {
+      "check": "失败请求未写入伪文件 code_reference/misaka21_LICENSE",
+      "passed": true
+    },
+    {
+      "check": "UTF8无替换字符 01_来源导航.md",
+      "passed": true
+    },
+    {
+      "check": "UTF8无替换字符 02_LicheeRV验证路线.md",
+      "passed": true
+    },
+    {
+      "check": "UTF8无替换字符 03_执行与验证记录.md",
+      "passed": true
+    },
+    {
+      "check": "UTF8无替换字符 README.md",
+      "passed": true
+    },
+    {
+      "check": "本地链接 01_来源导航.md",
+      "passed": true
+    },
+    {
+      "check": "本地链接 02_LicheeRV验证路线.md",
+      "passed": true
+    },
+    {
+      "check": "UTF8无替换字符 code_reference/README.md",
+      "passed": true
+    },
+    {
+      "check": "Python语法 collect_public_sources.py",
+      "passed": true
+    },
+    {
+      "check": "Python语法 index_and_validate.py",
+      "passed": true
+    }
+  ],
+  "passed": true
+}
