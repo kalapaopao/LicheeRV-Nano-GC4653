@@ -260,8 +260,8 @@ static void encoder_worker(const char* dir){
 }
 int main(int argc,char** argv){
     if(argc!=3 && argc!=4){fprintf(stderr,"Usage: %s USB_BIND_IP REPORT_DIR [60|80]\n",argv[0]);return 2;}
-    const char* mode=argc==4?argv[3]:"80";
-    if(strcmp(mode,"60") && strcmp(mode,"80"))return 2;
+    const char* mode="80";
+    if(argc==4 && strcmp(argv[3],"80"))return 2;
     const char* exposure_mode=getenv("RECORD80_EXPOSURE_MODE");
     if(!exposure_mode)exposure_mode="auto";
     if(strcmp(exposure_mode,"auto") && strcmp(exposure_mode,"manual")){fprintf(stderr,"Invalid exposure mode\n");return 2;}

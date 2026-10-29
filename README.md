@@ -113,6 +113,8 @@ sh /tmp/clock36_live_20261023/live_36_supervisor.sh
 - [录像使用手册](modules/record80/docs/USER_GUIDE.md) · [开发交接](modules/record80/docs/HANDOFF.md) · [实测验收报告](modules/record80/docs/TEST_REPORT.md)
 - 原80FPS研究代码和历史失败方案继续保留；录像模块不覆盖取流基线，不把80FPS采集误写为80FPS录像。
 
+当前 80FPS 主线入口见 [80FPS 工程说明](docs/80FPS_ONLY.md)。板端模型使用 `fly_rm_320_int8.cvimodel`，通过 `FLY_RM_MODEL` 启用实时推理。
+
 ## 🔭 下一阶段
 
 1. 用匹配板端的 kernel/ABI 把合法36MHz请求纳入 Linux CCF 正式时钟驱动，消除寄存器和 `clk_get_rate` 的状态不一致。
