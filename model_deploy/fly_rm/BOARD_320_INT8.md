@@ -22,6 +22,18 @@ export LD_LIBRARY_PATH=/usr/bin/lib
 
 当前实测：100 次耗时 3507.19 ms，平均 35.071 ms，约 28.51 FPS。
 
+## 真实摄像头接入
+
+`record80` 已增加可选的 `CVI_NN` 推理路径。启动时设置模型路径：
+
+```sh
+export LD_LIBRARY_PATH=/code/camera/lib:/mnt/system/usr/lib:/mnt/system/usr/lib/3rd:/usr/bin/lib
+export FLY_RM_MODEL=/code/camera/models/fly_rm/fly_rm_320_int8.cvimodel
+sh /code/camera/modules/record80/run_board_yolo320.sh
+```
+
+日志会输出 `capture_frames`、`infer`、`infer_errors` 和 `infer_avg_ms`。一次真实 GC4653 测试得到：采集约 16.6 FPS，推理完成 61 帧，跳过 245 帧，平均推理约 48.9 ms。模型输入和运行时调用已验证，当前瓶颈是摄像头帧转换和推理调用仍在采集路径上。
+
 ## 代码边界
 
 `modules/record80` 继续保持原来的 80FPS 采集程序。板端模型放在独立目录，不覆盖录像程序和系统模型。

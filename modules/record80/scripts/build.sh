@@ -7,8 +7,8 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
 SPEED="$ROOT/speed-fry"
 EXP="$ROOT/modules/record80"
-CAMERA="$SPEED/workspace/camera"
-SDK="$SPEED/workspace/LicheeRV-Nano-Build"
+CAMERA="${CAMERA_ROOT:-$SPEED/workspace/camera}"
+SDK="${SDK_ROOT:-$SPEED/workspace/LicheeRV-Nano-Build}"
 TC="$SDK/host-tools/gcc/riscv64-linux-musl-x86_64/bin/riscv64-unknown-linux-musl"
 OBJ="$EXP/build"
 OUTPUT="${1:-$EXP/bin/camera_36record}"
@@ -23,6 +23,7 @@ die(){ printf 'BUILD_ERROR: %s\n' "$*" >&2; exit 1; }
 mkdir -p "$OBJ" "$(dirname "$OUTPUT")"
 
 INC=(
+ -I"$EXP/include"
  -I"$SDK/middleware/v2/include"
  -I"$SDK/middleware/v2/include/isp/sg200x"
  -I"$SDK/osdrv/interdrv/v2/include/common/uapi"
@@ -71,10 +72,10 @@ cd "$CAMERA"
 "$TC-g++" \
  -Wl,--dynamic-list=src/exports.list -Wl,--gc-sections \
  -Wl,-rpath,'$ORIGIN/../lib:/code/camera/lib:/mnt/system/usr/lib:/mnt/system/usr/lib/3rd' \
- -Wl,-rpath-link,sdk/board-libs -Lsdk/board-libs \
+ -Wl,-rpath-link,sdk/board-libs -Lsdk/board-libs -L"$EXP/sdk/board-libs" \
  -o "$OUTPUT" "${objects[@]}" \
  -Wl,--no-as-needed -lsys -lvpu -lvenc -lcvi_bin -lcvi_bin_isp \
- -lisp -lisp_algo -lae -lawb -laf -lm -lpthread -ldl -latomic \
+ -lisp -lisp_algo -lae -lawb -laf -lcviruntime -lcvikernel -lm -lpthread -ldl -latomic \
  -static-libstdc++ -static-libgcc
 file "$OUTPUT"
 sha256sum "$OUTPUT"

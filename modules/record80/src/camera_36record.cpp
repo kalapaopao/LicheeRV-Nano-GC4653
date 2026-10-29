@@ -15,6 +15,7 @@
 #include <poll.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
+#include "cviruntime.h"
 extern "C" {
 #include "sample_comm.h"
 #include "cvi_venc.h"
@@ -38,8 +39,34 @@ static VIDEO_FRAME_INFO_S pending{};
 static bool has_pending=false;
 static std::atomic<unsigned long> encoded(0),errors(0);
 static std::atomic<unsigned long> network_sent(0),network_bytes(0),preview_replaced(0);
+static std::atomic<unsigned long> inference_done(0),inference_errors(0),inference_ms(0);
 static std::atomic<int> save_after_jpeg_request(0);
 static MJPEGRecorder recorder("/code/camera/recordings");
+class FlyRmNpu {
+    CVI_MODEL_HANDLE model_=nullptr; CVI_TENSOR *input_=nullptr,*output_=nullptr; int32_t in_n_=0,out_n_=0;
+    std::atomic<int> ready_{0},busy_{0};
+public:
+    bool open(const char* path){
+        if(CVI_NN_RegisterModel(path,&model_)!=0)return false;
+        if(CVI_NN_GetInputOutputTensors(model_,&input_,&in_n_,&output_,&out_n_)!=0 || in_n_<1 || out_n_<1)return false;
+        input_[0].pixel_format=CVI_NN_PIXEL_YUV_NV21; input_[0].mean[0]=input_[0].mean[1]=input_[0].mean[2]=0.f;
+        input_[0].scale[0]=input_[0].scale[1]=input_[0].scale[2]=1.f; return true;
+    }
+    bool prepare(const VIDEO_FRAME_INFO_S& frame){
+        if(!model_ || !input_ || !output_)return false;
+        if(busy_.load(std::memory_order_acquire) || ready_.load(std::memory_order_acquire))return false;
+        uint64_t addr[1]={frame.stVFrame.u64PhyAddr[0]};
+        if(CVI_NN_SetTensorWithAlignedFrames(input_,addr,1,CVI_NN_PIXEL_YUV_NV21)!=0)return false;
+        ready_.store(1,std::memory_order_release); return true;
+    }
+    bool run_once(){
+        if(busy_.exchange(1,std::memory_order_acq_rel))return false;
+        if(!ready_.exchange(0,std::memory_order_acquire)){busy_.store(0,std::memory_order_release);return false;}
+        bool ok=CVI_NN_Forward(model_,input_,in_n_,output_,out_n_)==0;
+        busy_.store(0,std::memory_order_release); return ok;
+    }
+    ~FlyRmNpu(){if(model_)CVI_NN_CleanupModel(model_);}
+};
 static void stop(int){running=0;}
 static double now(){timespec t{};clock_gettime(CLOCK_MONOTONIC,&t);return t.tv_sec+t.tv_nsec/1e9;}
 static bool sendall(int fd,const void* ptr,size_t n){
@@ -263,6 +290,11 @@ int main(int argc,char** argv){
         fprintf(stderr,"Invalid RECORD80 tuning value\n");return 2;
     }
     setvbuf(stdout,nullptr,_IOLBF,0);signal(SIGPIPE,SIG_IGN);
+    FlyRmNpu npu; const char* model_path=getenv("FLY_RM_MODEL");
+    if(model_path && *model_path){
+        if(!npu.open(model_path)){fprintf(stderr,"FLY_RM_MODEL_OPEN_FAILED path=%s\n",model_path);return 6;}
+        printf("FLY_RM_MODEL_READY path=%s input=320x320 format=NV21\n",model_path);
+    }
     int server=socket(AF_INET,SOCK_STREAM,0);if(server<0)return 2;
     int reuse=1;setsockopt(server,SOL_SOCKET,SO_REUSEADDR,&reuse,sizeof(reuse));
     sockaddr_in address{};address.sin_family=AF_INET;address.sin_port=htons(8081);
@@ -301,6 +333,10 @@ int main(int argc,char** argv){
     std::thread server_thread(http_server,server);
     std::thread control_thread(record_control_server,argv[1]);
     std::thread encoder_thread(encoder_worker,argv[2]);
+    std::thread infer_thread;
+    if(model_path && *model_path){
+        infer_thread=std::thread([&](){while(running){double s=now();if(npu.run_once()){++inference_done;inference_ms+=static_cast<unsigned long>((now()-s)*1000.0);}else usleep(500);}});
+    }
     unsigned long count=0,dups=0,timeouts=0;uint64_t firstpts=0,lastpts=0;
     double start=now(),first=0,last=0,report=start;
     bool diag_applied=false;bool later_sample_done=false;bool last_sample_done=false;
@@ -377,6 +413,9 @@ int main(int argc,char** argv){
         if(!count){first=t;firstpts=frame.stVFrame.u64PTS;printf("VI geometry=%ux%u stride=%u,%u format=%d compress=%d video=%d lengths=%u,%u,%u\n",frame.stVFrame.u32Width,frame.stVFrame.u32Height,frame.stVFrame.u32Stride[0],frame.stVFrame.u32Stride[1],frame.stVFrame.enPixelFormat,frame.stVFrame.enCompressMode,frame.stVFrame.enVideoFormat,frame.stVFrame.u32Length[0],frame.stVFrame.u32Length[1],frame.stVFrame.u32Length[2]);}
         else if(frame.stVFrame.u64PTS<=lastpts)++dups;
         last=t;lastpts=frame.stVFrame.u64PTS;++count;
+        if(model_path && *model_path){
+            if(!npu.prepare(frame))++inference_errors;
+        }
         {
             std::lock_guard<std::mutex> guard(input_mutex);
             if(has_pending){CVI_VI_ReleaseChnFrame(0,0,&pending);++preview_replaced;}
@@ -384,16 +423,17 @@ int main(int argc,char** argv){
         }
         if(t-report>=5 && count>1){
             unsigned long enc=encoded.load(),sent=network_sent.load(),bytes=network_bytes.load();
-            printf("capture_frames=%lu host_fps=%.4f pts_fps=%.4f duplicate_pts=%lu timeouts=%lu encoded=%lu encode_errors=%lu encode_fps=%.3f sent_fps=%.3f jpeg_mbit_s=%.3f preview_replaced=%lu\n",count,(count-1)/(last-first),lastpts>firstpts?(count-1)*1e6/(lastpts-firstpts):0,dups,timeouts,enc,errors.load(),(enc-last_encoded)/(t-report),(sent-last_sent)/(t-report),(bytes-last_bytes)*8e-6/(t-report),preview_replaced.load());
+            printf("capture_frames=%lu host_fps=%.4f pts_fps=%.4f duplicate_pts=%lu timeouts=%lu encoded=%lu infer=%lu infer_errors=%lu infer_avg_ms=%.3f encode_errors=%lu encode_fps=%.3f sent_fps=%.3f jpeg_mbit_s=%.3f preview_replaced=%lu\n",count,(count-1)/(last-first),lastpts>firstpts?(count-1)*1e6/(lastpts-firstpts):0,dups,timeouts,enc,inference_done.load(),inference_errors.load(),inference_done?double(inference_ms.load())/inference_done.load():0.,errors.load(),(enc-last_encoded)/(t-report),(sent-last_sent)/(t-report),(bytes-last_bytes)*8e-6/(t-report),preview_replaced.load());
             double wfps=(count-last_frame_count)/(t-report);double wpts=(last_window_pts&&lastpts>last_window_pts)?(count-last_frame_count)*1000000.0/(lastpts-last_window_pts):0;printf("CLOCK36_WINDOW elapsed_s=%.2f frames=%lu host_fps=%.4f pts_fps=%.4f\n",t-start,count-last_frame_count,wfps,wpts);last_frame_count=count;last_window_pts=lastpts;last_encoded=enc;last_sent=sent;last_bytes=bytes;report=t;
         }
     }
     encoder_thread.join();
+    if(infer_thread.joinable())infer_thread.join();
     recorder.stop();
     {std::lock_guard<std::mutex> guard(input_mutex);if(has_pending){CVI_VI_ReleaseChnFrame(0,0,&pending);has_pending=false;}}
     server_thread.join();
     control_thread.join();
     if(created){CVI_VENC_StopRecvFrame(0);CVI_VENC_DestroyChn(0);}
     SAMPLE_COMM_VI_DestroyIsp(&cfg);SAMPLE_COMM_VI_DestroyVi(&cfg);SAMPLE_COMM_SYS_Exit();
-    printf("stopped frames=%lu encoded=%lu errors=%lu tuning_failed=%d\n",count,encoded.load(),errors.load(),tuning_failed);return rc||errors||tuning_failed?1:0;
+    printf("stopped frames=%lu encoded=%lu infer=%lu infer_errors=%lu infer_avg_ms=%.3f errors=%lu tuning_failed=%d\n",count,encoded.load(),inference_done.load(),inference_errors.load(),inference_done?double(inference_ms.load())/inference_done.load():0.,errors.load(),tuning_failed);return rc||errors||tuning_failed?1:0;
 }

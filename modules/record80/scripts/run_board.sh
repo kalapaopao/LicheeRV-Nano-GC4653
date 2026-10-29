@@ -182,7 +182,9 @@ mkdir -p /code/camera/recordings
 mkdir "$LOCK"
 LOCK_OWNED=1
 cd /code/camera
-export LD_LIBRARY_PATH=/code/camera/lib:/mnt/system/usr/lib:/mnt/system/usr/lib/3rd
+export LD_LIBRARY_PATH=/code/camera/lib:/mnt/system/usr/lib:/mnt/system/usr/lib/3rd:/usr/bin/lib
+MODEL_PATH=${FLY_RM_MODEL:-/code/camera/models/fly_rm/fly_rm_320_int8.cvimodel}
+if [ -f "$MODEL_PATH" ]; then export FLY_RM_MODEL="$MODEL_PATH"; else unset FLY_RM_MODEL; fi
 export PREVIEW_DIAG_LINEAR=1
 export PREVIEW_DIAG_RAW=1
 "$ROOT/camera_36record" 10.133.124.1 "$REPORT" 80 >"$REPORT/capture.log" 2>&1 &
