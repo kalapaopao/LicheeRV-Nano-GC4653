@@ -1,0 +1,6 @@
+names:
+  0: target
+nc: 1
+path: C:\Users\admin\xanylabeling_data\trainer\ultralytics\datasets\detect\fly_rm_20261028_154724
+train: images/train
+val: images/val
