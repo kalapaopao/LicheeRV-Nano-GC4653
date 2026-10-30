@@ -141,7 +141,7 @@ public:
                 if(!raw)ok=false;
                 else{
                     const auto begin=std::chrono::steady_clock::now();
-                    detections=yolo26_decode(raw,2100,0.25f,0.45f,40);
+                    detections=yolo26_decode(raw,2100,0.70f,0.45f,40);
                     const auto end=std::chrono::steady_clock::now();
                     postprocess_total_us+=static_cast<unsigned long>(
                         std::chrono::duration_cast<std::chrono::microseconds>(end-begin).count());
@@ -225,7 +225,7 @@ small{color:#a6bdcf;display:block;line-height:1.8}
 <button id="stop" class="stop" onclick="cmd('stop')" disabled>■ 停止录像</button>
 <button id="reconnect" onclick="location.reload()" hidden>重新连接</button>
 <span id="status">正在连接录像控制服务…</span></div>
-<div class="toolbar"><button onclick="setMode(true)">高清带框诊断（1280×720）</button>
+<div class="toolbar"><button onclick="setMode(true)">高清带框诊断（1280×720，置信度≥70%）</button>
 <button onclick="setMode(false)">原始预览（1280×720）</button></div>
 <div id="visual"><img id="view" src="/detect.mjpg"></div>
 <p id="detection">检测结果连接中…</p><p id="detail"></p>
@@ -592,6 +592,7 @@ int main(int argc,char** argv){
         vpss_active=start_vpss();
         if(!vpss_active){fprintf(stderr,"FATAL_VPSS_INIT_FAILED\n");running=0;}
     }
+    printf("YOLO_CONFIDENCE_THRESHOLD=0.70 NMS_IOU=0.45\n");
     recorder.launch();
     if(getenv("RECORD_AUTOSTART") && strcmp(getenv("RECORD_AUTOSTART"),"1")==0)recorder.command(true);
     std::thread server_thread(http_server,server);
