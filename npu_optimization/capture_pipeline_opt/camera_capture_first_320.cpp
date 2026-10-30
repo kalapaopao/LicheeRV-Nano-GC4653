@@ -186,18 +186,22 @@ static bool sendall(int fd,const void* ptr,size_t n){
     while(running && n){ssize_t r=send(fd,p,n,MSG_NOSIGNAL);if(r>0){p+=r;n-=r;}else if(r<0 && errno==EINTR)continue;else return false;}
     return !n;
 }
-static void http_server(int server){
-    while(running){
-        pollfd p{server,POLLIN,0};if(poll(&p,1,100)<=0)continue;
-        int fd=accept(server,nullptr,nullptr);if(fd<0)continue;
+static void http_client(int fd){
         timeval timeout{1,0};setsockopt(fd,SOL_SOCKET,SO_SNDTIMEO,&timeout,sizeof(timeout));setsockopt(fd,SOL_SOCKET,SO_RCVTIMEO,&timeout,sizeof(timeout));
         int sndbuf=128*1024;setsockopt(fd,SOL_SOCKET,SO_SNDBUF,&sndbuf,sizeof(sndbuf));
         char request[4096]{};ssize_t n=recv(fd,request,sizeof(request)-1,0);
-        if(n<=0){close(fd);continue;}
-        bool snapshot=strstr(request,"GET /snapshot.jpg ")==request;
-        bool stream=strstr(request,"GET /live.mjpg ")==request;
-        bool baked_snapshot=strstr(request,"GET /detect.jpg ")==request;
-        bool baked_stream=strstr(request,"GET /detect.mjpg ")==request;
+        if(n<=0){close(fd);return;}
+        // Accept cache-busting query strings used when the browser switches MJPEG streams.
+        const auto matches=[&](const char* path)->bool{
+            const size_t k=strlen(path);
+            return strncmp(request,"GET ",4)==0 &&
+                   strncmp(request+4,path,k)==0 &&
+                   (request[4+k]==' ' || request[4+k]=='?');
+        };
+        bool snapshot=matches("/snapshot.jpg");
+        bool stream=matches("/live.mjpg");
+        bool baked_snapshot=matches("/detect.jpg");
+        bool baked_stream=matches("/detect.mjpg");
         if(!snapshot && !stream && !baked_snapshot && !baked_stream){
             const char page[]=R"PAGE(HTTP/1.0 200 OK
 Content-Type: text/html; charset=utf-8
@@ -220,8 +224,9 @@ small{color:#a6bdcf;display:block;line-height:1.8}
 <button id="stop" class="stop" onclick="cmd('stop')" disabled>■ 停止录像</button>
 <button id="reconnect" onclick="location.reload()" hidden>重新连接</button>
 <span id="status">正在连接录像控制服务…</span></div>
-<div class="toolbar"><button onclick="setMode(true)">带框识别（320×320）</button>
-<button onclick="setMode(false)">原始预览（1280×720）</button></div>
+<div class="toolbar"><button id="mode-detect" onclick="setMode(true)">带框识别（320×320）</button>
+<button id="mode-raw" onclick="setMode(false)">原始预览（1280×720）</button>
+<span id="preview-mode-status">当前：带框识别（320×320）</span></div>
 <div id="visual"><img id="view" src="/detect.mjpg"></div>
 <p id="detection">YOLO置信度70% | 检测结果连接中…</p><p id="detail"></p>
 <small>录像格式 MJPEG AVI，记录每2帧中的1帧（40FPS），原始取流维持80FPS，无二次 JPEG 编码。录像在板端 /code/camera/recordings，每段最多60秒。视频 FPS 以实际文件解码检测为准。网页显示速率不等于摄像头采集速率。</small>
@@ -229,7 +234,16 @@ small{color:#a6bdcf;display:block;line-height:1.8}
 const api='http://'+location.hostname+':8082';
 let disconnected=false,pollTimer=null,refreshBusy=false,detectionBusy=false;
 const requests=new Set();
-function setMode(detect){document.getElementById('view').src=detect?'/detect.mjpg':'/live.mjpg';}
+function setMode(detect){
+  if(disconnected)return;
+  const url=detect?'/detect.mjpg':'/live.mjpg';
+  const view=document.getElementById('view');
+  view.src=url+'?mode='+Date.now();
+  document.getElementById('mode-detect').disabled=detect;
+  document.getElementById('mode-raw').disabled=!detect;
+  document.getElementById('preview-mode-status').textContent=
+    detect?'当前：带框识别（320×320）':'当前：原始预览（1280×720）';
+}
 function offline(reason){if(disconnected)return;disconnected=true;clearTimeout(pollTimer);
 for(const controller of requests)controller.abort();
 document.getElementById('start').disabled=true;document.getElementById('stop').disabled=true;
@@ -248,7 +262,9 @@ document.getElementById('stop').disabled=!d.requested;document.getElementById('s
 document.getElementById('detail').textContent='已录编码帧：'+d.written+' · 队列丢帧：'+d.dropped+' · 输出：'+(d.bytes/1048576).toFixed(1)+' MB · 已完成：'+d.segments+'段 · '+(d.error||'正常');
 }catch(e){offline('摄像头服务或网络不可用：'+e.message);}
 finally{refreshBusy=false;if(!disconnected)pollTimer=setTimeout(refresh,1000);}}
-document.getElementById('view').addEventListener('error',()=>offline('预览连接中断'));
+document.getElementById('view').addEventListener('error',()=>{
+    document.getElementById('preview-mode-status').textContent='图像连接失败，可重新选择预览模式';
+});
 window.addEventListener('pagehide',()=>offline('页面已关闭'));
 // Boxes are decoded on the board; the canvas follows the camera's original 1280x720 image.
 // NPU ~31FPS and MJPEG ~80FPS are asynchronous; boxes are latest-result overlays,
@@ -265,12 +281,12 @@ async function updateDetections(){
   finally{detectionBusy=false;}
 }
 setInterval(updateDetections,500);
-refresh();updateDetections();
+setMode(true);refresh();updateDetections();
 </script></main></html>)PAGE";
-            sendall(fd,page,sizeof(page)-1);close(fd);continue;
+            sendall(fd,page,sizeof(page)-1);close(fd);return;
         }
         unsigned long seen=0;
-        if(stream || baked_stream){const char hdr[]="HTTP/1.0 200 OK\r\nContent-Type: multipart/x-mixed-replace; boundary=frame\r\nCache-Control: no-store, no-cache\r\nPragma: no-cache\r\nConnection: close\r\n\r\n";if(!sendall(fd,hdr,sizeof(hdr)-1)){close(fd);continue;}}
+        if(stream || baked_stream){const char hdr[]="HTTP/1.0 200 OK\r\nContent-Type: multipart/x-mixed-replace; boundary=frame\r\nCache-Control: no-store, no-cache\r\nPragma: no-cache\r\nConnection: close\r\n\r\n";if(!sendall(fd,hdr,sizeof(hdr)-1)){close(fd);return;}}
         while(running){
             std::vector<unsigned char> jpg;
             if(baked_snapshot || baked_stream) {
@@ -289,6 +305,31 @@ refresh();updateDetections();
             if(!sendall(fd,"\r\n",2))break;
         }
         close(fd);
+}
+// MJPEG is a long-lived HTTP response. Never block accept() on one viewer.
+static std::atomic<unsigned> http_active_clients(0);
+static void http_server(int server){
+    while(running){
+        pollfd p{server,POLLIN,0};
+        if(poll(&p,1,100)<=0)continue;
+        int fd=accept(server,nullptr,nullptr);
+        if(fd<0)continue;
+        if(http_active_clients.load()>=8){
+            const char busy[]="HTTP/1.0 503 Service Unavailable\r\nContent-Length: 0\r\nConnection: close\r\n\r\n";
+            send(fd,busy,sizeof(busy)-1,MSG_NOSIGNAL);
+            close(fd);
+            continue;
+        }
+        ++http_active_clients;
+        try {
+            std::thread([fd](){
+                http_client(fd);
+                --http_active_clients;
+            }).detach();
+        }catch(...){
+            --http_active_clients;
+            close(fd);
+        }
     }
     close(server);
 }
