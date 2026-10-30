@@ -20,6 +20,8 @@
 #include "cviruntime.h"
 #include "yolo26_postprocess.h"
 #include "frame_baked_preview.h"
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include "vendor/stb_image_write.h"
 #include <chrono>
 #include <sstream>
 extern "C" {
@@ -46,6 +48,12 @@ static unsigned long baked_generation=0;
 static std::atomic<unsigned long> baked_encoded(0), baked_errors(0), baked_boxes(0);
 static std::atomic<unsigned long long> baked_pts(0);
 static bool baked_venc_ready=false;
+static std::atomic<unsigned long> baked_swjpeg_us(0),baked_dropped(0);
+static std::mutex baked_job_mutex;
+static std::vector<uint8_t> baked_job_nv21;
+static CVI_U64 baked_job_pts=0;
+static size_t baked_job_boxes=0;
+static bool baked_job_ready=false;
 static std::mutex input_mutex;
 static VIDEO_FRAME_INFO_S pending{};
 static bool has_pending=false;
@@ -388,43 +396,107 @@ static void bayer_sample(const char* dir,const char* phase){
 }
 // Independent, frame-accurate hardware JPEG channel: one VPSS 320x320 frame
 // is used by NPU, then annotated in-place, then sent to VENC1 before release.
-static bool encode_baked_frame(VIDEO_FRAME_INFO_S &frame,
-                               const std::vector<YoloBox> &boxes) {
-    if(!baked_venc_ready)return false;
-    if(!baked_nv21_boxes(frame,boxes)){
-        ++baked_errors; fprintf(stderr,"BAKED_NV21_DRAW_ERROR\n");return false;
+static void swjpeg_append(void *ctx, void *data, int size) {
+    if (!ctx || !data || size<=0) return;
+    auto *jpeg=static_cast<std::vector<unsigned char>*>(ctx);
+    const auto *p=static_cast<const unsigned char*>(data);
+    jpeg->insert(jpeg->end(),p,p+size);
+}
+// Copy the very same VPSS/NPU frame to software JPEG after writing YOLO boxes.
+// This avoids VENC1 rejecting an incompatible video buffer.
+
+// Inference thread: draw into the *same* VPSS frame, then make an owned
+// 320x320 NV21 copy, without waiting for JPEG compression.
+static bool queue_baked_frame(VIDEO_FRAME_INFO_S &frame,
+                              const std::vector<YoloBox> &boxes) {
+    if(!baked_nv21_boxes(frame,boxes)){++baked_errors;return false;}
+    const auto &v=frame.stVFrame;
+    auto *y=static_cast<const uint8_t*>(
+        CVI_SYS_MmapCache(v.u64PhyAddr[0],v.u32Length[0]));
+    auto *vu=static_cast<const uint8_t*>(
+        CVI_SYS_MmapCache(v.u64PhyAddr[1],v.u32Length[1]));
+    if(!y || !vu){
+        if(y)CVI_SYS_Munmap(const_cast<uint8_t*>(y),v.u32Length[0]);
+        if(vu)CVI_SYS_Munmap(const_cast<uint8_t*>(vu),v.u32Length[1]);
+        ++baked_errors;return false;
     }
-    VENC_RECV_PIC_PARAM_S recv{};recv.s32RecvPicNum=1;
-    const char *stage="start";
-    int e=CVI_VENC_StartRecvFrame(1,&recv);
-    if(!e){stage="send"; e=CVI_VENC_SendFrame(1,&frame,150);}
-    if(!e){
-        VENC_PACK_S packets[64]{};VENC_STREAM_S stream{};
-        stream.pstPack=packets;stream.u32PackCount=64;
-        stage="get";e=CVI_VENC_GetStream(1,&stream,150);
-        if(!e){
-            std::vector<unsigned char> jpg;
-            for(unsigned i=0;i<stream.u32PackCount;i++){
-                const auto &p=packets[i];
-                if(p.pu8Addr && p.u32Len>=p.u32Offset)
-                    jpg.insert(jpg.end(),p.pu8Addr+p.u32Offset,p.pu8Addr+p.u32Len);
+    const bool cache_ok=
+        CVI_SYS_IonInvalidateCache(v.u64PhyAddr[0],const_cast<uint8_t*>(y),v.u32Length[0])==0 &&
+        CVI_SYS_IonInvalidateCache(v.u64PhyAddr[1],const_cast<uint8_t*>(vu),v.u32Length[1])==0;
+    std::vector<uint8_t> packed;
+    if(cache_ok){
+        packed.resize(320u*320u*3u/2u);
+        for(int row=0;row<320;row++)
+            std::memcpy(packed.data()+row*320,y+row*v.u32Stride[0],320);
+        for(int row=0;row<160;row++)
+            std::memcpy(packed.data()+102400+row*320,vu+row*v.u32Stride[1],320);
+    }
+    CVI_SYS_Munmap(const_cast<uint8_t*>(vu),v.u32Length[1]);
+    CVI_SYS_Munmap(const_cast<uint8_t*>(y),v.u32Length[0]);
+    if(!cache_ok){++baked_errors;return false;}
+    {
+        std::lock_guard<std::mutex> lk(baked_job_mutex);
+        if(baked_job_ready)++baked_dropped; // overwrite stale unencoded frame
+        baked_job_nv21.swap(packed);
+        baked_job_pts=v.u64PTS;
+        baked_job_boxes=boxes.size();
+        baked_job_ready=true;
+    }
+    return true;
+}
+// Only one pending frame is allowed. JPEG worker never blocks NPU/VPSS or
+// creates an unbounded queue; all rectangles are already in image pixels.
+static void baked_swjpeg_worker(){
+    while(true){
+        std::vector<uint8_t> packed;
+        CVI_U64 pts=0;size_t nboxes=0;
+        {
+            std::lock_guard<std::mutex> lk(baked_job_mutex);
+            if(baked_job_ready){
+                packed.swap(baked_job_nv21);
+                pts=baked_job_pts;nboxes=baked_job_boxes;
+                baked_job_ready=false;
             }
-            CVI_VENC_ReleaseStream(1,&stream);
-            if(jpg.size()>4 && jpg[0]==0xff && jpg[1]==0xd8){
-                std::lock_guard<std::mutex> lock(baked_jpeg_mutex);
-                baked_latest.swap(jpg);
-                baked_pts=frame.stVFrame.u64PTS;
-                baked_boxes+=boxes.size();
-                ++baked_generation;
-                ++baked_encoded;
-            }else e=-1;
+        }
+        if(packed.empty()){
+            if(!running)break;
+            usleep(800);continue;
+        }
+        std::vector<uint8_t> rgb(320u*320u*3u);
+        const uint8_t *y=packed.data();
+        const uint8_t *vu=packed.data()+102400;
+        auto clamp=[](int x)->uint8_t{return static_cast<uint8_t>(x<0?0:(x>255?255:x));};
+        for(int row=0;row<320;row++){
+            const uint8_t *yp=y+row*320;
+            const uint8_t *cp=vu+(row/2)*320;
+            uint8_t *dst=rgb.data()+row*320*3;
+            for(int x=0;x<320;x++){
+                const int yy=std::max(0,static_cast<int>(yp[x])-16)*298;
+                const int vcr=static_cast<int>(cp[x&~1])-128;
+                const int ucb=static_cast<int>(cp[(x&~1)+1])-128;
+                dst[x*3+0]=clamp((yy+409*vcr+128)>>8);
+                dst[x*3+1]=clamp((yy-100*ucb-208*vcr+128)>>8);
+                dst[x*3+2]=clamp((yy+516*ucb+128)>>8);
+            }
+        }
+        std::vector<unsigned char> jpg;
+        const auto t0=std::chrono::steady_clock::now();
+        const int okay=stbi_write_jpg_to_func(swjpeg_append,&jpg,320,320,3,rgb.data(),75);
+        const auto dt=std::chrono::duration_cast<std::chrono::microseconds>(
+            std::chrono::steady_clock::now()-t0).count();
+        baked_swjpeg_us+=static_cast<unsigned long>(dt);
+        if(!okay || jpg.size()<4 || jpg[0]!=0xff || jpg[1]!=0xd8){
+            ++baked_errors;fprintf(stderr,"BAKED_SWJPEG_FAILURE\n");continue;
+        }
+        {
+            std::lock_guard<std::mutex> lk(baked_jpeg_mutex);
+            baked_latest.swap(jpg);
+            baked_pts=pts;
+            baked_boxes+=nboxes;
+            ++baked_generation;
+            ++baked_encoded;
         }
     }
-    CVI_VENC_StopRecvFrame(1);
-    if(e){++baked_errors;fprintf(stderr,"BAKED_VENC_ERROR stage=%s rc=0x%x pts=%llu phy=%llx\n",
-        stage,e,static_cast<unsigned long long>(frame.stVFrame.u64PTS),
-        static_cast<unsigned long long>(frame.stVFrame.u64PhyAddr[0]));}
-    return e==0;
 }
 static void encoder_worker(const char* dir){
     while(running){
@@ -530,20 +602,7 @@ int main(int argc,char** argv){
     if(!rc){rc=CVI_VENC_CreateChn(0,&attr);created=rc==0;printf("VENC CreateChn rc=0x%x\n",rc);}
     if(!rc){VENC_JPEG_PARAM_S jpeg{};rc=CVI_VENC_GetJpegParam(0,&jpeg);if(!rc){jpeg.u32Qfactor=quality;rc=CVI_VENC_SetJpegParam(0,&jpeg);}printf("VENC JPEG quality=%u rc=0x%x\n",quality,rc);}
     if(rc)running=0;
-    if(!rc && model_path && *model_path){
-        VENC_CHN_ATTR_S baked_attr=attr;
-        baked_attr.stVencAttr.u32MaxPicWidth=baked_attr.stVencAttr.u32PicWidth=320;
-        baked_attr.stVencAttr.u32MaxPicHeight=baked_attr.stVencAttr.u32PicHeight=320;
-        baked_attr.stVencAttr.u32BufSize=512*1024;
-        int be=CVI_VENC_CreateChn(1,&baked_attr);
-        if(!be){
-            VENC_JPEG_PARAM_S jp{};be=CVI_VENC_GetJpegParam(1,&jp);
-            if(!be){jp.u32Qfactor=quality;be=CVI_VENC_SetJpegParam(1,&jp);}
-        }
-        baked_venc_ready=be==0;
-        printf("BAKED_VENC_READY channel=1 size=320x320 rc=0x%x\n",be);
-        if(be){fprintf(stderr,"FATAL_BAKED_VENC_INIT\n");running=0;}
-    }
+    if(model_path && *model_path) printf("BAKED_SWJPEG_READY size=320x320 quality=75\n");
     if(model_path && *model_path){
         vpss_active=start_vpss();
         if(!vpss_active){fprintf(stderr,"FATAL_VPSS_INIT_FAILED\n");running=0;}
@@ -553,6 +612,8 @@ int main(int argc,char** argv){
     std::thread server_thread(http_server,server);
     std::thread control_thread(record_control_server,argv[1]);
     std::thread encoder_thread(encoder_worker,argv[2]);
+    std::thread baked_thread;
+    if(model_path && *model_path)baked_thread=std::thread(baked_swjpeg_worker);
     std::thread infer_thread;
     if(model_path && *model_path){
         infer_thread=std::thread([&](){
@@ -565,7 +626,7 @@ int main(int argc,char** argv){
                 double t0=now();bool ok=npu.run_frame(frame,argv[2],detections);
                 if(ok){
                     // Same physical VPSS frame; no asynchronous frame mismatch.
-                    encode_baked_frame(frame,detections);
+                    queue_baked_frame(frame,detections);
                     ++inference_done;
                     inference_ms+=static_cast<unsigned long>((now()-t0)*1000.0);
                     double ts=now();
@@ -706,17 +767,19 @@ int main(int argc,char** argv){
     }
     encoder_thread.join();
     if(infer_thread.joinable())infer_thread.join();
+    if(baked_thread.joinable())baked_thread.join();
     stop_vpss();
     recorder.stop();
     {std::lock_guard<std::mutex> guard(input_mutex);if(has_pending){CVI_VI_ReleaseChnFrame(0,0,&pending);has_pending=false;}}
     server_thread.join();
     control_thread.join();
-    if(baked_venc_ready){CVI_VENC_StopRecvFrame(1);CVI_VENC_DestroyChn(1);}
     if(created){CVI_VENC_StopRecvFrame(0);CVI_VENC_DestroyChn(0);}
     SAMPLE_COMM_VI_DestroyIsp(&cfg);SAMPLE_COMM_VI_DestroyVi(&cfg);SAMPLE_COMM_SYS_Exit();
     printf("BAKED_PREVIEW frames=%lu errors=%lu boxes=%lu last_pts=%llu\n",
            baked_encoded.load(),baked_errors.load(),baked_boxes.load(),
            static_cast<unsigned long long>(baked_pts.load()));
+    printf("BAKED_QUEUE_DROPS count=%lu\n",baked_dropped.load());
+    printf("BAKED_SWJPEG_TIMING avg_us=%.1f\n", baked_encoded.load()?double(baked_swjpeg_us.load())/baked_encoded.load():0.);
     printf("YOLO26_POSTPROCESS frames=%lu avg_us=%.1f\n",postprocess_count.load(),
            postprocess_count.load()?double(postprocess_total_us.load())/postprocess_count.load():0.);
     printf("VPSS_NPU_FINAL frames=%lu queue_drops=%lu send_errors=%lu get_errors=%lu forwards=%lu forward_errors=%lu\n",vpss_frames.load(),vpss_queue_drops.load(),vpss_send_errors.load(),vpss_get_errors.load(),inference_done.load(),inference_errors.load());

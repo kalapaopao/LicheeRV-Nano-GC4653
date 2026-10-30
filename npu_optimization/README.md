@@ -80,3 +80,6 @@ bash npu_optimization/capture_pipeline_opt/build_capture_first.sh
 ## 2026-10-31 YOLO26n 实时后处理和网页叠框
 
 已加入 C++ YOLO26n [1,5,2100] 后处理（置信度0.25、IoU0.45、letterbox映射）与网页Canvas叠框，8082的/detections实测HTTP200、约31FPS/0.24ms后处理；原80FPS采集、74.5℃过热保护、300秒配置保持。详见[实机验收及交接报告](capture_pipeline_opt/REPORT_POSTPROCESS_20261031.md)。
+## 2026-10-31 板端同步绘框：新实验版已接入板端默认入口
+
+板端新程序采用同一张320x320 VPSS帧完成YOLO26n检测和绿色边框绘制，再交给独立软件JPEG线程；网页默认显示已画框的 /detect.mjpg，不再用浏览器Canvas按120ms更新框。20秒实验采集稳态80FPS、NPU约28FPS、带框JPEG约20FPS且0编码错误；实际正样本画框仍待人工对照。74.5℃过热保护、300秒配置和旧Canvas回滚程序保留。详细数据和回滚见 [板端同帧绘框实机报告](capture_pipeline_opt/REPORT_FRAME_SYNC_SWJPEG_20261031.md)。
