@@ -23,11 +23,11 @@
 sh /code/camera/modules/record80_opt/start.sh
 ~~~
 
-脚本会读取板端的 `/code/camera/modules/record80_opt/config/record80_opt.yaml`，无需在命令前写环境变量。默认 **20秒实验模式**；运行结束将进行时钟/资源回滚，非无限持续运行。
+脚本会读取板端的 `/code/camera/modules/record80_opt/config/record80_opt.yaml`，无需在命令前写环境变量。默认 **300秒受保护运行模式**；在达到时间、过热或其他故障时会退出并恢复时钟；散热不足时可能不到5分钟就提前结束。
 
 | YAML 键 | 默认值 | 作用 |
 |---|---|---|
-| `max_run_sec` | 20 | 实验运行时间，允许20～300秒 |
+| `max_run_sec` | 300 | 最长运行300秒；允许20～300秒，过热可能提前退出 |
 | `auto_record` | false | 不自动录像 |
 | `npu_model_path` | `/code/camera/modules/record80_opt/fly_rm320_new_vpss_nv21_f16.cvimodel` | 最新YOLO26n 320 FP16模型 |
 | `vpss_min_gap_ms` | 20 | VPSS最小间隔20ms；0表示对所有VI帧缩放 |
@@ -76,3 +76,7 @@ bash npu_optimization/capture_pipeline_opt/build_capture_first.sh
 **安全事项：** 临时切换CAM1分频只用于有人监护的实验。一次SSH强制中断导致时钟未自动恢复和空锁目录，之后人工确认无摄像头进程、恢复 `0x00200001` 并清锁。独立看门狗异常退出仍未验收；切勿无人值守运行、强杀进程或覆盖稳定版本。
 
 **精度边界：** YOLO26与YOLOv8各31张验证图，但只有3张共同未见图，另外28张互相进入对方的训练集。仅3张共同未见图上召回都为100%，mAP50-95约70.18%和68.02%；样本量不足以确立泛化精度优劣。完整YOLO解码/NMS/叠框、正样本的板端精度和真正端到端FPS仍未验收。
+
+## 2026-10-31 YOLO26n 实时后处理和网页叠框
+
+已加入 C++ YOLO26n [1,5,2100] 后处理（置信度0.25、IoU0.45、letterbox映射）与网页Canvas叠框，8082的/detections实测HTTP200、约31FPS/0.24ms后处理；原80FPS采集、74.5℃过热保护、300秒配置保持。详见[实机验收及交接报告](capture_pipeline_opt/REPORT_POSTPROCESS_20261031.md)。

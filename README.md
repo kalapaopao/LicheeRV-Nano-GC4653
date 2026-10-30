@@ -99,9 +99,9 @@ sh /tmp/clock36_live_20261023/live_36_supervisor.sh
 
 新独立C++程序将硬件VPSS从原来的JPEG编码线程后面移到VI取帧后；JPEG编码由约60提升到约80FPS。增加20ms预处理限频后，VPSS工作量由约80降到40帧/秒，NPU仍约31.6次前向/秒，减少冗余缩放而不改变输入320分辨率。
 
-> **重要边界：** 全帧VPSS方案有完整结束日志；20ms限频方案只有运行中统计，SSH中断后缺正常退出验收（板端时钟和空锁已人工恢复）。NPU目标后处理、绘框及完整检测FPS尚未完成；此前稳定300秒采集里程碑没有被覆盖。
+> **重要边界：** 全帧VPSS方案有完整结束日志；20ms限频方案只有运行中统计，SSH中断后缺正常退出验收（板端时钟和空锁已人工恢复）。（历史状态）NPU后处理和绘框尚未完成；2026-10-31已实现单类YOLO26n后处理和Canvas叠框，最新实机31FPS，详见交接报告；此前稳定300秒采集里程碑没有被覆盖。
 
-**最新板端启动：** `sh /code/camera/modules/record80_opt/start.sh`；运行参数统一读取 `config/record80_opt.yaml`（默认20秒实验）。**最新实测配置读取正常，但VPSS Group已存在导致真实运行失败；仍需排查。**
+**当前板端启动：** `sh /code/camera/modules/record80_opt/start.sh`；从 `config/record80_opt.yaml` 读取参数（当前最长300秒）。**2026-10-31 后处理实机验收成功：采集约80FPS、YOLO26n约31FPS、网页Canvas叠框接口HTTP200；尚需正目标框精度验证，74.5℃温度保护保留。**
 
 [**实验C++源码与交接**](npu_optimization/README.md) · [数据JSON](npu_optimization/benchmarks/board_benchmarks_20261030.json) · [模型精度与速度对比](npu_optimization/fly_rm320_v8/REPORT_V8_VS_YOLO26_20261030.md) · [采集流水线研究报告](npu_optimization/capture_pipeline_opt/REPORT_CPP_CAPTURE_PIPELINE_20261030.md)。
 
@@ -156,3 +156,5 @@ sh /tmp/clock36_live_20261023/live_36_supervisor.sh
 - 完整 SDK、板端 RISC-V 已编译二进制、原始 RAW/NV21/JPEG、个人环境画面不随 Public GitHub 公开；仓库保留核心源码、静态指标、工作流和图表。详情见 [PUBLICATION_SCOPE.md](docs/PUBLICATION_SCOPE.md)。
 - 本仓库不包含可直接运行的整机镜像。官方基础资料：[Sipeed LicheeRV Nano Wiki](https://wiki.sipeed.com/hardware/zh/lichee/RV_Nano/1_intro.html) · [Sipeed LicheeRV-Nano-Build](https://github.com/sipeed/LicheeRV-Nano-Build)。
 - **技术免责声明：** 当前方案是该板该环境的研发里程碑，未完成正式驱动、物理时钟及逐帧画质认证；不同硬件/温度/曝光下请重新验证，不用于无人值守量产。
+
+2026-10-31 识别网页后处理交接：[YOLO26n 帧率、NMS、叠框及回滚](npu_optimization/capture_pipeline_opt/REPORT_POSTPROCESS_20261031.md)。

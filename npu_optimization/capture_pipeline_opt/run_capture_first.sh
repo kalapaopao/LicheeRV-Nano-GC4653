@@ -177,9 +177,9 @@ on_exit() {
 trap on_exit 0
 trap 'STOP_REASON=signal;exit 130' 1 2 15
 test "$(uname -r)" = '5.10.4-tag-'
-test -x "$ROOT/camera_capture_first_320"
+test -x "$ROOT/camera_capture_first_yolo26"
 test ! -e "$LOCK" || { echo "CAMERA_LOCK_BUSY"; exit 2; }
-if pidof camera_preview_hd camera_preview80 camera_preview_factory camera_factory_timing camera_36record camera_capture_first_320 camera_vpss_320 camera_36probe camera_bench camera_http80 camera_normal60 camera_stream minraw36 minraw1080_27or36 sensor_test sample_vio >/dev/null 2>&1; then
+if pidof camera_capture_first_yolo26 camera_preview_hd camera_preview80 camera_preview_factory camera_factory_timing camera_36record camera_capture_first_320 camera_vpss_320 camera_36probe camera_bench camera_http80 camera_normal60 camera_stream minraw36 minraw1080_27or36 sensor_test sample_vio >/dev/null 2>&1; then
   echo "CAMERA_PROCESS_BUSY"
   exit 2
 fi
@@ -200,7 +200,11 @@ export LD_LIBRARY_PATH=/code/camera/lib:/mnt/system/usr/lib:/mnt/system/usr/lib/
 echo "NPU_CONFIG model=$FLY_RM_MODEL vpss_gap_ms=$CAPTURE_VPSS_MIN_GAP_MS"
 export PREVIEW_DIAG_LINEAR=1
 export PREVIEW_DIAG_RAW=1
-"$ROOT/camera_capture_first_320" 10.133.124.1 "$REPORT" 80 >"$REPORT/capture.log" 2>&1 &
+# Prefer the actual Wi-Fi address; keep the legacy USB bind if wlan0 is down.
+WEB_BIND_IP=$(ifconfig wlan0 2>/dev/null | awk '/inet addr:/ {sub(/^addr:/, "", $2); print $2; exit}')
+if [ -z "$WEB_BIND_IP" ]; then WEB_BIND_IP=10.133.124.1; fi
+echo "PREVIEW_BIND_IP=$WEB_BIND_IP"
+"$ROOT/camera_capture_first_yolo26" "$WEB_BIND_IP" "$REPORT" 80 >"$REPORT/capture.log" 2>&1 &
 CAM_PID=$!
 echo "$CAM_PID" >"$ROOT/record_cam.pid"
 echo "CAMERA_PID=$CAM_PID"
@@ -223,12 +227,12 @@ echo "MMIO_WRITE_TARGET=$TARGET"
 CHANGED=1
 devmem "$REG" 32 "$TARGET"
 test "$(clockreg)" = "$TARGET" || { echo "MMIO_TARGET_MISMATCH"; exit 5; }
-echo "LIVE_READY http://10.133.124.1:8081/ approx36MHz; time=$(now)"
+echo "LIVE_READY http://$WEB_BIND_IP:8081/ approx36MHz; time=$(now)"
 echo "CLOCK_CCF_STALE=$(cat /sys/kernel/debug/clk/clk_cam1/clk_rate)"
 echo "LIFETIME_MAX=${MAX_RUN_SEC}s"
 if [ "${RECORD_TEST_AUTOSTART:-0}" = 1 ]; then
   echo RECORD_START_REQUEST
-  curl -fsS --max-time 5 -X POST http://10.133.124.1:8082/start || echo RECORD_START_HTTP_FAILED
+  curl -fsS --max-time 5 -X POST "http://$WEB_BIND_IP:8082/start" || echo RECORD_START_HTTP_FAILED
 fi
 START=$(now)
 CYCLES=0

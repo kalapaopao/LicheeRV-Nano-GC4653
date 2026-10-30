@@ -18,6 +18,9 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include "cviruntime.h"
+#include "yolo26_postprocess.h"
+#include <chrono>
+#include <sstream>
 extern "C" {
 #include "sample_comm.h"
 #include "cvi_venc.h"
@@ -44,6 +47,10 @@ static std::atomic<unsigned long> network_sent(0),network_bytes(0),preview_repla
 static std::atomic<unsigned long> inference_done(0),inference_errors(0),inference_ms(0);
 static std::atomic<unsigned long> vpss_frames(0),vpss_send_errors(0),vpss_get_errors(0),vpss_queue_drops(0);
 static std::atomic<unsigned long> vpss_total_us(0);
+static std::mutex detection_mutex;
+static std::vector<YoloBox> current_detections;
+static double detections_at=0.0, detection_period_ms=0.0;
+static std::atomic<unsigned long> postprocess_total_us(0), postprocess_count(0);
 static std::mutex vpss_mutex;
 static VIDEO_FRAME_INFO_S vpss_pending{};
 static bool vpss_has_pending=false;
@@ -99,11 +106,29 @@ public:
         for(int k=0;k<3;k++){input_[0].mean[k]=0.f;input_[0].scale[k]=1.f;}
         return true;
     }
-    bool run_frame(const VIDEO_FRAME_INFO_S &f,const char* report_dir){
+    bool run_frame(const VIDEO_FRAME_INFO_S &f,const char* report_dir,std::vector<YoloBox>& detections){
         if(f.stVFrame.u32Width!=320 || f.stVFrame.u32Height!=320)return false;
         uint64_t addr[1]={f.stVFrame.u64PhyAddr[0]};
         if(CVI_NN_SetTensorWithAlignedFrames(input_,addr,1,CVI_NN_PIXEL_YUV_NV21)!=0)return false;
         bool ok=CVI_NN_Forward(model_,input_,in_n_,output_,out_n_)==0;
+        if(ok){
+            const size_t bytes=CVI_NN_TensorSize(&output_[0]);
+            if(bytes != 5u*2100u*sizeof(float)){
+                fprintf(stderr,"NPU_POSTPROCESS_UNSUPPORTED_OUTPUT_BYTES=%zu expected=42000\n",bytes);
+                ok=false;
+            }else{
+                const float* raw=reinterpret_cast<const float*>(CVI_NN_TensorPtr(&output_[0]));
+                if(!raw)ok=false;
+                else{
+                    const auto begin=std::chrono::steady_clock::now();
+                    detections=yolo26_decode(raw,2100,0.25f,0.45f,40);
+                    const auto end=std::chrono::steady_clock::now();
+                    postprocess_total_us+=static_cast<unsigned long>(
+                        std::chrono::duration_cast<std::chrono::microseconds>(end-begin).count());
+                    ++postprocess_count;
+                }
+            }
+        }
         if(ok && !traced_){
             traced_=true;
             char path[512];snprintf(path,sizeof(path),"%s/vpss_first_320.nv21",report_dir);
@@ -168,19 +193,24 @@ main{max-width:1250px;margin:auto;padding:20px}
 h2{font-size:22px}.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:16px 0}
 button{border:0;border-radius:8px;color:#fff;background:#276b58;padding:12px 20px;font-size:15px;cursor:pointer}
 button.stop{background:#a83d48}button:disabled{opacity:.4}
-#status{color:#9de6d5}#view{width:100%;height:auto;background:black;border-radius:8px}
+#status{color:#9de6d5}#visual{position:relative;width:100%;overflow:hidden;border-radius:8px}
+#view{display:block;width:100%;height:auto;background:black}
+#boxes{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+#detection{color:#64ecd2;font-variant-numeric:tabular-nums}
 small{color:#a6bdcf;display:block;line-height:1.8}
 </style><main><h2>GC4653 · 1280×720 · 80FPS 采集 / 40FPS Q85 录像</h2>
 <div class="toolbar"><button id="start" onclick="cmd('start')" disabled>● 开始录像</button>
 <button id="stop" class="stop" onclick="cmd('stop')" disabled>■ 停止录像</button>
 <button id="reconnect" onclick="location.reload()" hidden>重新连接</button>
 <span id="status">正在连接录像控制服务…</span></div>
-<img id="view" src="/live.mjpg"><p id="detail"></p>
+<div id="visual"><img id="view" src="/live.mjpg"><canvas id="boxes" width="1280" height="720"></canvas></div>
+<p id="detection">检测结果连接中…</p><p id="detail"></p>
 <small>录像格式 MJPEG AVI，记录每2帧中的1帧（40FPS），原始取流维持80FPS，无二次 JPEG 编码。录像在板端 /code/camera/recordings，每段最多60秒。视频 FPS 以实际文件解码检测为准。网页显示速率不等于摄像头采集速率。</small>
 <script>
 const api='http://'+location.hostname+':8082';
-let disconnected=false,pollTimer=null,refreshBusy=false;
+let disconnected=false,pollTimer=null,refreshBusy=false,detectionBusy=false;
 const requests=new Set();
+const overlay=document.getElementById('boxes'),draw=overlay.getContext('2d');
 function offline(reason){if(disconnected)return;disconnected=true;clearTimeout(pollTimer);
 for(const controller of requests)controller.abort();
 document.getElementById('start').disabled=true;document.getElementById('stop').disabled=true;
@@ -201,7 +231,32 @@ document.getElementById('detail').textContent='已录编码帧：'+d.written+' �
 finally{refreshBusy=false;if(!disconnected)pollTimer=setTimeout(refresh,1000);}}
 document.getElementById('view').addEventListener('error',()=>offline('预览连接中断'));
 window.addEventListener('pagehide',()=>offline('页面已关闭'));
-refresh();
+// Boxes are decoded on the board; the canvas follows the camera's original 1280x720 image.
+// NPU ~31FPS and MJPEG ~80FPS are asynchronous; boxes are latest-result overlays,
+// not pixel-perfect same-frame snapshots.
+async function updateDetections(){
+  if(disconnected||detectionBusy)return;
+  detectionBusy=true;
+  try{
+    const d=await request('/detections',{cache:'no-store'});
+    draw.clearRect(0,0,1280,720);
+    if(d.age_ms<1000)for(const b of d.boxes||[]){
+      const x=Math.max(0,b.x1),y=Math.max(0,b.y1),w=Math.max(0,b.x2-b.x1),h=Math.max(0,b.y2-b.y1);
+      draw.strokeStyle='#40ecc3';draw.lineWidth=3;draw.strokeRect(x,y,w,h);
+      const text='target '+(b.score*100).toFixed(1)+'%';
+      draw.font='bold 20px sans-serif';
+      const tw=draw.measureText(text).width+14,ty=Math.max(0,y-27);
+      draw.fillStyle='rgba(7,64,52,.88)';draw.fillRect(x,ty,tw,27);
+      draw.fillStyle='#fff';draw.fillText(text,x+7,ty+20);
+    }
+    document.getElementById('detection').textContent=
+      'YOLO26n | '+(d.fps||0).toFixed(1)+' 检测帧/秒 | '+(d.post_ms||0).toFixed(2)+'ms 后处理 | '
+      +(d.boxes||[]).length+' 个目标 | 结果延迟 '+Math.round(d.age_ms||0)+'ms';
+  }catch(e){document.getElementById('detection').textContent='检测结果暂不可用：'+e.message;}
+  finally{detectionBusy=false;}
+}
+setInterval(updateDetections,120);
+refresh();updateDetections();
 </script></main></html>)PAGE";
             sendall(fd,page,sizeof(page)-1);close(fd);continue;
         }
@@ -251,8 +306,33 @@ static void record_control_server(const char* bind_ip){
             recorder.command(false);body="{\"accepted\":true,\"action\":\"stop\"}";
         }else if(strcmp(method,"GET")==0 && strcmp(route,"/status")==0)
             body=recorder.status();
-        else {status="404 Not Found";body="{\"error\":\"route not found\"}";}
-        char hdr[512];
+        else if(strcmp(method,"GET")==0 && strcmp(route,"/detections")==0){
+            std::vector<YoloBox> boxes;
+            double age=0,period=0;
+            {
+                std::lock_guard<std::mutex> lk(detection_mutex);
+                boxes=current_detections;
+                age=detections_at>0 ? (now()-detections_at)*1000.0 : 1.e9;
+                period=detection_period_ms;
+            }
+            std::ostringstream out;
+            out.setf(std::ios::fixed);out.precision(2);
+            out<<"{\"model\":\"YOLO26n\",\"class\":\"target\",\"fps\":"
+               <<(period>0?1000.0/period:0.0)<<",\"age_ms\":"<<age
+               <<",\"post_ms\":"<<(postprocess_count.load()
+                  ?postprocess_total_us.load()/double(postprocess_count.load())/1000.0:0.0)
+               <<",\"boxes\":[";
+            for(size_t i=0;i<boxes.size();++i){
+                if(i)out<<",";
+                const YoloBox &b=boxes[i];
+                out<<"{\"x1\":"<<b.x1<<",\"y1\":"<<b.y1
+                   <<",\"x2\":"<<b.x2<<",\"y2\":"<<b.y2
+                   <<",\"score\":"<<b.score<<",\"cls\":"<<b.cls<<"}";
+            }
+            out<<"]}";
+            body=out.str();
+        }
+        else {status="404 Not Found";body="{\"error\":\"route not found\"}";}        char hdr[512];
         int k=snprintf(hdr,sizeof(hdr),"HTTP/1.1 %s\r\nContent-Type: application/json\r\n"
            "Content-Length: %zu\r\nAccess-Control-Allow-Origin: *\r\n"
            "Access-Control-Allow-Methods: GET,POST,OPTIONS\r\n"
@@ -417,8 +497,22 @@ int main(int argc,char** argv){
                 {std::lock_guard<std::mutex> g(vpss_mutex);
                   if(vpss_has_pending){frame=vpss_pending;vpss_has_pending=false;got=true;}}
                 if(!got){usleep(800);continue;}
-                double t0=now();bool ok=npu.run_frame(frame,argv[2]);
-                if(ok){++inference_done;inference_ms+=static_cast<unsigned long>((now()-t0)*1000.0);}
+                std::vector<YoloBox> detections;
+                double t0=now();bool ok=npu.run_frame(frame,argv[2],detections);
+                if(ok){
+                    ++inference_done;
+                    inference_ms+=static_cast<unsigned long>((now()-t0)*1000.0);
+                    double ts=now();
+                    {
+                        std::lock_guard<std::mutex> lk(detection_mutex);
+                        if(detections_at>0){
+                            const double dt=(ts-detections_at)*1000.;
+                            detection_period_ms=detection_period_ms>0 ? detection_period_ms*0.8+dt*0.2 : dt;
+                        }
+                        detections_at=ts;
+                        current_detections.swap(detections);
+                    }
+                }
                 else ++inference_errors;
                 CVI_VPSS_ReleaseChnFrame(VPSS_AI_GRP,VPSS_AI_CHN,&frame);
             }
@@ -553,6 +647,8 @@ int main(int argc,char** argv){
     control_thread.join();
     if(created){CVI_VENC_StopRecvFrame(0);CVI_VENC_DestroyChn(0);}
     SAMPLE_COMM_VI_DestroyIsp(&cfg);SAMPLE_COMM_VI_DestroyVi(&cfg);SAMPLE_COMM_SYS_Exit();
+    printf("YOLO26_POSTPROCESS frames=%lu avg_us=%.1f\n",postprocess_count.load(),
+           postprocess_count.load()?double(postprocess_total_us.load())/postprocess_count.load():0.);
     printf("VPSS_NPU_FINAL frames=%lu queue_drops=%lu send_errors=%lu get_errors=%lu forwards=%lu forward_errors=%lu\n",vpss_frames.load(),vpss_queue_drops.load(),vpss_send_errors.load(),vpss_get_errors.load(),inference_done.load(),inference_errors.load());
     printf("stopped frames=%lu encoded=%lu infer=%lu infer_errors=%lu infer_avg_ms=%.3f errors=%lu tuning_failed=%d\n",count,encoded.load(),inference_done.load(),inference_errors.load(),inference_done?double(inference_ms.load())/inference_done.load():0.,errors.load(),tuning_failed);return rc||errors||tuning_failed?1:0;
 }
