@@ -19,6 +19,7 @@
 #include <arpa/inet.h>
 #include "cviruntime.h"
 #include "yolo26_postprocess.h"
+#include "frame_baked_preview.h"
 #include <chrono>
 #include <sstream>
 extern "C" {
@@ -39,6 +40,12 @@ static_assert(ATOMIC_INT_LOCK_FREE==2,"Signal handler requires lock-free atomic 
 static std::mutex jpeg_mutex;
 static std::vector<unsigned char> latest;
 static unsigned long generation=0;
+static std::mutex baked_jpeg_mutex;
+static std::vector<unsigned char> baked_latest;
+static unsigned long baked_generation=0;
+static std::atomic<unsigned long> baked_encoded(0), baked_errors(0), baked_boxes(0);
+static std::atomic<unsigned long long> baked_pts(0);
+static bool baked_venc_ready=false;
 static std::mutex input_mutex;
 static VIDEO_FRAME_INFO_S pending{};
 static bool has_pending=false;
@@ -181,7 +188,9 @@ static void http_server(int server){
         if(n<=0){close(fd);continue;}
         bool snapshot=strstr(request,"GET /snapshot.jpg ")==request;
         bool stream=strstr(request,"GET /live.mjpg ")==request;
-        if(!snapshot && !stream){
+        bool baked_snapshot=strstr(request,"GET /detect.jpg ")==request;
+        bool baked_stream=strstr(request,"GET /detect.mjpg ")==request;
+        if(!snapshot && !stream && !baked_snapshot && !baked_stream){
             const char page[]=R"PAGE(HTTP/1.0 200 OK
 Content-Type: text/html; charset=utf-8
 Cache-Control: no-store
@@ -203,14 +212,16 @@ small{color:#a6bdcf;display:block;line-height:1.8}
 <button id="stop" class="stop" onclick="cmd('stop')" disabled>■ 停止录像</button>
 <button id="reconnect" onclick="location.reload()" hidden>重新连接</button>
 <span id="status">正在连接录像控制服务…</span></div>
-<div id="visual"><img id="view" src="/live.mjpg"><canvas id="boxes" width="1280" height="720"></canvas></div>
+<div class="toolbar"><button onclick="setMode(true)">带框识别（320×320）</button>
+<button onclick="setMode(false)">原始预览（1280×720）</button></div>
+<div id="visual"><img id="view" src="/detect.mjpg"></div>
 <p id="detection">检测结果连接中…</p><p id="detail"></p>
 <small>录像格式 MJPEG AVI，记录每2帧中的1帧（40FPS），原始取流维持80FPS，无二次 JPEG 编码。录像在板端 /code/camera/recordings，每段最多60秒。视频 FPS 以实际文件解码检测为准。网页显示速率不等于摄像头采集速率。</small>
 <script>
 const api='http://'+location.hostname+':8082';
 let disconnected=false,pollTimer=null,refreshBusy=false,detectionBusy=false;
 const requests=new Set();
-const overlay=document.getElementById('boxes'),draw=overlay.getContext('2d');
+function setMode(detect){document.getElementById('view').src=detect?'/detect.mjpg':'/live.mjpg';}
 function offline(reason){if(disconnected)return;disconnected=true;clearTimeout(pollTimer);
 for(const controller of requests)controller.abort();
 document.getElementById('start').disabled=true;document.getElementById('stop').disabled=true;
@@ -235,42 +246,38 @@ window.addEventListener('pagehide',()=>offline('页面已关闭'));
 // NPU ~31FPS and MJPEG ~80FPS are asynchronous; boxes are latest-result overlays,
 // not pixel-perfect same-frame snapshots.
 async function updateDetections(){
-  if(disconnected||detectionBusy)return;
-  detectionBusy=true;
+  if(disconnected||detectionBusy)return; detectionBusy=true;
   try{
     const d=await request('/detections',{cache:'no-store'});
-    draw.clearRect(0,0,1280,720);
-    if(d.age_ms<1000)for(const b of d.boxes||[]){
-      const x=Math.max(0,b.x1),y=Math.max(0,b.y1),w=Math.max(0,b.x2-b.x1),h=Math.max(0,b.y2-b.y1);
-      draw.strokeStyle='#40ecc3';draw.lineWidth=3;draw.strokeRect(x,y,w,h);
-      const text='target '+(b.score*100).toFixed(1)+'%';
-      draw.font='bold 20px sans-serif';
-      const tw=draw.measureText(text).width+14,ty=Math.max(0,y-27);
-      draw.fillStyle='rgba(7,64,52,.88)';draw.fillRect(x,ty,tw,27);
-      draw.fillStyle='#fff';draw.fillText(text,x+7,ty+20);
-    }
-    document.getElementById('detection').textContent=
-      'YOLO26n | '+(d.fps||0).toFixed(1)+' 检测帧/秒 | '+(d.post_ms||0).toFixed(2)+'ms 后处理 | '
-      +(d.boxes||[]).length+' 个目标 | 结果延迟 '+Math.round(d.age_ms||0)+'ms';
-  }catch(e){document.getElementById('detection').textContent='检测结果暂不可用：'+e.message;}
+    document.getElementById('detection').textContent='同帧板端叠框 | '
+      +(d.fps||0).toFixed(1)+' 检测FPS | '
+      +(d.post_ms||0).toFixed(2)+'ms 后处理 | '
+      +(d.boxes||[]).length+' 个目标 | 带框JPEG '+(d.baked_frames||0)+' 帧';
+  }catch(e){document.getElementById('detection').textContent='检测结果不可用：'+e.message;}
   finally{detectionBusy=false;}
 }
-setInterval(updateDetections,120);
+setInterval(updateDetections,500);
 refresh();updateDetections();
 </script></main></html>)PAGE";
             sendall(fd,page,sizeof(page)-1);close(fd);continue;
         }
         unsigned long seen=0;
-        if(stream){const char hdr[]="HTTP/1.0 200 OK\r\nContent-Type: multipart/x-mixed-replace; boundary=frame\r\nCache-Control: no-store, no-cache\r\nPragma: no-cache\r\nConnection: close\r\n\r\n";if(!sendall(fd,hdr,sizeof(hdr)-1)){close(fd);continue;}}
+        if(stream || baked_stream){const char hdr[]="HTTP/1.0 200 OK\r\nContent-Type: multipart/x-mixed-replace; boundary=frame\r\nCache-Control: no-store, no-cache\r\nPragma: no-cache\r\nConnection: close\r\n\r\n";if(!sendall(fd,hdr,sizeof(hdr)-1)){close(fd);continue;}}
         while(running){
             std::vector<unsigned char> jpg;
-            {std::lock_guard<std::mutex> guard(jpeg_mutex);if(generation!=seen){seen=generation;jpg=latest;}}
+            if(baked_snapshot || baked_stream) {
+                std::lock_guard<std::mutex> guard(baked_jpeg_mutex);
+                if(baked_generation!=seen){seen=baked_generation;jpg=baked_latest;}
+            }else{
+                std::lock_guard<std::mutex> guard(jpeg_mutex);
+                if(generation!=seen){seen=generation;jpg=latest;}
+            }
             if(jpg.empty()){usleep(2000);continue;}
             char hdr[256];
-            int count=snprintf(hdr,sizeof(hdr),snapshot?"HTTP/1.0 200 OK\r\nContent-Type: image/jpeg\r\nContent-Length: %zu\r\nCache-Control: no-store\r\n\r\n":"--frame\r\nContent-Type: image/jpeg\r\nContent-Length: %zu\r\n\r\n",jpg.size());
+            int count=snprintf(hdr,sizeof(hdr),(snapshot || baked_snapshot)?"HTTP/1.0 200 OK\r\nContent-Type: image/jpeg\r\nContent-Length: %zu\r\nCache-Control: no-store\r\n\r\n":"--frame\r\nContent-Type: image/jpeg\r\nContent-Length: %zu\r\n\r\n",jpg.size());
             if(!sendall(fd,hdr,count)||!sendall(fd,jpg.data(),jpg.size()))break;
             ++network_sent;network_bytes+=jpg.size();
-            if(snapshot)break;
+            if(snapshot || baked_snapshot)break;
             if(!sendall(fd,"\r\n",2))break;
         }
         close(fd);
@@ -321,6 +328,9 @@ static void record_control_server(const char* bind_ip){
                <<(period>0?1000.0/period:0.0)<<",\"age_ms\":"<<age
                <<",\"post_ms\":"<<(postprocess_count.load()
                   ?postprocess_total_us.load()/double(postprocess_count.load())/1000.0:0.0)
+               <<",\"baked_frames\":"<<baked_encoded.load()
+               <<",\"baked_errors\":"<<baked_errors.load()
+               <<",\"baked_pts\":"<<baked_pts.load()
                <<",\"boxes\":[";
             for(size_t i=0;i<boxes.size();++i){
                 if(i)out<<",";
@@ -375,6 +385,46 @@ static void bayer_sample(const char* dir,const char* phase){
         }
         printf("DIAG restore PipeDump=%x\n",CVI_VI_SetPipeDumpAttr(0,&previous));
     }
+}
+// Independent, frame-accurate hardware JPEG channel: one VPSS 320x320 frame
+// is used by NPU, then annotated in-place, then sent to VENC1 before release.
+static bool encode_baked_frame(VIDEO_FRAME_INFO_S &frame,
+                               const std::vector<YoloBox> &boxes) {
+    if(!baked_venc_ready)return false;
+    if(!baked_nv21_boxes(frame,boxes)){
+        ++baked_errors; fprintf(stderr,"BAKED_NV21_DRAW_ERROR\n");return false;
+    }
+    VENC_RECV_PIC_PARAM_S recv{};recv.s32RecvPicNum=1;
+    const char *stage="start";
+    int e=CVI_VENC_StartRecvFrame(1,&recv);
+    if(!e){stage="send"; e=CVI_VENC_SendFrame(1,&frame,150);}
+    if(!e){
+        VENC_PACK_S packets[64]{};VENC_STREAM_S stream{};
+        stream.pstPack=packets;stream.u32PackCount=64;
+        stage="get";e=CVI_VENC_GetStream(1,&stream,150);
+        if(!e){
+            std::vector<unsigned char> jpg;
+            for(unsigned i=0;i<stream.u32PackCount;i++){
+                const auto &p=packets[i];
+                if(p.pu8Addr && p.u32Len>=p.u32Offset)
+                    jpg.insert(jpg.end(),p.pu8Addr+p.u32Offset,p.pu8Addr+p.u32Len);
+            }
+            CVI_VENC_ReleaseStream(1,&stream);
+            if(jpg.size()>4 && jpg[0]==0xff && jpg[1]==0xd8){
+                std::lock_guard<std::mutex> lock(baked_jpeg_mutex);
+                baked_latest.swap(jpg);
+                baked_pts=frame.stVFrame.u64PTS;
+                baked_boxes+=boxes.size();
+                ++baked_generation;
+                ++baked_encoded;
+            }else e=-1;
+        }
+    }
+    CVI_VENC_StopRecvFrame(1);
+    if(e){++baked_errors;fprintf(stderr,"BAKED_VENC_ERROR stage=%s rc=0x%x pts=%llu phy=%llx\n",
+        stage,e,static_cast<unsigned long long>(frame.stVFrame.u64PTS),
+        static_cast<unsigned long long>(frame.stVFrame.u64PhyAddr[0]));}
+    return e==0;
 }
 static void encoder_worker(const char* dir){
     while(running){
@@ -480,6 +530,20 @@ int main(int argc,char** argv){
     if(!rc){rc=CVI_VENC_CreateChn(0,&attr);created=rc==0;printf("VENC CreateChn rc=0x%x\n",rc);}
     if(!rc){VENC_JPEG_PARAM_S jpeg{};rc=CVI_VENC_GetJpegParam(0,&jpeg);if(!rc){jpeg.u32Qfactor=quality;rc=CVI_VENC_SetJpegParam(0,&jpeg);}printf("VENC JPEG quality=%u rc=0x%x\n",quality,rc);}
     if(rc)running=0;
+    if(!rc && model_path && *model_path){
+        VENC_CHN_ATTR_S baked_attr=attr;
+        baked_attr.stVencAttr.u32MaxPicWidth=baked_attr.stVencAttr.u32PicWidth=320;
+        baked_attr.stVencAttr.u32MaxPicHeight=baked_attr.stVencAttr.u32PicHeight=320;
+        baked_attr.stVencAttr.u32BufSize=512*1024;
+        int be=CVI_VENC_CreateChn(1,&baked_attr);
+        if(!be){
+            VENC_JPEG_PARAM_S jp{};be=CVI_VENC_GetJpegParam(1,&jp);
+            if(!be){jp.u32Qfactor=quality;be=CVI_VENC_SetJpegParam(1,&jp);}
+        }
+        baked_venc_ready=be==0;
+        printf("BAKED_VENC_READY channel=1 size=320x320 rc=0x%x\n",be);
+        if(be){fprintf(stderr,"FATAL_BAKED_VENC_INIT\n");running=0;}
+    }
     if(model_path && *model_path){
         vpss_active=start_vpss();
         if(!vpss_active){fprintf(stderr,"FATAL_VPSS_INIT_FAILED\n");running=0;}
@@ -500,6 +564,8 @@ int main(int argc,char** argv){
                 std::vector<YoloBox> detections;
                 double t0=now();bool ok=npu.run_frame(frame,argv[2],detections);
                 if(ok){
+                    // Same physical VPSS frame; no asynchronous frame mismatch.
+                    encode_baked_frame(frame,detections);
                     ++inference_done;
                     inference_ms+=static_cast<unsigned long>((now()-t0)*1000.0);
                     double ts=now();
@@ -645,8 +711,12 @@ int main(int argc,char** argv){
     {std::lock_guard<std::mutex> guard(input_mutex);if(has_pending){CVI_VI_ReleaseChnFrame(0,0,&pending);has_pending=false;}}
     server_thread.join();
     control_thread.join();
+    if(baked_venc_ready){CVI_VENC_StopRecvFrame(1);CVI_VENC_DestroyChn(1);}
     if(created){CVI_VENC_StopRecvFrame(0);CVI_VENC_DestroyChn(0);}
     SAMPLE_COMM_VI_DestroyIsp(&cfg);SAMPLE_COMM_VI_DestroyVi(&cfg);SAMPLE_COMM_SYS_Exit();
+    printf("BAKED_PREVIEW frames=%lu errors=%lu boxes=%lu last_pts=%llu\n",
+           baked_encoded.load(),baked_errors.load(),baked_boxes.load(),
+           static_cast<unsigned long long>(baked_pts.load()));
     printf("YOLO26_POSTPROCESS frames=%lu avg_us=%.1f\n",postprocess_count.load(),
            postprocess_count.load()?double(postprocess_total_us.load())/postprocess_count.load():0.);
     printf("VPSS_NPU_FINAL frames=%lu queue_drops=%lu send_errors=%lu get_errors=%lu forwards=%lu forward_errors=%lu\n",vpss_frames.load(),vpss_queue_drops.load(),vpss_send_errors.load(),vpss_get_errors.load(),inference_done.load(),inference_errors.load());
