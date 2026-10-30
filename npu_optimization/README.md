@@ -15,6 +15,42 @@
 
 可复核数据：[board_benchmarks_20261030.json](benchmarks/board_benchmarks_20261030.json)、[采集优化交接](capture_pipeline_opt/REPORT_CPP_CAPTURE_PIPELINE_20261030.md)、[YOLO26模型报告](fly_rm320/REPORT_20261030_NEW_MODEL.md)、[YOLOv8对照报告](fly_rm320_v8/REPORT_V8_VS_YOLO26_20261030.md)。
 
+## 一条命令启动（所有运行参数从 YAML 读取）
+
+**板端运行：**
+
+~~~sh
+sh /code/camera/modules/record80_opt/start.sh
+~~~
+
+脚本会读取板端的 `/code/camera/modules/record80_opt/config/record80_opt.yaml`，无需在命令前写环境变量。默认 **20秒实验模式**；运行结束将进行时钟/资源回滚，非无限持续运行。
+
+| YAML 键 | 默认值 | 作用 |
+|---|---|---|
+| `max_run_sec` | 20 | 实验运行时间，允许20～300秒 |
+| `auto_record` | false | 不自动录像 |
+| `npu_model_path` | `/code/camera/modules/record80_opt/fly_rm320_new_vpss_nv21_f16.cvimodel` | 最新YOLO26n 320 FP16模型 |
+| `vpss_min_gap_ms` | 20 | VPSS最小间隔20ms；0表示对所有VI帧缩放 |
+| `jpeg_quality` | 85 | 硬件JPEG质量 |
+| `exposure_mode` | manual | 曝光模式；曝光和黑电平等细项同文件配置 |
+
+**仅校验 YAML / 文件是否存在（不启动摄像头）：**
+
+~~~sh
+sh /code/camera/modules/record80_opt/start.sh --check-config
+~~~
+
+配置错误、指定模型不存在、参数越界会在修改硬件状态前拒绝执行。参数集中于 YAML，录像模块的稳定版 `modules/record80/config/record80.yaml` 不受影响。
+
+### 2026-10-31 板端实际启动检查
+
+- `sh .../start.sh --check-config`：**成功**，确认运行时间20秒、不自动录像、YOLO26n FP16模型存在、20ms VPSS间隔。
+- 通过 `nohup sh .../start.sh` 启动完整短测：**初始化失败**。日志显示 `VPSS_CREATE_ERROR=0xc0068004` / `FATAL_VPSS_INIT_FAILED`，0帧推理。Sophgo错误码含义是 **VPSS GROUP 已存在**，不是配置读取失败。
+- 监督程序正常退出并回滚：时钟 `0x00200001`、无摄像头锁。未发现活动的常规用户态摄像头进程，但不能仅凭此认定可以清除内核VPSS组。
+- 后续需定位 VPSS Group 1 的所有者。**本次没有重置系统、强制销毁VPSS组或更改稳定采集模块**。
+
+因此：单命令与YAML读取已验证，**目前板端实际启动仍被VPSS占用阻塞，不能宣称已经完成推理运行验收**。
+
 ## 最新 C++11 源码
 
 ```text
@@ -35,10 +71,7 @@ bash npu_optimization/capture_pipeline_opt/build_capture_first.sh
 
 脚本从**本仓库读取源码**，从旁边的 `gc4653_36mhz_80fps_20261019` 工作区读取厂商SDK和工具链，输出被Git忽略的 `npu_optimization/bin/camera_capture_first_320`。另一个机器可设置 `LICHEERV_LAB_ROOT` 为SDK工作区绝对路径。模型文件、板端程序、厂商SDK、录像和传感器原始数据**不在公开仓库**。
 
-板端实验路径 `/code/camera/modules/record80_opt` 中保留已部署程序，当前模型为新训练 YOLO26n `fly_rm320_new_vpss_nv21_f16.cvimodel`；显式20ms短测命令：
-```sh
-MAX_RUN_SEC=20 RECORD_TEST_AUTOSTART=0 CAPTURE_VPSS_MIN_GAP_MS=20 FLY_RM_MODEL=/code/camera/modules/record80_opt/fly_rm320_new_vpss_nv21_f16.cvimodel sh /code/camera/modules/record80_opt/run_capture_first.sh
-```
+板端实验路径 `/code/camera/modules/record80_opt` 中保留已部署程序和 `config/record80_opt.yaml`。**运行请使用上面的一条启动命令**，不再附带模型路径、20ms间隔、自动录像或运行时长参数。历史多行命令已被 YAML 配置取代。
 
 **安全事项：** 临时切换CAM1分频只用于有人监护的实验。一次SSH强制中断导致时钟未自动恢复和空锁目录，之后人工确认无摄像头进程、恢复 `0x00200001` 并清锁。独立看门狗异常退出仍未验收；切勿无人值守运行、强杀进程或覆盖稳定版本。
 

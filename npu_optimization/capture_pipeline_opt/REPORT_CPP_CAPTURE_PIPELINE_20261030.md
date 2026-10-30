@@ -101,3 +101,25 @@ https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV1
 这意味着还存在**硬件 VI→VPSS 绑定、减少CPU参与和重复内存转发**的潜在方向。但当前型号的SDK配置和36MHz高速模式是否支持该拓扑，必须另外隔离实验，不能直接在稳定80FPS上切换，也不能提前声称会增加NPU前向FPS。
 
 更进一步的真正提升 YOLO26 识别FPS需重点检查：官方模型性能profile、分层耗时、FP16与经过严格校准的INT8正确性/召回率、模型后处理和叠框消耗，不能仅靠更多VPSS预处理帧。本轮**没有commit/push**；模型、大图/原始录像均不会加入Git。
+
+
+## 2026-10-31 更新：配置集中到 YAML，板端启动仅一条命令
+
+历史上使用 `MAX_RUN_SEC=20 RECORD_TEST_AUTOSTART=0 CAPTURE_VPSS_MIN_GAP_MS=20 FLY_RM_MODEL=... sh ...`，容易输错。
+
+**当前推荐板端调用：**
+
+~~~sh
+sh /code/camera/modules/record80_opt/start.sh
+~~~
+
+`run_capture_first.sh` 默认读取独立 `/code/camera/modules/record80_opt/config/record80_opt.yaml`，并在操作摄像头或时钟前验证运行时长、模型路径、VPSS节流和曝光等字段。模型缺失不会再悄悄降级成不做推理的采集模式。`sh /code/camera/modules/record80_opt/start.sh --check-config` 仅校验配置，不启动摄像头。稳定录像模块的 YAML 保持原样，互不干扰。
+
+
+### 2026-10-31 YAML启动实际验收补充
+
+- 配置校验命令 `sh /code/camera/modules/record80_opt/start.sh --check-config` **成功**（`CONFIG_OK`），正确读取独立 `config/record80_opt.yaml`。
+- 使用 `nohup sh /code/camera/modules/record80_opt/start.sh` 执行真实短测，**未成功进入推理**：`VPSS_CREATE_ERROR=0xc0068004`（CVI_ERR_VPSS_EXIST，VPSS GROUP已存在）。本轮报告 `session_23869_2367`，`stopped frames=0 ... infer=0`。
+- 脚本检测到 `CAMERA_EARLY_EXIT` 并清理，时钟已回到 `0x00200001`，锁目录不存在；本次并非YAML配置故障。
+- 没有发现常规用户态采集进程，尚未确定占用VPSS GROUP 1的是内核残留还是其他图像组件。**不直接删除VPSS GROUP、卸载驱动或重启板子**，后续必须隔离诊断后复测。
+- 官方错误码资料：https://doc.sophgo.com/cvitek-develop-docs/master/docs_latest_release/CV180x_CV181x/zh/01.software/MPI/Media_Processing_Software_Development_Reference/build/html/6_Video_Processing_Subsystem/Error_Codes.html

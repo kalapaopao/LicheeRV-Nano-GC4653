@@ -14,7 +14,7 @@ GUARD_PID=''
 LOCK_OWNED=0
 CHANGED=0
 STOP_REASON=''
-CONFIG=${RECORD80_CONFIG:-/code/camera/modules/record80/config/record80.yaml}
+CONFIG=${RECORD80_CONFIG:-$ROOT/config/record80_opt.yaml}
 config_error() { echo "BAD_RECORD80_CONFIG: $*" >&2; exit 2; }
 [ -r "$CONFIG" ] || config_error "cannot read $CONFIG"
 SEEN=' '
@@ -25,13 +25,23 @@ while IFS= read -r line || [ -n "$line" ]; do
   key=${line%%:*}
   value=$(printf '%s' "${line#*:}" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
   case "$key" in ''|*[!a-z0-9_]*) config_error "invalid key $key";; esac
-  case "$value" in ''|*[!a-zA-Z0-9_.-]*) config_error "invalid value for $key";; esac
+  if [ "$key" = npu_model_path ]; then
+    case "$value" in
+      /code/camera/modules/record80_opt/*.cvimodel) :;;
+      *) config_error "model must be an absolute .cvimodel under record80_opt";;
+    esac
+    case "$value" in *..*|*[!a-zA-Z0-9_./-]*) config_error "unsafe model path";; esac
+  else
+    case "$value" in ''|*[!a-zA-Z0-9_.-]*) config_error "invalid value for $key";; esac
+  fi
   case "$SEEN" in *" $key "*) config_error "duplicate key $key";; esac
   SEEN="$SEEN$key "
   case "$key" in
     schema_version) CFG_SCHEMA=$value;;
     camera_mode) CFG_MODE=$value;;
     max_run_sec) CFG_MAX_RUN=$value;;
+    npu_model_path) CFG_MODEL=$value;;
+    vpss_min_gap_ms) CFG_VPSS_GAP=$value;;
     auto_record) CFG_AUTO_RECORD=$value;;
     jpeg_quality) CFG_JPEG=$value;;
     exposure_mode) CFG_EXPOSURE_MODE=$value;;
@@ -58,6 +68,9 @@ num_range() {
   [ "$2" -ge "$3" ] && [ "$2" -le "$4" ] || config_error "$1 out of range [$3,$4]"
 }
 num_range max_run_sec "${CFG_MAX_RUN-}" 20 300
+num_range vpss_min_gap_ms "${CFG_VPSS_GAP-}" 0 50
+[ -n "${CFG_MODEL-}" ] || config_error 'npu_model_path is required'
+[ -r "$CFG_MODEL" ] || config_error "NPU model missing/unreadable: $CFG_MODEL"
 num_range jpeg_quality "${CFG_JPEG-}" 75 90
 case "${CFG_AUTO_RECORD-}" in true|false) :;; *) config_error 'auto_record must be true or false';; esac
 case "${CFG_EXPOSURE_MODE-}" in auto|manual) :;; *) config_error 'exposure_mode must be auto or manual';; esac
@@ -89,11 +102,12 @@ num_range black_level_r "$CFG_BLC_R" 0 4095
 num_range black_level_gr "$CFG_BLC_GR" 0 4095
 num_range black_level_gb "$CFG_BLC_GB" 0 4095
 num_range black_level_b "$CFG_BLC_B" 0 4095
-# Existing command-line environment overrides remain compatible.
-MAX_RUN_SEC=${MAX_RUN_SEC:-$CFG_MAX_RUN}
-if [ -z "${RECORD_TEST_AUTOSTART-}" ]; then
-  if [ "$CFG_AUTO_RECORD" = true ]; then RECORD_TEST_AUTOSTART=1; else RECORD_TEST_AUTOSTART=0; fi
-fi
+# All runtime settings come from experiment YAML.
+MAX_RUN_SEC=$CFG_MAX_RUN
+if [ "$CFG_AUTO_RECORD" = true ]; then RECORD_TEST_AUTOSTART=1; else RECORD_TEST_AUTOSTART=0; fi
+CAPTURE_VPSS_MIN_GAP_MS=$CFG_VPSS_GAP
+export FLY_RM_MODEL=$CFG_MODEL
+export CAPTURE_VPSS_MIN_GAP_MS
 num_range MAX_RUN_SEC "$MAX_RUN_SEC" 20 300
 case "$RECORD_TEST_AUTOSTART" in 0|1) :;; *) config_error 'RECORD_TEST_AUTOSTART must be 0 or 1';; esac
 export RECORD80_JPEG_QUALITY=$CFG_JPEG RECORD80_EXPOSURE_MODE=$CFG_EXPOSURE_MODE
@@ -108,7 +122,7 @@ if [ "$CFG_EXPOSURE_MODE" = manual ]; then
 else
   AE_SUMMARY="auto_exp_max_us=$CFG_AUTO_EXP_MAX"
 fi
-CONFIG_SUMMARY="path=$CONFIG mode=$CFG_MODE run_sec=$MAX_RUN_SEC auto_record=$RECORD_TEST_AUTOSTART jpeg_quality=$CFG_JPEG exposure_mode=$CFG_EXPOSURE_MODE $AE_SUMMARY black_level_mode=$CFG_BLC_MODE blc=$CFG_BLC_R,$CFG_BLC_GR,$CFG_BLC_GB,$CFG_BLC_B"
+CONFIG_SUMMARY="path=$CONFIG mode=$CFG_MODE run_sec=$MAX_RUN_SEC auto_record=$RECORD_TEST_AUTOSTART npu_model=$FLY_RM_MODEL vpss_gap_ms=$CAPTURE_VPSS_MIN_GAP_MS jpeg_quality=$CFG_JPEG exposure_mode=$CFG_EXPOSURE_MODE $AE_SUMMARY black_level_mode=$CFG_BLC_MODE blc=$CFG_BLC_R,$CFG_BLC_GR,$CFG_BLC_GB,$CFG_BLC_B"
 if [ "${1-}" = --check-config ]; then
   echo "CONFIG_OK $CONFIG_SUMMARY"
   exit 0
@@ -177,16 +191,13 @@ PARENT=$(cat /sys/kernel/debug/clk/clk_cam0pll/clk_rate)
 test "$PARENT" -gt 1187000000 && test "$PARENT" -lt 1189000000
 echo "PARENT_HZ=$PARENT"
 mkdir -p "$REPORT"
-cp "$CONFIG" "$REPORT/record80.yaml"
+cp "$CONFIG" "$REPORT/record80_opt.yaml"
 mkdir -p /code/camera/recordings
 mkdir "$LOCK"
 LOCK_OWNED=1
 cd /code/camera
 export LD_LIBRARY_PATH=/code/camera/lib:/mnt/system/usr/lib:/mnt/system/usr/lib/3rd:/usr/bin/lib
-MODEL_PATH=${FLY_RM_MODEL:-/code/camera/modules/record80_opt/fly_rm320_new_vpss_nv21_f16.cvimodel}
-if [ -f "$MODEL_PATH" ]; then export FLY_RM_MODEL="$MODEL_PATH"; else unset FLY_RM_MODEL; fi
-export CAPTURE_VPSS_MIN_GAP_MS=${CAPTURE_VPSS_MIN_GAP_MS:-20}
-echo "CAPTURE_VPSS_CONFIG gap_ms=$CAPTURE_VPSS_MIN_GAP_MS"
+echo "NPU_CONFIG model=$FLY_RM_MODEL vpss_gap_ms=$CAPTURE_VPSS_MIN_GAP_MS"
 export PREVIEW_DIAG_LINEAR=1
 export PREVIEW_DIAG_RAW=1
 "$ROOT/camera_capture_first_320" 10.133.124.1 "$REPORT" 80 >"$REPORT/capture.log" 2>&1 &

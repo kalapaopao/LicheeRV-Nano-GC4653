@@ -101,6 +101,8 @@ sh /tmp/clock36_live_20261023/live_36_supervisor.sh
 
 > **重要边界：** 全帧VPSS方案有完整结束日志；20ms限频方案只有运行中统计，SSH中断后缺正常退出验收（板端时钟和空锁已人工恢复）。NPU目标后处理、绘框及完整检测FPS尚未完成；此前稳定300秒采集里程碑没有被覆盖。
 
+**最新板端启动：** `sh /code/camera/modules/record80_opt/start.sh`；运行参数统一读取 `config/record80_opt.yaml`（默认20秒实验）。**最新实测配置读取正常，但VPSS Group已存在导致真实运行失败；仍需排查。**
+
 [**实验C++源码与交接**](npu_optimization/README.md) · [数据JSON](npu_optimization/benchmarks/board_benchmarks_20261030.json) · [模型精度与速度对比](npu_optimization/fly_rm320_v8/REPORT_V8_VS_YOLO26_20261030.md) · [采集流水线研究报告](npu_optimization/capture_pipeline_opt/REPORT_CPP_CAPTURE_PIPELINE_20261030.md)。
 
 ## 📚 每次失败和进步都有资料
