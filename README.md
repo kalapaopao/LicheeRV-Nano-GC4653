@@ -4,7 +4,7 @@
   <strong>🏁 2026-10-23 研究里程碑 · 真实 VI/PTS 80 FPS · CAM1 分频33 · Bayer RAW 顶行异常显著改善</strong>
 </p>
 
-> **唯一推荐的开发入口：** [80 FPS 当前方案 → 源码、编译、部署、停机](test/clock36_live_20261023/README.md)。历史实验仅供追溯，不应当从旧目录直接启动摄像头。⚠️ 这是临时硬件分频的**研究版**，不是完成示波器验证与逐帧无花屏验收的量产驱动。
+> **稳定采集推荐入口：** [80 FPS 方案 → 源码、编译、部署、停机](test/clock36_live_20261023/README.md)。新增 [YOLO26n C++ 与 VPSS 优化](npu_optimization/README.md) 属于独立研发实验，不覆盖稳定摄像头/录像。⚠️ CAM1临时分频尚未完成示波器和逐帧画质量产验收。
 
 ## 🏆 项目封面：80 FPS 已经真实跑通
 
@@ -80,6 +80,29 @@ sh /tmp/clock36_live_20261023/live_36_supervisor.sh
 | USB NCM / MJPEG 发送 | 有连接的时间窗口可达约79～80 FPS | 由板端成功发送统计，不是浏览器绘制帧率 |
 | 浏览器渲染/显示器 | **未单独测量** | 浏览器解码、刷新率、屏幕60/120/144Hz等因素限制可见画面 |
 
+## 🧠 2026-10-30 最新成果：YOLO26n 320 FP16 与 C++ 采集优化
+
+**GC4653 保持约80 FPS真实VI采集；NPU前向次数不等于完整目标识别、浏览器显示FPS。**
+
+![实测SG2002模型前向速度：YOLO26n与YOLOv8n](docs/images/npu-model-throughput-20261030.svg)
+
+| 模型（320×320 FP16） | 摄像头取帧 | 平均NPU前向 | NPU前向吞吐 |
+|---|---:|---:|---:|
+| **YOLO26n 新训版（当前优先研究）** | **80.13 FPS** | **31.582ms** | **31.66次/秒** |
+| YOLOv8n | 80.13 FPS | 38.553ms | 25.94次/秒 |
+
+**YOLO26n的板端NPU吞吐领先约22%。** 但准确率尚未最终定论：两次训练各31张验证图片只有3张共同未见，其余相互进入对方训练集。不能把训练/交叉验证的高分数当作独立准确率证明。
+
+### C++采集与预处理：VI优先VPSS、JPEG并行编码
+
+![C++采集、JPEG编码、VPSS硬件缩放、NPU前向吞吐对照](docs/images/cpp-vpss-capture-pipeline-20261030.svg)
+
+新独立C++程序将硬件VPSS从原来的JPEG编码线程后面移到VI取帧后；JPEG编码由约60提升到约80FPS。增加20ms预处理限频后，VPSS工作量由约80降到40帧/秒，NPU仍约31.6次前向/秒，减少冗余缩放而不改变输入320分辨率。
+
+> **重要边界：** 全帧VPSS方案有完整结束日志；20ms限频方案只有运行中统计，SSH中断后缺正常退出验收（板端时钟和空锁已人工恢复）。NPU目标后处理、绘框及完整检测FPS尚未完成；此前稳定300秒采集里程碑没有被覆盖。
+
+[**实验C++源码与交接**](npu_optimization/README.md) · [数据JSON](npu_optimization/benchmarks/board_benchmarks_20261030.json) · [模型精度与速度对比](npu_optimization/fly_rm320_v8/REPORT_V8_VS_YOLO26_20261030.md) · [采集流水线研究报告](npu_optimization/capture_pipeline_opt/REPORT_CPP_CAPTURE_PIPELINE_20261030.md)。
+
 ## 📚 每次失败和进步都有资料
 
 **本次清理不是忘记过去，而是只保留一个有效启动入口。** 已经从主分支退役 **109个旧启动/停止/构建/实验调用及板端辅助脚本**。删除之前逐一归档了名称、SHA-256、用途、Git旧版链接，完整源码可从 Git 历史固定提交恢复，避免交接人重复踩坑。**历史C++研究源码、技术说明、指标JSON等仍保留在仓库**，但不是当前可用入口。
@@ -113,9 +136,12 @@ sh /tmp/clock36_live_20261023/live_36_supervisor.sh
 - [录像使用手册](modules/record80/docs/USER_GUIDE.md) · [开发交接](modules/record80/docs/HANDOFF.md) · [实测验收报告](modules/record80/docs/TEST_REPORT.md)
 - 原80FPS研究代码和历史失败方案继续保留；录像模块不覆盖取流基线，不把80FPS采集误写为80FPS录像。
 
-当前 80FPS 主线入口见 [80FPS 工程说明](docs/80FPS_ONLY.md)。板端模型使用 `fly_rm_320_int8.cvimodel`，通过 `FLY_RM_MODEL` 启用实时推理。
+当前80FPS稳定采集入口见 [80FPS 工程说明](docs/80FPS_ONLY.md)；最新**独立NPU实验**选择 YOLO26n 320 FP16（`fly_rm320_new_vpss_nv21_f16.cvimodel`），用 `FLY_RM_MODEL` 配置。原有INT8模型仅保留历史研究，不作为当前最快实测选择；[C++源码与实验结论](npu_optimization/README.md)。
 
 ## 🔭 下一阶段
+
+- **识别与可靠性：** 完成YOLO26n的C++检测头解码、NMS、真实目标绘框、独立精度/端到端FPS验收，并验证SSH异常退出的独立时钟看门狗。
+
 
 1. 用匹配板端的 kernel/ABI 把合法36MHz请求纳入 Linux CCF 正式时钟驱动，消除寄存器和 `clk_get_rate` 的状态不一致。
 2. 用示波器实测GC4653模组 MCLK 输入波形和频率，并核对厂家传感器PLL/MIPI高速寄存器表。

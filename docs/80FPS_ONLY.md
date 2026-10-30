@@ -2,6 +2,8 @@
 
 当前仓库以 GC4653 80FPS 采集和 `fly_rm` 实时推理为主线。
 
+> **2026-10-30 更新：** 本页原有 `fly_rm_320_int8.cvimodel` + `run_board_yolo320.sh` 是**历史已验证运行入口**，不等于最新速度最佳方案。实测最新YOLO26n 320×320 FP16、VI优先VPSS的 C++ 实验请到 [NPU / VPSS 独立研究模块](../npu_optimization/README.md)。该独立实验约80 FPS是真实采集，NPU约31.6次前向/秒，真实检测框和端到端识别FPS尚未验收；请勿覆盖既有稳定录像程序。
+
 ## 板端启动
 
 ```sh

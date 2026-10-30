@@ -1,0 +1,44 @@
+[
+  {
+    "mode": "RGB",
+    "onnx_shape": [
+      1,
+      5,
+      2100
+    ],
+    "finite_board_ratio": 1.0,
+    "cosine_all": 0.9994725584983826,
+    "mae": 2.0357329845428467,
+    "rmse": 4.475731372833252,
+    "mae_box": 2.5446624755859375,
+    "mae_conf": 1.5051507034513634e-05,
+    "max_abs_diff": 54.52882385253906,
+    "max_conf_onnx": 0.0009984374046325684,
+    "max_conf_board": 0.0010223388671875,
+    "confidence_cosine": 0.9966921210289001,
+    "above05_onnx": 0,
+    "above05_board": 0,
+    "within_0p1": 0.2423809523809524
+  },
+  {
+    "mode": "BGR",
+    "onnx_shape": [
+      1,
+      5,
+      2100
+    ],
+    "finite_board_ratio": 1.0,
+    "cosine_all": 0.999474823474884,
+    "mae": 2.0337016582489014,
+    "rmse": 4.465022087097168,
+    "mae_box": 2.5421230792999268,
+    "mae_conf": 1.5066791092976928e-05,
+    "max_abs_diff": 54.55549621582031,
+    "max_conf_onnx": 0.0009990036487579346,
+    "max_conf_board": 0.0010223388671875,
+    "confidence_cosine": 0.996692955493927,
+    "above05_onnx": 0,
+    "above05_board": 0,
+    "within_0p1": 0.2423809523809524
+  }
+]

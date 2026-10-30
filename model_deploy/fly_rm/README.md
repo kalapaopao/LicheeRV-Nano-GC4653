@@ -1,5 +1,7 @@
 # fly_rm 部署记录（LicheeRV Nano / SG2002）
 
+> **研究更新（2026-10-30）：** 以下记录是旧640原始模型与初期部署结果；当前YOLO26n重训320 FP16已采用融合NV21预处理、VPSS硬件缩放，实机前向31.582ms；YOLOv8n同尺寸38.553ms。比较和实验限制见 [最新对照与C++流水线](../../npu_optimization/README.md)。**旧模型及其测试数据不删除，供追溯。**
+
 ## 模型来源
 
 - 训练权重：`E:\study\X-AnyLabeling-main\xanylabeling_data\trainer\ultralytics\runs\detect\fly_rm\weights\best.pt`

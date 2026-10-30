@@ -1,0 +1,129 @@
+{
+  "date": "2026-10-30",
+  "board": "LicheeRV Nano (SG2002 cv181x)",
+  "camera": "GC4653, 1280x720 NV21, ~36 MHz, ~80 FPS",
+  "inference": "FP16, 320x320, VPSS hardware resize, same RISC-V board",
+  "measurement_warning": "forward FPS not complete object detection or browser rendering FPS; stage 20ms has no final exit log",
+  "models": [
+    {
+      "name": "YOLO26n 原先FP16 VPSS",
+      "capture_fps": 80.0815,
+      "forward_ms": 31.621,
+      "forward_fps": 31.62,
+      "validation": "20s protected board test",
+      "source": "lab npu_optimization/reports/vpss_320_board_capture.log"
+    },
+    {
+      "name": "YOLO26n 新训320 FP16",
+      "capture_fps": 80.1312,
+      "forward_ms": 31.582,
+      "forward_fps": 31.66,
+      "validation": "20s protected board test",
+      "source": "lab fly_rm320/reports/session_18918_530/capture.log"
+    },
+    {
+      "name": "YOLOv8n 320 FP16",
+      "capture_fps": 80.1318,
+      "forward_ms": 38.553,
+      "forward_fps": 25.94,
+      "validation": "20s protected board test",
+      "source": "lab fly_rm320_v8/reports/session_20840_1199/capture.log"
+    }
+  ],
+  "pipeline": [
+    {
+      "name": "基线：JPEG后VPSS",
+      "capture_fps": 80.1312,
+      "jpeg_fps": 60.051,
+      "vpss_fps_approx": 60.0,
+      "forward_fps": 31.66,
+      "vpss_queue_drop": 596,
+      "queue_sample_capture_frames": 1690,
+      "final_log": true,
+      "source": "lab fly_rm320/reports/session_18918_530/capture.log"
+    },
+    {
+      "name": "采集后优先VPSS：全帧",
+      "capture_fps": 80.0339,
+      "jpeg_fps": 79.784,
+      "vpss_fps_approx": 80.0,
+      "forward_fps": 31.22,
+      "vpss_queue_drop": 1044,
+      "queue_sample_capture_frames": 1690,
+      "final_log": true,
+      "source": "lab capture_pipeline_opt/session_21418_1539/capture.log"
+    },
+    {
+      "name": "采集优先VPSS：20ms限频",
+      "capture_fps": 79.9917,
+      "jpeg_fps": 80.01,
+      "vpss_fps_approx": 40.0,
+      "forward_fps": 31.6,
+      "vpss_queue_drop": 190,
+      "queue_sample_capture_frames": 1688,
+      "final_log": false,
+      "source": "lab capture_pipeline_opt/session_21487_1744/capture.log"
+    }
+  ],
+  "accuracy_cv_pt_320": [
+    {
+      "dataset": "v26_val",
+      "model": "YOLO26n",
+      "size": 320,
+      "precision": 1.0,
+      "recall": 0.9737192740253853,
+      "mAP50": 0.995,
+      "mAP50_95": 0.7085713536527815,
+      "wall_s": 6.56
+    },
+    {
+      "dataset": "v26_val",
+      "model": "YOLOv8n",
+      "size": 320,
+      "precision": 0.9947374752001849,
+      "recall": 1.0,
+      "mAP50": 0.995,
+      "mAP50_95": 0.8262018298306275,
+      "wall_s": 2.33
+    },
+    {
+      "dataset": "v8_val",
+      "model": "YOLO26n",
+      "size": 320,
+      "precision": 1.0,
+      "recall": 0.8905988512161876,
+      "mAP50": 0.9862073732718895,
+      "mAP50_95": 0.7897122380077006,
+      "wall_s": 2.61
+    },
+    {
+      "dataset": "v8_val",
+      "model": "YOLOv8n",
+      "size": 320,
+      "precision": 0.9951988900569321,
+      "recall": 1.0,
+      "mAP50": 0.995,
+      "mAP50_95": 0.7429956050302309,
+      "wall_s": 2.19
+    }
+  ],
+  "accuracy_common_unseen_images_only_3": [
+    {
+      "model": "YOLO26n",
+      "samples": 3,
+      "precision": 0.980042114967651,
+      "recall": 1.0,
+      "map50": 0.995,
+      "map50_95": 0.7017857142857143
+    },
+    {
+      "model": "YOLOv8n",
+      "samples": 3,
+      "precision": 0.9658539446591221,
+      "recall": 1.0,
+      "map50": 0.995,
+      "map50_95": 0.6801666666666666
+    }
+  ],
+  "validation_warning": "Different 31-image validation sets have 3 images in common; 28 of each are in the other training split. Cross-split metrics have leakage."
+}

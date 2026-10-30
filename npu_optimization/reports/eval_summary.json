@@ -1,0 +1,82 @@
+[
+  {
+    "size": 320,
+    "dataset": "E:\\study\\X-AnyLabeling-main\\xanylabeling_data\\trainer\\ultralytics\\datasets\\detect\\fly_rm_20261028_154724",
+    "dataset_images": 31,
+    "weights": "E:\\study\\X-AnyLabeling-main\\xanylabeling_data\\trainer\\ultralytics\\runs\\detect\\fly_rm\\weights\\best.pt",
+    "weights_sha256": "c76f9a7c284d4f1e93432b14b9e31d03d3a347a3ff479cd4d0fb7145beacac16",
+    "precision": 0.9240909092856925,
+    "recall": 0.7856744890089693,
+    "map50": 0.9213788300308353,
+    "map75": 0.6178141629362506,
+    "map50_95": 0.5666902526756364,
+    "speed_ms": {
+      "preprocess": 0.36784193305779367,
+      "inference": 17.834961292288835,
+      "loss": 0.011080644100964552,
+      "postprocess": 0.3526580666432217
+    },
+    "wall_seconds": 6.7,
+    "evaluated_on": "PC best.pt FP32/torch (NOT cvimodel FP16)"
+  },
+  {
+    "size": 224,
+    "dataset": "E:\\study\\X-AnyLabeling-main\\xanylabeling_data\\trainer\\ultralytics\\datasets\\detect\\fly_rm_20261028_154724",
+    "dataset_images": 31,
+    "weights": "E:\\study\\X-AnyLabeling-main\\xanylabeling_data\\trainer\\ultralytics\\runs\\detect\\fly_rm\\weights\\best.pt",
+    "weights_sha256": "c76f9a7c284d4f1e93432b14b9e31d03d3a347a3ff479cd4d0fb7145beacac16",
+    "precision": 0.9438434135363307,
+    "recall": 0.5161290322580645,
+    "map50": 0.6804006924673955,
+    "map75": 0.1867302357085639,
+    "map50_95": 0.3163662504173087,
+    "speed_ms": {
+      "preprocess": 0.3583677415360486,
+      "inference": 19.381912903026524,
+      "loss": 0.011461287466508726,
+      "postprocess": 0.33488710065402333
+    },
+    "wall_seconds": 0.98,
+    "evaluated_on": "PC best.pt FP32/torch (NOT cvimodel FP16)"
+  },
+  {
+    "size": 640,
+    "dataset": "E:\\study\\X-AnyLabeling-main\\xanylabeling_data\\trainer\\ultralytics\\datasets\\detect\\fly_rm_20261028_154724",
+    "dataset_images": 31,
+    "weights": "E:\\study\\X-AnyLabeling-main\\xanylabeling_data\\trainer\\ultralytics\\runs\\detect\\fly_rm\\weights\\best.pt",
+    "weights_sha256": "c76f9a7c284d4f1e93432b14b9e31d03d3a347a3ff479cd4d0fb7145beacac16",
+    "precision": 0.9580373251052632,
+    "recall": 0.9032258064516129,
+    "map50": 0.9813410150645624,
+    "map75": 0.9725386852502195,
+    "map50_95": 0.8080079099520956,
+    "speed_ms": {
+      "preprocess": 0.4629806480220249,
+      "inference": 17.762612902574364,
+      "loss": 0.011512903579240365,
+      "postprocess": 0.34768709766438166
+    },
+    "wall_seconds": 0.97,
+    "evaluated_on": "PC best.pt FP32/torch (NOT cvimodel FP16)"
+  },
+  {
+    "size": 192,
+    "dataset": "E:\\study\\X-AnyLabeling-main\\xanylabeling_data\\trainer\\ultralytics\\datasets\\detect\\fly_rm_20261028_154724",
+    "dataset_images": 31,
+    "weights": "E:\\study\\X-AnyLabeling-main\\xanylabeling_data\\trainer\\ultralytics\\runs\\detect\\fly_rm\\weights\\best.pt",
+    "weights_sha256": "c76f9a7c284d4f1e93432b14b9e31d03d3a347a3ff479cd4d0fb7145beacac16",
+    "precision": 0.7627518832451584,
+    "recall": 0.45161290322580644,
+    "map50": 0.4442369093231162,
+    "map75": 0.07807471264367816,
+    "map50_95": 0.16007516349989032,
+    "speed_ms": {
+      "preprocess": 0.33711290152202694,
+      "inference": 18.39189677341511,
+      "loss": 0.01152258107228385,
+      "postprocess": 0.35421290029320984
+    },
+    "wall_seconds": 0.92,
+    "evaluated_on": "PC best.pt FP32/torch (NOT cvimodel FP16)"
+  }
+]

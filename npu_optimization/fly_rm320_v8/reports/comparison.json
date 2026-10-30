@@ -1,0 +1,42 @@
+[
+  {
+    "dataset": "v26_val",
+    "model": "YOLO26n",
+    "size": 320,
+    "precision": 1.0,
+    "recall": 0.9737192740253853,
+    "mAP50": 0.995,
+    "mAP50_95": 0.7085713536527815,
+    "wall_s": 6.56
+  },
+  {
+    "dataset": "v26_val",
+    "model": "YOLOv8n",
+    "size": 320,
+    "precision": 0.9947374752001849,
+    "recall": 1.0,
+    "mAP50": 0.995,
+    "mAP50_95": 0.8262018298306275,
+    "wall_s": 2.33
+  },
+  {
+    "dataset": "v8_val",
+    "model": "YOLO26n",
+    "size": 320,
+    "precision": 1.0,
+    "recall": 0.8905988512161876,
+    "mAP50": 0.9862073732718895,
+    "mAP50_95": 0.7897122380077006,
+    "wall_s": 2.61
+  },
+  {
+    "dataset": "v8_val",
+    "model": "YOLOv8n",
+    "size": 320,
+    "precision": 0.9951988900569321,
+    "recall": 1.0,
+    "mAP50": 0.995,
+    "mAP50_95": 0.7429956050302309,
+    "wall_s": 2.19
+  }
+]

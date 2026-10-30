@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1070" height="515" viewBox="0 0 1070 515" role="img"><rect width="1070" height="515" rx="18" fill="#0c1424"/>
+<style>text{font-family:Arial,"Microsoft YaHei","Noto Sans CJK SC",sans-serif} .title{fill:#f2f7ff;font-size:24px;font-weight:700}.sub{fill:#94abc2;font-size:13px}.lbl{fill:#dce7f3;font-size:16px}.num{fill:#eaf7ff;font-size:18px;font-weight:bold}.foot{fill:#a5b7ca;font-size:12px}</style>
+<text x="34" y="44" class="title" text-anchor="start">采集 → JPEG → VPSS 的 C++ 流水线优化</text>
+<text x="34" y="69" class="sub" text-anchor="start">同一 GC4653 720P 与 YOLO26n 320 FP16；单位：FPS（约值），不同阶段并行执行</text>
+<text x="34" y="113" class="sub" text-anchor="start">方案</text>
+<text x="330" y="113" class="sub" text-anchor="start">VI采集</text>
+<text x="505" y="113" class="sub" text-anchor="start">JPEG编码</text>
+<text x="680" y="113" class="sub" text-anchor="start">VPSS处理</text>
+<text x="860" y="113" class="sub" text-anchor="start">NPU前向</text>
+<rect x="24" y="123" width="1020" height="85" rx="8" fill="#16253a"/>
+<text x="34" y="151" class="lbl" text-anchor="start">原流程 / JPEG后VPSS</text>
+<text x="34" y="171" class="foot" text-anchor="start">最终日志已验收</text>
+<rect x="330" y="135" width="145" height="17" rx="3" fill="#28394f"/>
+<rect x="330" y="135" width="136.7" height="17" rx="3" fill="#47accd"/>
+<text x="475" y="177" class="num" text-anchor="end">80.1</text>
+<rect x="505" y="135" width="145" height="17" rx="3" fill="#28394f"/>
+<rect x="505" y="135" width="102.4" height="17" rx="3" fill="#48be9e"/>
+<text x="650" y="177" class="num" text-anchor="end">60.1</text>
+<rect x="680" y="135" width="145" height="17" rx="3" fill="#28394f"/>
+<rect x="680" y="135" width="102.4" height="17" rx="3" fill="#edaa60"/>
+<text x="825" y="177" class="num" text-anchor="end">60.0</text>
+<rect x="860" y="135" width="145" height="17" rx="3" fill="#28394f"/>
+<rect x="860" y="135" width="54.0" height="17" rx="3" fill="#8986ea"/>
+<text x="1005" y="177" class="num" text-anchor="end">31.7</text>
+<rect x="24" y="221" width="1020" height="85" rx="8" fill="#16253a"/>
+<text x="34" y="249" class="lbl" text-anchor="start">实验 A / VPSS全帧优先</text>
+<text x="34" y="269" class="foot" text-anchor="start">最终日志已验收</text>
+<rect x="330" y="233" width="145" height="17" rx="3" fill="#28394f"/>
+<rect x="330" y="233" width="136.5" height="17" rx="3" fill="#47accd"/>
+<text x="475" y="275" class="num" text-anchor="end">80.0</text>
+<rect x="505" y="233" width="145" height="17" rx="3" fill="#28394f"/>
+<rect x="505" y="233" width="136.1" height="17" rx="3" fill="#48be9e"/>
+<text x="650" y="275" class="num" text-anchor="end">79.8</text>
+<rect x="680" y="233" width="145" height="17" rx="3" fill="#28394f"/>
+<rect x="680" y="233" width="136.5" height="17" rx="3" fill="#edaa60"/>
+<text x="825" y="275" class="num" text-anchor="end">80.0</text>
+<rect x="860" y="233" width="145" height="17" rx="3" fill="#28394f"/>
+<rect x="860" y="233" width="53.3" height="17" rx="3" fill="#8986ea"/>
+<text x="1005" y="275" class="num" text-anchor="end">31.2</text>
+<rect x="24" y="319" width="1020" height="85" rx="8" fill="#16253a"/>
+<text x="34" y="347" class="lbl" text-anchor="start">实验 B / 20ms限频</text>
+<text x="34" y="367" class="foot" text-anchor="start">运行中数据；最终日志缺失</text>
+<rect x="330" y="331" width="145" height="17" rx="3" fill="#28394f"/>
+<rect x="330" y="331" width="136.5" height="17" rx="3" fill="#47accd"/>
+<text x="475" y="373" class="num" text-anchor="end">80.0</text>
+<rect x="505" y="331" width="145" height="17" rx="3" fill="#28394f"/>
+<rect x="505" y="331" width="136.5" height="17" rx="3" fill="#48be9e"/>
+<text x="650" y="373" class="num" text-anchor="end">80.0</text>
+<rect x="680" y="331" width="145" height="17" rx="3" fill="#28394f"/>
+<rect x="680" y="331" width="68.2" height="17" rx="3" fill="#edaa60"/>
+<text x="825" y="373" class="num" text-anchor="end">40.0</text>
+<rect x="860" y="331" width="145" height="17" rx="3" fill="#28394f"/>
+<rect x="860" y="331" width="53.9" height="17" rx="3" fill="#8986ea"/>
+<text x="1005" y="373" class="num" text-anchor="end">31.6</text>
+<line x1="34" y1="445" x2="1038" y2="445" stroke="#233349"/>
+<text x="34" y="468" class="foot" text-anchor="start">采集一直约80 FPS；将VPSS从JPEG线程前移后，JPEG约60→80 FPS</text>
+<text x="34" y="487" class="foot" text-anchor="start">20ms实验将VPSS约80→40 FPS，NPU单帧耗时约31.65ms；异常断线下退出验收未通过</text>
+</svg>

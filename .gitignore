@@ -232,3 +232,20 @@ credentials*
 /resouce/robomaster_dart_vision_20261026/licheerv_followup_20261026/bit_*.txt
 /resouce/robomaster_dart_vision_20261026/licheerv_followup_20261026/hero_*.txt
 /resouce/robomaster_dart_vision_20261026/licheerv_followup_20261026/search_lichee_nano.txt
+
+
+# Latest SG2002 YOLO26n C++ pipeline: public sources and compact metrics only.
+# Never publish trained checkpoints, converted CVI models, captured frames or SDK binaries.
+/npu_optimization/models/
+/npu_optimization/**/models/
+/npu_optimization/**/cache/
+/npu_optimization/**/eval/
+/npu_optimization/**/session_*/
+/npu_optimization/**/record_report/
+/npu_optimization/**/sdk_libs/
+/npu_optimization/**/output/
+/npu_optimization/**/output_*/
+/npu_optimization/**/report_*/
+/npu_optimization/**/*.layer_group_cache.json
+/npu_optimization/**/*.layer_group_config.json
+/npu_optimization/**/*.ref_files.json

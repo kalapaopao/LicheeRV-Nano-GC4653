@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="385" viewBox="0 0 960 385" role="img"><rect width="960" height="385" rx="18" fill="#0c1424"/>
+<style>text{font-family:Arial,"Microsoft YaHei","Noto Sans CJK SC",sans-serif} .title{fill:#f2f7ff;font-size:24px;font-weight:700}.sub{fill:#94abc2;font-size:13px}.lbl{fill:#dce7f3;font-size:16px}.num{fill:#eaf7ff;font-size:18px;font-weight:bold}.foot{fill:#a5b7ca;font-size:12px}</style>
+<text x="34" y="48" class="title" text-anchor="start">YOLO26n / YOLOv8n：SG2002 NPU 实机前向吞吐</text>
+<text x="34" y="77" class="sub" text-anchor="start">统一 320×320 / FP16 / VPSS NV21；数值越高越好，不等于完整目标检测 FPS</text>
+<text x="36" y="134" class="lbl" text-anchor="start">YOLO26n 原先FP16 VPSS</text>
+<rect x="315" y="112" width="490" height="30" rx="5" fill="#1c2c42"/>
+<rect x="315" y="112" width="387.3" height="30" rx="5" fill="#37b8a0"/>
+<text x="825" y="134" class="num" text-anchor="start">31.62 FPS</text>
+<text x="36" y="210" class="lbl" text-anchor="start">YOLO26n 新训320 FP16</text>
+<rect x="315" y="188" width="490" height="30" rx="5" fill="#1c2c42"/>
+<rect x="315" y="188" width="387.8" height="30" rx="5" fill="#3b9de3"/>
+<text x="825" y="210" class="num" text-anchor="start">31.66 FPS</text>
+<text x="36" y="286" class="lbl" text-anchor="start">YOLOv8n 320 FP16</text>
+<rect x="315" y="264" width="490" height="30" rx="5" fill="#1c2c42"/>
+<rect x="315" y="264" width="317.8" height="30" rx="5" fill="#d69a53"/>
+<text x="825" y="286" class="num" text-anchor="start">25.94 FPS</text>
+<line x1="36" y1="328" x2="921" y2="328" stroke="#233349"/>
+<text x="36" y="351" class="foot" text-anchor="start">YOLO26n 新训模型：31.582 ms / forward；YOLOv8n：38.553 ms / forward</text>
+<text x="36" y="370" class="foot" text-anchor="start">全部为约20秒实验；摄像头独立保持约80 FPS；数据：npu_optimization/benchmarks/board_benchmarks_20261030.json</text>
+</svg>
