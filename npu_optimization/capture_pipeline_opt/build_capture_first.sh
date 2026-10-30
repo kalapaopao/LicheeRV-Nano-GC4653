@@ -15,7 +15,7 @@ LIBS="$LAB/npu_optimization/sdk_libs"
 test -f "$LIBS/libcviruntime.so" && test -f "$LIBS/libcvikernel.so" || { echo "NPU_LIBRARY_MISSING"; exit 3; }
 "$TC-g++" -std=c++11 "${FLAGS[@]}" "${INC[@]}" -c "$OPT/capture_pipeline_opt/camera_capture_first_320.cpp" -o "$OPT/build/capture_first_320.o"
 cd "$CAM"
-"$TC-g++" -pthread -Wl,--dynamic-list=src/exports.list -Wl,--gc-sections -Wl,-rpath,'$ORIGIN/../../lib:/usr/bin/lib:/mnt/system/usr/lib:/mnt/system/usr/lib/3rd' -Wl,-rpath-link,"$LIBS" -Wl,-rpath-link,"$CAM/sdk/board-libs" -L"$CAM/sdk/board-libs" -L"$LIBS" -o "$OPT/bin/camera_capture_first_baked" "$OPT/build/capture_first_320.o" "$CAM/build/atomic_compat.o" "$CAM"/build/common_*.o "$CAM/build/ini.o" "$CAM/build/sensor_gc4653_cmos.o" "$CAM/build/sensor_gc4653_sensor_ctl.o" -Wl,--no-as-needed -lsys -lvpu -lvenc -lcvi_bin -lcvi_bin_isp -lisp -lisp_algo -lae -lawb -laf -lcviruntime -lcvikernel -lm -lpthread -ldl -latomic -static-libstdc++ -static-libgcc
-file "$OPT/bin/camera_capture_first_baked"
-sha256sum "$OPT/bin/camera_capture_first_baked"
+"$TC-g++" -pthread -Wl,--dynamic-list=src/exports.list -Wl,--gc-sections -Wl,-rpath,'$ORIGIN/../../lib:/usr/bin/lib:/mnt/system/usr/lib:/mnt/system/usr/lib/3rd' -Wl,-rpath-link,"$LIBS" -Wl,-rpath-link,"$CAM/sdk/board-libs" -L"$CAM/sdk/board-libs" -L"$LIBS" -o "$OPT/bin/camera_capture_first_baked70" "$OPT/build/capture_first_320.o" "$CAM/build/atomic_compat.o" "$CAM"/build/common_*.o "$CAM/build/ini.o" "$CAM/build/sensor_gc4653_cmos.o" "$CAM/build/sensor_gc4653_sensor_ctl.o" -Wl,--no-as-needed -lsys -lvpu -lvenc -lcvi_bin -lcvi_bin_isp -lisp -lisp_algo -lae -lawb -laf -lcviruntime -lcvikernel -lm -lpthread -ldl -latomic -static-libstdc++ -static-libgcc
+file "$OPT/bin/camera_capture_first_baked70"
+sha256sum "$OPT/bin/camera_capture_first_baked70"
 echo BUILD_CAPTURE_FIRST_DONE

@@ -136,7 +136,7 @@ public:
                 if(!raw)ok=false;
                 else{
                     const auto begin=std::chrono::steady_clock::now();
-                    detections=yolo26_decode(raw,2100,0.25f,0.45f,40);
+                    detections=yolo26_decode(raw,2100,0.70f,0.45f,40);
                     const auto end=std::chrono::steady_clock::now();
                     postprocess_total_us+=static_cast<unsigned long>(
                         std::chrono::duration_cast<std::chrono::microseconds>(end-begin).count());
@@ -223,7 +223,7 @@ small{color:#a6bdcf;display:block;line-height:1.8}
 <div class="toolbar"><button onclick="setMode(true)">带框识别（320×320）</button>
 <button onclick="setMode(false)">原始预览（1280×720）</button></div>
 <div id="visual"><img id="view" src="/detect.mjpg"></div>
-<p id="detection">检测结果连接中…</p><p id="detail"></p>
+<p id="detection">YOLO置信度70% | 检测结果连接中…</p><p id="detail"></p>
 <small>录像格式 MJPEG AVI，记录每2帧中的1帧（40FPS），原始取流维持80FPS，无二次 JPEG 编码。录像在板端 /code/camera/recordings，每段最多60秒。视频 FPS 以实际文件解码检测为准。网页显示速率不等于摄像头采集速率。</small>
 <script>
 const api='http://'+location.hostname+':8082';
@@ -607,6 +607,7 @@ int main(int argc,char** argv){
         vpss_active=start_vpss();
         if(!vpss_active){fprintf(stderr,"FATAL_VPSS_INIT_FAILED\n");running=0;}
     }
+    printf("YOLO_CONFIDENCE_THRESHOLD=0.70 NMS_IOU=0.45\n");
     recorder.launch();
     if(getenv("RECORD_AUTOSTART") && strcmp(getenv("RECORD_AUTOSTART"),"1")==0)recorder.command(true);
     std::thread server_thread(http_server,server);
