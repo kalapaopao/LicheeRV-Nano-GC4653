@@ -20,6 +20,7 @@
 #include "cviruntime.h"
 #include "yolo26_postprocess.h"
 #include "frame_baked_preview.h"
+#include "hd_pts_diagnostic.h"
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "vendor/stb_image_write.h"
 #include <chrono>
@@ -52,6 +53,10 @@ static std::atomic<unsigned long> baked_swjpeg_us(0),baked_dropped(0);
 static std::mutex baked_job_mutex;
 static std::vector<uint8_t> baked_job_nv21;
 static CVI_U64 baked_job_pts=0;
+static std::vector<uint8_t> vpss_hd_pending;
+static uint64_t vpss_hd_pts=0;
+static std::atomic<unsigned long> hd_pts_ok(0),hd_pts_mismatch(0),hd_copy_errors(0),hd_sample_skipped(0);
+static std::atomic<unsigned long> hd_copy_us(0);
 static size_t baked_job_boxes=0;
 static bool baked_job_ready=false;
 static std::mutex input_mutex;
@@ -220,7 +225,7 @@ small{color:#a6bdcf;display:block;line-height:1.8}
 <button id="stop" class="stop" onclick="cmd('stop')" disabled>■ 停止录像</button>
 <button id="reconnect" onclick="location.reload()" hidden>重新连接</button>
 <span id="status">正在连接录像控制服务…</span></div>
-<div class="toolbar"><button onclick="setMode(true)">带框识别（320×320）</button>
+<div class="toolbar"><button onclick="setMode(true)">高清带框诊断（1280×720）</button>
 <button onclick="setMode(false)">原始预览（1280×720）</button></div>
 <div id="visual"><img id="view" src="/detect.mjpg"></div>
 <p id="detection">检测结果连接中…</p><p id="detail"></p>
@@ -408,44 +413,22 @@ static void swjpeg_append(void *ctx, void *data, int size) {
 // Inference thread: draw into the *same* VPSS frame, then make an owned
 // 320x320 NV21 copy, without waiting for JPEG compression.
 static bool queue_baked_frame(VIDEO_FRAME_INFO_S &frame,
-                              const std::vector<YoloBox> &boxes) {
-    if(!baked_nv21_boxes(frame,boxes)){++baked_errors;return false;}
-    const auto &v=frame.stVFrame;
-    auto *y=static_cast<const uint8_t*>(
-        CVI_SYS_MmapCache(v.u64PhyAddr[0],v.u32Length[0]));
-    auto *vu=static_cast<const uint8_t*>(
-        CVI_SYS_MmapCache(v.u64PhyAddr[1],v.u32Length[1]));
-    if(!y || !vu){
-        if(y)CVI_SYS_Munmap(const_cast<uint8_t*>(y),v.u32Length[0]);
-        if(vu)CVI_SYS_Munmap(const_cast<uint8_t*>(vu),v.u32Length[1]);
+                              const std::vector<YoloBox> &boxes,
+                              std::vector<uint8_t>& hd, CVI_U64 pts) {
+    if(hd.size()!=1280u*720u*3u/2u || pts!=frame.stVFrame.u64PTS){
         ++baked_errors;return false;
     }
-    const bool cache_ok=
-        CVI_SYS_IonInvalidateCache(v.u64PhyAddr[0],const_cast<uint8_t*>(y),v.u32Length[0])==0 &&
-        CVI_SYS_IonInvalidateCache(v.u64PhyAddr[1],const_cast<uint8_t*>(vu),v.u32Length[1])==0;
-    std::vector<uint8_t> packed;
-    if(cache_ok){
-        packed.resize(320u*320u*3u/2u);
-        for(int row=0;row<320;row++)
-            std::memcpy(packed.data()+row*320,y+row*v.u32Stride[0],320);
-        for(int row=0;row<160;row++)
-            std::memcpy(packed.data()+102400+row*320,vu+row*v.u32Stride[1],320);
-    }
-    CVI_SYS_Munmap(const_cast<uint8_t*>(vu),v.u32Length[1]);
-    CVI_SYS_Munmap(const_cast<uint8_t*>(y),v.u32Length[0]);
-    if(!cache_ok){++baked_errors;return false;}
+    hd_nv21_boxes(hd,boxes);
     {
         std::lock_guard<std::mutex> lk(baked_job_mutex);
-        if(baked_job_ready)++baked_dropped; // overwrite stale unencoded frame
-        baked_job_nv21.swap(packed);
-        baked_job_pts=v.u64PTS;
+        if(baked_job_ready)++baked_dropped;
+        baked_job_nv21.swap(hd);
+        baked_job_pts=pts;
         baked_job_boxes=boxes.size();
         baked_job_ready=true;
     }
     return true;
 }
-// Only one pending frame is allowed. JPEG worker never blocks NPU/VPSS or
-// creates an unbounded queue; all rectangles are already in image pixels.
 static void baked_swjpeg_worker(){
     while(true){
         std::vector<uint8_t> packed;
@@ -462,15 +445,17 @@ static void baked_swjpeg_worker(){
             if(!running)break;
             usleep(800);continue;
         }
-        std::vector<uint8_t> rgb(320u*320u*3u);
+        const unsigned W=1280,H=720;
+        if(packed.size()!=W*H*3u/2u){++baked_errors;continue;}
+        std::vector<uint8_t> rgb(W*H*3u);
         const uint8_t *y=packed.data();
-        const uint8_t *vu=packed.data()+102400;
+        const uint8_t *vu=packed.data()+W*H;
         auto clamp=[](int x)->uint8_t{return static_cast<uint8_t>(x<0?0:(x>255?255:x));};
-        for(int row=0;row<320;row++){
-            const uint8_t *yp=y+row*320;
-            const uint8_t *cp=vu+(row/2)*320;
-            uint8_t *dst=rgb.data()+row*320*3;
-            for(int x=0;x<320;x++){
+        for(unsigned row=0;row<H;row++){
+            const uint8_t *yp=y+row*W;
+            const uint8_t *cp=vu+(row/2)*W;
+            uint8_t *dst=rgb.data()+row*W*3;
+            for(unsigned x=0;x<W;x++){
                 const int yy=std::max(0,static_cast<int>(yp[x])-16)*298;
                 const int vcr=static_cast<int>(cp[x&~1])-128;
                 const int ucb=static_cast<int>(cp[(x&~1)+1])-128;
@@ -481,7 +466,7 @@ static void baked_swjpeg_worker(){
         }
         std::vector<unsigned char> jpg;
         const auto t0=std::chrono::steady_clock::now();
-        const int okay=stbi_write_jpg_to_func(swjpeg_append,&jpg,320,320,3,rgb.data(),75);
+        const int okay=stbi_write_jpg_to_func(swjpeg_append,&jpg,W,H,3,rgb.data(),75);
         const auto dt=std::chrono::duration_cast<std::chrono::microseconds>(
             std::chrono::steady_clock::now()-t0).count();
         baked_swjpeg_us+=static_cast<unsigned long>(dt);
@@ -602,7 +587,7 @@ int main(int argc,char** argv){
     if(!rc){rc=CVI_VENC_CreateChn(0,&attr);created=rc==0;printf("VENC CreateChn rc=0x%x\n",rc);}
     if(!rc){VENC_JPEG_PARAM_S jpeg{};rc=CVI_VENC_GetJpegParam(0,&jpeg);if(!rc){jpeg.u32Qfactor=quality;rc=CVI_VENC_SetJpegParam(0,&jpeg);}printf("VENC JPEG quality=%u rc=0x%x\n",quality,rc);}
     if(rc)running=0;
-    if(model_path && *model_path) printf("BAKED_SWJPEG_READY size=320x320 quality=75\n");
+    if(model_path && *model_path) printf("BAKED_SWJPEG_READY size=1280x720 quality=75; PTS-match required\n");
     if(model_path && *model_path){
         vpss_active=start_vpss();
         if(!vpss_active){fprintf(stderr,"FATAL_VPSS_INIT_FAILED\n");running=0;}
@@ -619,14 +604,28 @@ int main(int argc,char** argv){
         infer_thread=std::thread([&](){
             while(running){
                 VIDEO_FRAME_INFO_S frame{};bool got=false;
+                std::vector<uint8_t> hd; CVI_U64 hd_pts=0;
                 {std::lock_guard<std::mutex> g(vpss_mutex);
-                  if(vpss_has_pending){frame=vpss_pending;vpss_has_pending=false;got=true;}}
+                  if(vpss_has_pending){
+                      frame=vpss_pending;
+                      hd.swap(vpss_hd_pending);
+                      hd_pts=vpss_hd_pts;
+                      vpss_has_pending=false;got=true;
+                  }}
                 if(!got){usleep(800);continue;}
                 std::vector<YoloBox> detections;
                 double t0=now();bool ok=npu.run_frame(frame,argv[2],detections);
                 if(ok){
                     // Same physical VPSS frame; no asynchronous frame mismatch.
-                    queue_baked_frame(frame,detections);
+                    if(!detections.empty()){
+                        for(size_t k=0;k<detections.size() && k<3;k++){
+                            const auto &b=detections[k];
+                            fprintf(stdout,"HD_DETECTION pts=%llu box=%.1f,%.1f,%.1f,%.1f score=%.3f\n",
+                              static_cast<unsigned long long>(frame.stVFrame.u64PTS),
+                              b.x1,b.y1,b.x2,b.y2,b.score);
+                        }
+                    }
+                    if(!hd.empty()) queue_baked_frame(frame,detections,hd,hd_pts);
                     ++inference_done;
                     inference_ms+=static_cast<unsigned long>((now()-t0)*1000.0);
                     double ts=now();
@@ -650,6 +649,7 @@ int main(int argc,char** argv){
         fprintf(stderr,"Invalid CAPTURE_VPSS_MIN_GAP_MS\n");running=0;
     }
     double last_vpss_feed=0.;
+    double last_hd_sample=0.; // diagnostics only: 1 HD frame/s to protect 80FPS VI
     printf("CAPTURE_FIRST_VPSS mode=pre_encode gap_ms=%u\n",vpss_min_gap_ms);
     unsigned long count=0,dups=0,timeouts=0;uint64_t firstpts=0,lastpts=0;
     double start=now(),first=0,last=0,report=start;
@@ -740,12 +740,35 @@ int main(int argc,char** argv){
                 else{
                     if(processed.stVFrame.u32Width!=320 || processed.stVFrame.u32Height!=320)
                         fprintf(stderr,"VPSS_WRONG_SIZE=%ux%u\n",processed.stVFrame.u32Width,processed.stVFrame.u32Height);
+                    std::vector<uint8_t> hd;
+                    const uint64_t pts=processed.stVFrame.u64PTS;
+                    if(pts!=frame.stVFrame.u64PTS) ++hd_pts_mismatch;
+                    else if(now()-last_hd_sample>=1.0){
+                        last_hd_sample=now();
+                        const auto copy_t0=std::chrono::steady_clock::now();
+                        if(!capture_hd_nv21(frame,hd))++hd_copy_errors;
+                        else {
+                            ++hd_pts_ok;
+                            hd_copy_us+=static_cast<unsigned long>(
+                              std::chrono::duration_cast<std::chrono::microseconds>(
+                                  std::chrono::steady_clock::now()-copy_t0).count());
+                        }
+                    }else ++hd_sample_skipped;
                     std::lock_guard<std::mutex> g(vpss_mutex);
-                    if(vpss_has_pending){
-                        CVI_VPSS_ReleaseChnFrame(VPSS_AI_GRP,VPSS_AI_CHN,&vpss_pending);
+                    if(vpss_has_pending && !vpss_hd_pending.empty()){
+                        // Preserve the rare matched HD diagnostic sample until
+                        // the NPU worker consumes it instead of overwriting it
+                        // with an ordinary VPSS frame 12ms later.
+                        CVI_VPSS_ReleaseChnFrame(VPSS_AI_GRP,VPSS_AI_CHN,&processed);
                         ++vpss_queue_drops;
+                    }else{
+                        if(vpss_has_pending){
+                            CVI_VPSS_ReleaseChnFrame(VPSS_AI_GRP,VPSS_AI_CHN,&vpss_pending);
+                            ++vpss_queue_drops;
+                        }
+                        vpss_pending=processed;vpss_has_pending=true;++vpss_frames;
+                        vpss_hd_pending.swap(hd);vpss_hd_pts=pts;
                     }
-                    vpss_pending=processed;vpss_has_pending=true;++vpss_frames;
                 }
             }
             vpss_total_us+=static_cast<unsigned long>((now()-t0)*1000000.);
@@ -778,6 +801,9 @@ int main(int argc,char** argv){
     printf("BAKED_PREVIEW frames=%lu errors=%lu boxes=%lu last_pts=%llu\n",
            baked_encoded.load(),baked_errors.load(),baked_boxes.load(),
            static_cast<unsigned long long>(baked_pts.load()));
+    printf("HD_PTS_STATS ok=%lu mismatch=%lu skipped=%lu copy_errors=%lu avg_copy_us=%.1f\n",
+        hd_pts_ok.load(),hd_pts_mismatch.load(),hd_sample_skipped.load(),hd_copy_errors.load(),
+        hd_pts_ok.load()?double(hd_copy_us.load())/hd_pts_ok.load():0.);
     printf("BAKED_QUEUE_DROPS count=%lu\n",baked_dropped.load());
     printf("BAKED_SWJPEG_TIMING avg_us=%.1f\n", baked_encoded.load()?double(baked_swjpeg_us.load())/baked_encoded.load():0.);
     printf("YOLO26_POSTPROCESS frames=%lu avg_us=%.1f\n",postprocess_count.load(),
